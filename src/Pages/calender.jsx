@@ -223,6 +223,7 @@ export default function Calender() {
     {
         days.map((day)=>(
 
+
         <div
 
         className={`
@@ -251,9 +252,7 @@ export default function Calender() {
 
          {
 
-            events
-
-            .filter((event)=>event.date === day && event.month===currentMonth && event.year===currentYear)
+            events.filter((event)=>event.date === day && event.month===currentMonth && event.year===currentYear)
 
             .map((event,index)=>(
 
