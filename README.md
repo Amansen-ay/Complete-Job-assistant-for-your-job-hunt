@@ -4,21 +4,21 @@ A modern and responsive React-based Job Application Tracker designed to help use
 
 ---
 
-## 🚀 Features
-- 📌 Track job applications efficiently
-- ➕ Add, edit, and delete job applications
-- 📊 Interactive analytics dashboard
-- 📈 Charts and data visualization
-- 📅 Calendar-based task scheduling
-- 🔍 Search and filtering functionality
-- 🎯 Application status management
-- 📱 Fully responsive modern UI
-- ⚡ Fast and optimized React application
-- 🧠 Productivity-focused workflow design
+##  Features
+-  Track job applications efficiently
+-  Add, edit, and delete job applications
+-  Interactive analytics dashboard
+-  Charts and data visualization
+-  Calendar-based task scheduling
+-  Search and filtering functionality
+-  Application status management
+-  Fully responsive modern UI
+-  Fast and optimized React application
+-  Productivity-focused workflow design
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 - React
 - JavaScript
@@ -29,7 +29,7 @@ A modern and responsive React-based Job Application Tracker designed to help use
 
 ---
 
-## 📂 Project Structure
+##  Project Structure
 
 ```bash
 src/
