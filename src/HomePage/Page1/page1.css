@@ -1,0 +1,92 @@
+  .trust {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: sans-serif;
+  }
+
+  /* 👤 avatars */
+  .avatars {
+    display: flex;
+  }
+
+  .avatars img {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    border: 2px solid white;
+    margin-left: -10px;  /* 🔥 overlap magic */
+  }
+
+  .avatars img:first-child {
+    margin-left: 0;
+  }
+
+  /* ⭐ stars */
+  .stars {
+    color: #fbbf24; /* yellow */
+    font-size: 18px;
+  }
+
+  /* 📝 text */
+  .text {
+    font-size: 14px;
+    color: #555;
+  }
+
+  #getStartedBtn:hover{
+    background-color:rgb(17, 0, 255)  !important;
+    border:2px solid rgb(17, 0, 255) !important;
+    cursor:pointer;
+  }
+
+
+.dashboard-box {
+  position: relative;
+  width: 60%;   /* match your dashboard */
+}
+
+/* overlay */
+.overlay {
+  position: absolute;
+  top: 20px;   /* match your marginTop */
+  left: 0;
+  width: 100%;
+  height: calc(100% - 20px);
+
+  background: rgba(255,255,255,0.5);
+  backdrop-filter: blur(3px);
+  border-radius: 12px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  pointer-events: none; /* 🔥 prevents layout issues */
+}
+
+.overlay-content {
+  text-align: center;
+  pointer-events: auto;
+}
+
+.lock {
+  width: 50px;
+  height: 50px;
+  background: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  margin-bottom: 10px;
+}
+
+.overlay button {
+  margin-top: 10px;
+  padding: 8px 16px;
+  background: #2e25d8;
+  color: white;
+  border: none;
+  border-radius: 6px;
+}

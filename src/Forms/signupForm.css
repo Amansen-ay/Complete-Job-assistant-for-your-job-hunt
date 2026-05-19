@@ -1,0 +1,258 @@
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  background:#f8faff;
+  font-family:sans-serif;
+}
+
+/* ================= WRAPPER ================= */
+
+#mainContainerWrapper{
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:40px 20px;
+}
+
+/* ================= CARD ================= */
+
+#mainContainer{
+  width:100%;
+  height:fit-content;
+  max-width:600px;
+
+  background:white;
+
+  border-radius:18px;
+
+  padding:45px;
+
+  box-shadow:
+    0 10px 30px rgba(0,0,0,0.08),
+    0 2px 8px rgba(0,0,0,0.04);
+}
+
+/* ================= LOGO ================= */
+
+.header{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:12px;
+
+  margin-bottom:35px;
+}
+
+.header h1{
+  font-size:52px;
+}
+
+/* ================= TITLE ================= */
+
+.header2{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+
+  gap:10px;
+
+  margin-bottom:40px;
+}
+
+.header2 h1{
+  font-size:52px;
+  text-align:center;
+}
+
+.header2 p{
+  color:#666;
+  font-size:18px;
+  text-align:center;
+}
+
+/* ================= FORM ================= */
+
+.mainForm{
+  display:flex;
+  justify-content:center;
+}
+
+.fields{
+  width:100%;
+}
+
+/* ================= INPUT ================= */
+
+.input-box{
+  position:relative;
+
+  width:100%;
+
+  margin-bottom:24px;
+}
+
+.input-box input{
+  width:100%;
+
+  height:56px;
+
+  padding:0 18px 0 50px;
+
+  border-radius:12px;
+
+  border:1px solid #d9d9d9;
+
+  outline:none;
+
+  font-size:17px;
+
+  transition:0.25s ease;
+
+  background:white;
+}
+
+/* focus effect */
+
+.input-box input:focus{
+  border:1px solid #4f46e5;
+
+  box-shadow:
+    0 0 0 4px rgba(79,70,229,0.12);
+}
+
+/* ================= ICON ================= */
+
+.input-box .icon{
+  position:absolute;
+
+  left:16px;
+
+  top:50%;
+
+  transform:translateY(-50%);
+
+  width:20px;
+  height:20px;
+
+  opacity:0.55;
+}
+
+/* ================= TERMS ================= */
+
+#TandC{
+  margin-top:8px;
+  margin-bottom:28px;
+}
+
+#TandC div{
+  display:flex;
+  align-items:flex-start;
+
+  gap:12px;
+}
+
+#checkbox{
+  width:18px;
+  height:18px;
+
+  margin-top:2px;
+
+  cursor:pointer;
+}
+
+#TandC label{
+  line-height:1.5;
+  color:#444;
+}
+
+#TandC span{
+  color:#4338ca;
+  cursor:pointer;
+}
+
+/* ================= BUTTON ================= */
+
+#createBtn{
+  width:100%;
+
+  height:56px;
+
+  border:none;
+
+  border-radius:12px;
+
+  background:#3b2cf5;
+
+  color:white;
+
+  font-size:18px;
+  font-weight:600;
+
+  cursor:pointer;
+
+  transition:0.25s ease;
+}
+
+#createBtn:hover{
+  background:#2f22d4;
+
+  transform:translateY(-2px);
+
+  box-shadow:
+    0 10px 25px rgba(59,44,245,0.25);
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:650px){
+
+  #mainContainer{
+    padding:30px 22px;
+  }
+
+  .header h1{
+    font-size:38px;
+  }
+
+  .header2 h1{
+    font-size:38px;
+  }
+
+  .header2 p{
+    font-size:15px;
+  }
+}
+
+/* ================= PASSWORD TOGGLE ================= */
+
+.toggle-btn{
+
+  position:absolute;
+
+  right:14px;
+
+  top:50%;
+
+  transform:translateY(-50%);
+
+  border:none;
+
+  background:transparent;
+
+  cursor:pointer;
+
+  font-size:18px;
+
+  opacity:0.7;
+
+  transition:0.2s ease;
+}
+
+.toggle-btn:hover{
+  opacity:1;
+}

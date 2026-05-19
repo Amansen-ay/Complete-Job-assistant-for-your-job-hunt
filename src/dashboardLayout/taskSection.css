@@ -1,0 +1,66 @@
+.taskSectionHeader{
+    display:flex;
+
+}
+.taskSectionHeader p{
+    margin-left:auto;
+    color:blue;
+    cursor:pointer;
+}
+
+.task-section-container{
+    width:400px;
+    height:230px;
+    margin-top:20px;
+    background-color: #fff;
+    padding:20px;
+    border:1px solid #c1c1c1;
+    border-radius:10px;
+    box-shadow:
+    0 10px 30px rgba(0,0,0,0.08),
+    0 2px 8px rgba(0,0,0,0.04); 
+}
+
+
+/* css */
+
+.reminderSectionContainer{
+    width:fit-content;
+    margin-top:20px;
+    height:230px;
+    background-color: #fff;
+    padding:20px;
+    border:1px solid #c1c1c1;
+    border-radius:10px;
+    box-shadow:
+    0 10px 30px rgba(0,0,0,0.08),
+    0 2px 8px rgba(0,0,0,0.04); 
+}
+
+.reminderSectionHeader{
+    display:flex;
+    
+}
+
+.reminderSectionHeader p{
+    margin-left:auto;
+    color:blue;
+    margin-bottom:15px;
+    cursor:pointer;
+}
+
+.Task-row-container{
+    margin-top:20px;
+    display:flex;
+    gap:40px;
+    margin-bottom:10px;
+    
+}
+
+
+#dateOfTask{
+    margin-left:auto;
+}
+
+
+

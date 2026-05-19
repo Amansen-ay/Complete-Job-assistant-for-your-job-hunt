@@ -1,0 +1,32 @@
+.contentCard {
+    width:250px;
+    height:120px;
+    background-color: #fff;
+    margin-top:20px;
+    padding:10px;
+    display:flex;
+    align-items:center;
+    gap:30px;
+    border:1px solid #c1c1c1;
+    border-radius:10px;
+     box-shadow:
+    0 10px 30px rgba(0,0,0,0.08),
+    0 2px 8px rgba(0,0,0,0.04);
+}
+.contentCard img{
+    /* background-color: #eef2ff; */
+    padding: 10px;
+    border-radius:8px;
+}
+
+#bottomRecord{
+    font-size:small;
+    margin-top:10px;
+}
+
+.bottomRecordContainer{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+

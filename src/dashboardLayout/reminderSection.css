@@ -1,0 +1,50 @@
+.reminderSectionContainer{
+    width:fit-content;
+    margin-top:20px;
+    height:230px;
+    background-color: #fff;
+    padding:20px;
+    border:1px solid #c1c1c1;
+    border-radius:10px;
+    box-shadow:
+    0 10px 30px rgba(0,0,0,0.08),
+    0 2px 8px rgba(0,0,0,0.04); 
+}
+
+.reminderSectionHeader{
+    display:flex;
+    
+}
+
+.reminderSectionHeader p{
+    margin-left:auto;
+    color:blue;
+    margin-bottom:15px;
+    cursor:pointer;
+}
+
+.ReminderSectionTableRow{
+    display:flex;
+    gap:40px;
+    margin-bottom:10px;
+    
+}
+
+.schedule p{ 
+  font-size:smaller;
+  line-height:1.8;
+}
+
+.schedule h3{
+    font-size:small;
+}
+#levelOfAppliction{
+    margin-left:auto;
+}
+
+.dateContainer{
+    background-color: #eef2ff;
+    padding:3px 5px;
+    border-radius:3px;
+    /* flex:1 */
+}

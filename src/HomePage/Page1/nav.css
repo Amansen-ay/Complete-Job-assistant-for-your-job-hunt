@@ -1,0 +1,45 @@
+#texts p{
+    margin-left:60px;
+}
+
+#signBtns p {
+ margin-right:30px;
+}
+#signBtns button{
+    margin-right:20px;
+    height:35px;
+    width:120px;
+    background-color: #2e25d8;
+    color:white;
+    border-radius:5px;
+    border:2px solid #2e25d8;
+}
+
+.navOptions:hover{
+  color:#2e25d8;
+}
+
+.navOptions {
+    cursor:pointer
+}
+
+
+#loginBtn{
+    padding:10px;
+}
+
+#loginBtn:hover{
+ color:rgb(17, 0, 255);
+ cursor: pointer;
+ /* background-color: #2e25d8; */
+ border-radius:5px;
+ /* color:white; */
+  transition: all 0.25s ease;
+
+}
+
+#signBtns button:hover{
+   background-color:rgb(17, 0, 255);
+   border:2px solid rgb(17, 0, 255);
+   cursor:pointer;
+}

@@ -1,0 +1,82 @@
+*{
+   margin:0;
+   padding:0;
+   box-sizing:border-box;
+}
+#sidebarContainer{
+    width:fit-content;
+    background-color: #fff;
+    min-height: 100vh;
+    padding-left:20px;
+    padding-right:20px;
+    border-right:1px solid #c1c1c1;
+    padding-top:15px;
+    /* position:fixed; */
+}
+
+.sidebarHeader{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:10px;
+    /* margin-top:-10px; */
+    
+}
+
+
+.sidebarOption{
+    display:flex;
+    /* justify-content:center; */
+    align-items:center;
+    gap:15px;
+    cursor:pointer;
+    padding:10px;
+    /* padding-bottom:30px */
+    margin-bottom:8px;
+    /* background-color: #c73535; */
+    
+    
+}
+
+.sidebarOption:hover{
+    background-color: #eef2ff;
+    border-radius:10px;
+    color:#2255fb;
+    
+}
+
+#optionsContainer{
+    
+    border-bottom: 1px solid #c1c1c1;
+    /* background-color: red; */
+    padding-top:20px;
+}
+
+#helpDiv{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    margin-top:10px;
+    cursor:pointer;
+}
+#helpDiv:hover{
+    color:#2255fb;
+    
+}
+
+.active-option-in-sidebar{
+    background-color:#c6d2fc;
+    text-decoration:none;
+    border-radius:10px;
+    color:#2255fb;
+}
+.active-option-in-sidebar:hover{
+    background-color:#c6d2fc;
+    text-decoration:none;
+}
+
+.non-active-option-in-sidebar{
+    text-decoration:none;
+     border-radius:10px;  
+     color:inherit;  
+}

@@ -1,0 +1,38 @@
+.explore-jobs-container{
+    width:fit-content;
+    background-color: #eef2ff;
+    height:230px;
+    margin-top:20px;
+    padding:10px;
+    border:1px solid #c1c1c1;
+    border-radius:10px;
+    box-shadow:
+    0 10px 30px rgba(0,0,0,0.08),
+    0 2px 8px rgba(0,0,0,0.04); 
+}
+
+.discription-findBtn{
+    width:200px;
+    margin-top:20px;
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+}
+
+.discription-findBtn p{
+    font-size:small;
+}
+.discription-findBtn button{
+    width:100px;
+    height:40px;
+    background-color: blue;
+    border: 2px solid blue;
+    border-radius:5px;
+    color:white;
+    cursor:pointer;
+
+}
+.discription-findBtn img{
+    margin-top:-10px;
+    margin-left:auto;
+}

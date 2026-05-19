@@ -1,0 +1,55 @@
+.chartWrapper{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:40px;
+    margin-top:30px;
+}
+
+.chartHeader{
+    display:flex;
+}
+.chartHeader p{
+    margin-left:auto;
+    color:blue;
+}
+
+.legendContainer{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:18px;
+}
+
+.legendItem{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:40px;
+}
+
+.legendLeft{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+}
+
+.dot{
+
+    width:12px;
+
+    height:12px;
+
+    border-radius:50%;
+}

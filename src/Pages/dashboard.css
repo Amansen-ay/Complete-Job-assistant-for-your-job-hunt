@@ -1,0 +1,22 @@
+.finalDashboardContainer{
+
+    display:flex;
+
+    min-height:100vh;
+}
+
+.mainDashboardSection{
+
+    flex:1;
+
+    display:flex;
+
+    flex-direction:column;
+}
+
+.dashboardContent{
+
+    flex:1;
+
+    padding:20px;
+}

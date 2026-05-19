@@ -1,0 +1,99 @@
+.appliation-navs-container{
+    display:flex;
+    align-items:center;
+    height: 50px;
+    /* background-color: #c13d3d; */
+}
+
+.application-navs{
+    display:flex;
+    gap:30px;
+    
+}
+
+.application-navs p{
+    cursor:pointer;
+    padding:8px 15px;
+    
+}
+
+.application-navs p:hover{
+    background-color: #c9d4fb;
+    border-radius:5px;
+    color:#0031e2
+    
+}
+
+.filter-and-addJob{
+    display:flex;
+    gap:30px;
+    margin-left:auto;
+    align-items:center;
+}
+
+.filter-and-addJob div{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    border: 1px solid #c1c1c1;
+    border-radius:5px;
+    padding:3px 6px;;
+    cursor:pointer;
+}
+.filter-and-addJob div:hover{
+    background-color: #eef2ff;
+}
+.filter-and-addJob button{
+    width:130px;
+    height:35px;
+    background-color: #2e25d8;
+    border: 2px solid #2e25d8;
+    border-radius:5px;
+    color:whitesmoke;
+    cursor:pointer;
+}
+.filter-and-addJob button:hover{
+     background-color:rgb(17, 0, 255);
+     border:2px solid rgb(17, 0, 255);
+}
+
+.application-table-container{
+    margin-top:50px;
+    background-color: #fff;
+    border:1px solid #c1c1c1;
+    border-radius:10px;
+}
+
+.service-and-logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+table{
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th{
+  padding: 16px;
+  border-bottom:1px solid #000000;
+  text-align:left;
+}
+td{
+  padding: 16px;
+  border-bottom:1px solid #c1c1c1;
+  text-align:left;
+}
+
+
+.pagination-container{
+    padding:20px 16px;
+    display:flex;
+
+}
+
+.pagination-container h3{
+    margin-left:auto;
+}
+

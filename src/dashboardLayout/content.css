@@ -1,0 +1,36 @@
+#headerWithUsername p{
+  font-size:small;
+  margin-top:10px;
+  
+}
+
+.cardContainer{
+    display:flex;
+    justify-content:space-between
+}
+
+.finalContainer{
+    width:fit-content;
+    padding:20px;
+    background-color: #fff;
+    border:1px solid #c1c1c1;
+    border-radius:10px;
+    box-shadow:
+    0 10px 30px rgba(0,0,0,0.08),
+    0 2px 8px rgba(0,0,0,0.04);
+    margin-top:20px;
+}
+
+.chartAndTableContainer{
+    display:flex;
+    flex:1;
+    
+}
+.wholeTableContainer{
+    margin-top:20px;
+}
+
+.reminder-task-section-container{
+    display:flex;
+    gap:10px;
+}
