@@ -1,5 +1,5 @@
 import './calender.css';
-import {useState} from 'react';
+import {useState,useEffect} from 'react';
 import arrowBack from '../assets/arrowBack.svg'
 import arrowForward from '../assets/arrowForward.svg'
 import amazon from '../assets/amazon.png'
@@ -15,7 +15,21 @@ export default function Calender() {
 
     const [eventTitle,setEventTitle] = useState("");
 
-    const [events,setEvents] = useState([]);
+    const [events,setEvents] = useState(()=>{
+
+        const savedEvents = localStorage.getItem("calendarEvents"); 
+
+        return savedEvents
+
+        ? JSON.parse(savedEvents)
+
+        : [];
+
+        });
+
+    const [showMoreModal,setShowMoreModal] = useState(false);
+
+    const [selectedDayEvents,setSelectedDayEvents] = useState([]);     
 
     const [deleteModal,setDeleteModal] = useState(false);
 
@@ -170,6 +184,19 @@ export default function Calender() {
         setCurrentDate(new Date())
     }
 
+
+    useEffect(()=>{
+
+        localStorage.setItem(
+
+        "calendarEvents",
+
+        JSON.stringify(events)
+
+        );
+
+    },[events]);
+
     return (
       <>
       <div className="main-wrapper">
@@ -220,63 +247,87 @@ export default function Calender() {
 
     <div className="calendarGrid">
 
-    {
-        days.map((day)=>(
+   {days.map((day)=>{
 
+        const dayEvents = events.filter(
+            (event)=>
+            event.date === day &&
+            event.month === currentMonth &&
+            event.year === currentYear
 
-        <div
+        );
 
-        className={`
-      
-         ${day ? "calendarCell" : "emptyCell"}
+        return (
 
-         ${currentDate.getDate() === day ? "current-date-styling" : ""}
-
-        `}
-
-        onClick={() => {
-
-         if(day){
-
-            setSelectedDate(day);
-
-            setShowModal(true);
-
-        }
-
-      }}
-
-      >
+      <div className={`${day?"calendarCell":"emptyCell"} ${currentDate.getDate()===day?"current-date-styling":""}`} onClick={()=>{
+           day &&
+          setShowModal(true);
+          setSelectedDate(day);
+            }}>
 
          <span>{day}</span>
 
-         {
 
-            events.filter((event)=>event.date === day && event.month===currentMonth && event.year===currentYear)
+       {
+        dayEvents.slice(0,2).map((event,index)=>(
 
-            .map((event,index)=>(
+        <div
 
-               <div className="event-pill" key={index} onClick={(e)=>{
-                e.stopPropagation();
-                setDeleteModal(true);
-                setSelectedPill(event)
+         className="event-pill"
 
-               }}>
+         key={index}
 
-                  {event.title}
+         onClick={(e)=>{
 
-               </div>
+            e.stopPropagation();
 
-            ))
+            setDeleteModal(true);
 
-         }
+            setSelectedPill(event);
 
+         }}
+
+        >
+
+         {event.title}
+
+        </div>
+
+
+        ))
+        } 
+
+        {
+            dayEvents.length>2 && 
+
+            <div className="event-pill" onClick={(e)=>{
+
+            e.stopPropagation();
+
+            setSelectedDayEvents(dayEvents);
+
+            setSelectedDate(day);
+
+            setShowMoreModal(true);
+
+        }}
+>
+            + {dayEvents.length-2} more
+
+        </div>
+
+        }
+
+      
       </div>
 
-   ))
-}
+   )
+
+    })
+    }
 
     </div>
+
 
     {
         showModal &&
@@ -394,6 +445,56 @@ export default function Calender() {
     </div>
 
     }
+
+    {/* +more modal */}
+
+    {
+     showMoreModal &&
+
+    <div className="modalOverlay">
+
+      <div className="eventModal">
+
+         <h3>
+
+            All Events -  {months[currentDate.getMonth()]} {selectedDate}
+
+         </h3>
+
+         {
+
+            selectedDayEvents.map((event,index)=>(
+
+               <div
+
+               className="all-events-pill"
+
+               key={index}
+
+               >
+
+                  {event.title}
+
+               </div>
+
+            ))
+
+         }
+
+         <button
+
+         onClick={()=>setShowMoreModal(false)}
+
+         >
+
+            Close
+
+         </button>
+
+      </div>
+
+   </div>
+ }
   
 
     </div> 
