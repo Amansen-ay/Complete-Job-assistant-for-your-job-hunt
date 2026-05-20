@@ -33,7 +33,9 @@ export default function Calender() {
 
     const [deleteModal,setDeleteModal] = useState(false);
 
-    const [selectedPill,setSelectedPill] = useState(null)
+    const [selectedPill,setSelectedPill] = useState(null);
+
+    
 
     const months = [
 
@@ -481,6 +483,32 @@ export default function Calender() {
 
          }
 
+         <button onClick={() => {
+
+            const updatedEvents = events.filter(
+
+            (event)=>
+
+            !(
+
+            event.date === selectedDate &&
+
+            event.month === currentMonth &&
+
+            event.year === currentYear
+
+         )
+
+        );
+
+        setEvents(updatedEvents);
+
+        setShowMoreModal(false);
+
+    }}>
+                Delete All
+         </button>
+
          <button
 
          onClick={()=>setShowMoreModal(false)}
@@ -490,6 +518,8 @@ export default function Calender() {
             Close
 
          </button>
+
+         
 
       </div>
 
