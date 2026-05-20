@@ -372,7 +372,7 @@ td:last-child p:last-child{
     margin-top:3px;
     color:#3a3a3a
 }
-.reminder-upcoming-container table{
+.upcoming-reminder-table{
 
     border-spacing:0 16px;
     border-collapse:separate;

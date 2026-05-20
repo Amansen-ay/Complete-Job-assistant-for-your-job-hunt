@@ -9,11 +9,15 @@ import followUp from '../assets/followUp.svg'
 
 export default function Calender() {
 
+    const [eventTime,setEventTime] = useState(null)
+
     const [selectedDate,setSelectedDate] = useState(null);
 
     const [showModal,setShowModal] = useState(false);
 
     const [eventTitle,setEventTitle] = useState("");
+
+    const [eventRole,setEventRole] = useState("");
 
     const [events,setEvents] = useState(()=>{
 
@@ -34,6 +38,8 @@ export default function Calender() {
     const [deleteModal,setDeleteModal] = useState(false);
 
     const [selectedPill,setSelectedPill] = useState(null);
+
+    const recentEvents = events.slice(0,5);
 
     
 
@@ -358,6 +364,38 @@ export default function Calender() {
 
          />
 
+         <label htmlFor="eventRole" >Event role :</label>
+
+         <input 
+
+         id="eventRole" 
+
+         type="text" 
+
+         value={eventRole}
+
+         placeholder="Enter the role you aplied for ..."
+         
+         onChange={(e)=>{
+
+            setEventRole(e.target.value)
+            
+         }} />
+
+        <label htmlFor="evenTime">Enter Time : </label>
+
+        <input
+
+        id="eventTime"
+
+        type="time"
+
+        value={eventTime}
+
+        onChange={(e)=>setEventTime(e.target.value)}
+
+         />
+
          <div className="modalBtns">
 
             <button
@@ -390,7 +428,11 @@ export default function Calender() {
 
                      month:currentMonth,
 
-                     year:currentYear
+                     year:currentYear,
+
+                     role:eventRole,
+
+                     time: eventTime
 
                   }
 
@@ -400,7 +442,8 @@ export default function Calender() {
 
                setShowModal(false);
 
-            }}
+               setEventRole("");
+            }}  
 
             >
 
@@ -423,10 +466,12 @@ export default function Calender() {
         <div className="eventModal">
 
          <h3>
-            Want to delete the Task for {selectedDate} {months[currentMonth]}? 
+            Want to delete the Task for {selectedPill.date} {months[currentMonth]}? 
             
          </h3>
-         <h3 style={{color:"#007de3"}}>"{selectedPill.title}"</h3>
+         <h3 style={{color:"#009d1f"}}><span style={{color:"black"}}> Event :</span> {selectedPill.title}</h3>
+
+         <h3 style={{color:"#007de3"}}><span style={{color:"black"}}> Role :</span>{selectedPill.role}</h3>
 
          <div className="modalBtns">
             <button onClick={()=>setDeleteModal(false)}>
@@ -567,63 +612,35 @@ export default function Calender() {
             </div>
 
         </div>
-
-        <div className="reminder-upcoming-container">
-            <header>
-                <p id="main-header-line">Upcoming Events</p>
-                <p id="view-all-btn">View all</p>
-            </header>
-
-            <table>
-                <tr>
+  <div className="reminder-upcoming-container">
+    <header>
+            <p id="main-header-line">Upcoming Events</p>
+            <p id="view-all-btn">View all</p>
+    </header>
+    <table className="upcoming-reminder-table">
+     { recentEvents.map((event,index)=>(
+    
+            
+                <tr key={index}>
                     <td><img src={amazon}  width="30px" height="30px" /></td>
                     <td>
-                        <p>Interview with google</p>
-                        <p className="role-in-reminder-section">Frontend Developer</p>
+                        <p>{event.title}</p>
+                        <p className="role-in-reminder-section">{event.role}</p>
                     </td>
                     <td>
-                        <p>20 May</p>
-                        <p>10:30 AM</p>
+                        <p>{event.date} {months[event.month]}</p>
+                        <p>{event.time}</p>
                     </td>
                 </tr>
 
-                <tr>
-                    <td><img src={amazon}  width="30px" height="30px" /></td>
-                     <td>
-                        <p>Interview with google</p>
-                        <p className="role-in-reminder-section">Frontend Developer</p>
-                    </td>
-                     <td>
-                        <p>20 May</p>
-                        <p>10:30 AM</p>
-                    </td>
-                </tr>
+           
+        
 
-                <tr>
-                    <td><img src={amazon}  width="30px" height="30px" /></td>
-                     <td>
-                        <p>Interview with google</p>
-                        <p className="role-in-reminder-section">Frontend Developer</p>
-                    </td>
-                     <td>
-                        <p>20 May</p>
-                        <p>10:30 AM</p>
-                    </td>
-                </tr>
+     ))} 
+        
+        </table>
 
-                <tr>
-                    <td><img src={amazon}  width="30px" height="30px" /></td>
-                     <td>
-                        <p>Interview with google</p>
-                        <p className="role-in-reminder-section">Frontend Developer</p>
-                    </td>
-                     <td>
-                        <p>20 May</p>
-                        <p>10:30 AM</p>
-                    </td>
-                </tr>
-            </table>
-        </div>
+    </div>
 
         <div className="stats-container">
 
