@@ -6,10 +6,18 @@ import amazon from '../assets/amazon.png'
 import dateBlue from '../assets/dateBlue.svg'
 import dateRed from '../assets/dateRed.svg'
 import followUp from '../assets/followUp.svg'
+import warning from '../assets/warning.svg'
+import blueCalendar from '../assets/calendarBlue.svg'
+import eventImg from '../assets/event.svg'
+import Case from '../assets/case.svg'
+import timer from '../assets/timer.svg'
+import removeBtn from '../assets/removeBtn.svg'
+import help from '../assets/help.svg'
+import pin from '../assets/pin.svg'
 
 export default function Calender() {
 
-    const [eventTime,setEventTime] = useState(null)
+    const [eventTime,setEventTime] = useState("")
 
     const [selectedDate,setSelectedDate] = useState(null);
 
@@ -39,7 +47,20 @@ export default function Calender() {
 
     const [selectedPill,setSelectedPill] = useState(null);
 
-    const recentEvents = events.slice(0,5);
+    const todayDate = new Date()
+    todayDate.setHours(0,0,0,0);
+
+    const upcomingEvents = events.filter((event)=>{
+      
+        const eventDate = new Date(
+            event.year,
+            event.month,
+            event.date
+        )
+
+        return eventDate>=todayDate
+
+    }).slice(0,5);
 
     
 
@@ -344,17 +365,27 @@ export default function Calender() {
 
         <div className="eventModal">
 
-         <h3>
+            <div className="show-modal-header">
+                <img src={blueCalendar} width="40px" height="40px" />
+                <div>
+                    <h3>Add Event - {selectedDate}</h3>
+                    <p>On <span style={{color:"#2668bf"}}>{selectedDate} {months[currentMonth]} {currentYear}</span></p>
+                </div>
+            </div>
 
-            Add Event - {selectedDate}
 
-         </h3>
+     <label htmlFor="event-tite">Enter event : </label>
+      <div className="add-event-input">
 
-         <input
+        <img src={eventImg} />
+        
+        <input
+
+         id="event-title"
 
          type="text"
 
-         placeholder="Enter event"
+         placeholder="Enter event title"
 
          value={eventTitle}
 
@@ -364,7 +395,17 @@ export default function Calender() {
 
          />
 
-         <label htmlFor="eventRole" >Event role :</label>
+
+        </div>
+         
+
+         <label htmlFor="eventRole" >Event role : <span style={{color:"#5c5c5c"}}>(optional)</span></label>
+
+         <div className="add-event-input">
+
+        <img src={Case} />
+
+        <div className="input-and-instruction">
 
          <input 
 
@@ -382,7 +423,21 @@ export default function Calender() {
             
          }} />
 
+         </div>
+
+        </div>
+
+        <div className="instruction">
+            <img src={help}  width="20px" height="20px"/>
+            <p>Helps you remember what this event is for. </p>
+        </div>
+         
+
         <label htmlFor="evenTime">Enter Time : </label>
+
+        <div className="add-event-input">
+
+        <img src={timer} />
 
         <input
 
@@ -396,9 +451,17 @@ export default function Calender() {
 
          />
 
+        </div>
+        <div className="instruction">
+            <img src={help}  width="20px" height="20px"/>
+            <p>Select the schedue time for this event. </p>
+        </div>
+
          <div className="modalBtns">
 
             <button
+
+            className="show-modal-cancel-button"
 
             onClick={() => {
 
@@ -414,7 +477,11 @@ export default function Calender() {
 
             <button
 
+            className="show-modal-save-button"
+
             onClick={() => {
+
+               eventTitle.trim()!=="" && 
 
                setEvents([
 
@@ -443,6 +510,8 @@ export default function Calender() {
                setShowModal(false);
 
                setEventRole("");
+
+               setEventTime("");
             }}  
 
             >
@@ -464,27 +533,62 @@ export default function Calender() {
       <div className="modalOverlay">
 
         <div className="eventModal">
-
-         <h3>
-            Want to delete the Task for {selectedPill.date} {months[currentMonth]}? 
             
-         </h3>
-         <h3 style={{color:"#009d1f"}}><span style={{color:"black"}}> Event :</span> {selectedPill.title}</h3>
+            <div className="delete-modal-warning-header">
+                <img src={warning} width="40px" height="40px"/>
+                <div className="warning-text">
+                    <h3>Delete this task?</h3>
+                    <p>This action cannot be undone. The task details will be permanently removed.</p> <p></p>
+                </div>
+            </div>
 
-         <h3 style={{color:"#007de3"}}><span style={{color:"black"}}> Role :</span>{selectedPill.role}</h3>
+            <div className="row-in-delete-modal">
+                <img src={blueCalendar} width="30px" height="30px" />
+                <div className="label-and-titles">
+                    <p>Date</p>
+                    <h3 >{selectedPill.date} {months[selectedPill.month]} {selectedPill.year} </h3>
+                </div>
+            </div>
+
+            <div className="row-in-delete-modal">
+                <img src={eventImg} width="30px" height="30px" />
+                <div className="label-and-titles">
+                    <p>Event</p>
+                    <h3 style={{color:"#2668bf"}} >{selectedPill.title}</h3>
+                </div>
+            </div>
+
+            <div className="row-in-delete-modal">
+                <img src={Case} width="30px" height="30px" />
+                <div className="label-and-titles">
+                    <p>Role</p>
+                    <h3 style={{color:"#2668bf"}}>{selectedPill.role}</h3>
+                </div>
+            </div>
+
+             <div className="row-in-delete-modal">
+                <img src={timer} width="30px" height="30px" />
+                <div className="label-and-titles">
+                    <p>Time</p>
+                    <h3>{selectedPill.time}</h3>
+                </div>
+            </div>
+        
 
          <div className="modalBtns">
-            <button onClick={()=>setDeleteModal(false)}>
+            <button className="delete-modal-cancel-button" onClick={()=>setDeleteModal(false)}>
                 Cancel
             </button>
-            <button onClick={()=>{
+            <button 
+                className="delete-modal-delete-button"
+                onClick={()=>{
                 const updatedEvents = events.filter((event)=> event!==selectedPill)
                 setEvents(updatedEvents);
                 setDeleteModal(false);
             }
                 
             }>
-               Delete
+               Delete Task
             </button>
          </div>
 
@@ -502,33 +606,71 @@ export default function Calender() {
 
       <div className="eventModal">
 
-         <h3>
-
-            All Events -  {months[currentDate.getMonth()]} {selectedDate}
-
-         </h3>
+          <div className="show-modal-header">
+                <img src={blueCalendar} width="40px" height="40px" />
+                <div>
+                    <h3>All Events</h3>
+                    <p><span style={{color:"#2668bf"}}>{selectedDate} {months[currentMonth]} {currentYear}</span></p>
+                </div>
+            </div>
 
          {
 
             selectedDayEvents.map((event,index)=>(
 
-               <div
+            <div
 
                className="all-events-pill"
 
                key={index}
 
                >
+                <div className="event-task-pinned">
+                    <img src={pin}/>
 
-                  {event.title}
+                    <div>
+                        <h3>{event.title}</h3>
+                        <p style={{color:"#2668bf"}}><span style={{color:"#5c5c5c"}}>Role : </span>{event.role}</p>
 
+                    </div>
+                  
                </div>
+
+               <div className="event-task-pinned-time">{event.time}</div>
+
+            </div>
+                
 
             ))
 
+            
+
          }
 
-         <button onClick={() => {
+         <div className="event-task-pinned-warning">
+            <img src={warning} />
+            Deleting an event will remove it from your calendar and cannot be undone.
+        </div>
+
+        <div className="event-task-pinned-Btn-container">
+
+        <button
+
+         className="event-task-pinned-cancelBtn"
+
+         onClick={()=>setShowMoreModal(false)}
+
+         >
+
+            Close
+
+         </button>
+
+         <button
+
+         className="event-task-pinned-deleteAllBtn"
+         
+         onClick={() => {
 
             const updatedEvents = events.filter(
 
@@ -554,15 +696,7 @@ export default function Calender() {
                 Delete All
          </button>
 
-         <button
-
-         onClick={()=>setShowMoreModal(false)}
-
-         >
-
-            Close
-
-         </button>
+        </div>
 
          
 
@@ -618,7 +752,7 @@ export default function Calender() {
             <p id="view-all-btn">View all</p>
     </header>
     <table className="upcoming-reminder-table">
-     { recentEvents.map((event,index)=>(
+     { upcomingEvents.map((event,index)=>(
     
             
                 <tr key={index}>

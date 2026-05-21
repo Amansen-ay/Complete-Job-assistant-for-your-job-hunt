@@ -490,7 +490,7 @@ tr:last-child td{
 
 .eventModal{
 
-   width:350px;
+   width:fit-content;
 
    background:#fff;
 
@@ -525,6 +525,8 @@ tr:last-child td{
    justify-content:flex-end;
 
    gap:10px;
+
+   margin-top:10px;
 }
 
 .event-pill{
@@ -559,4 +561,223 @@ tr:last-child td{
    margin-top:10px;
 
    font-size:14px;
+
+   width:480px;
+
+   display:flex;
+
+   justify-content:space-between;
+
+   align-items:center;
+
+   border:1px solid #c1c1c1;
+
+   
 }
+
+.warning-text,
+.date-row-in-delete-modal div
+{
+    display:flex;
+    flex-direction:column;
+    gap:5px;
+}
+
+.removeBtn{
+    margin-left:auto;
+    cursor:pointer;
+}
+
+
+.delete-modal-warning-header p{
+    font-size:small;
+}
+.delete-modal-warning-header{
+    display:flex;
+    gap:20px;
+    border-bottom:1px solid #c1c1c1;
+    padding-bottom:13px;
+}
+
+.delete-modal-warning-header img{
+    background-color: #ffabab;
+    padding:5px;
+    border-radius:50%;
+}
+
+.row-in-delete-modal{
+    display:flex;
+    align-items:center;
+    gap:20px;
+    border-bottom : 1px solid #c1c1c1;
+    padding: 0px 0px 13px 0px;
+}
+
+.row-in-delete-modal img{
+    background-color: #ebf0ff;
+    padding:3px;
+    border-radius:10px;
+
+}
+
+.row-in-delete-modal p{
+    color:#515151
+}
+
+.label-and-titles{
+    display:flex;
+    flex-direction:column;
+    gap:5px;
+}
+
+.delete-modal-cancel-button,
+.show-modal-cancel-button{
+    width:65px;
+    height:30px;
+    border-radius:5px;
+    border:1px solid #787878;
+    background-color: #fff;
+    font-weight:600;
+    cursor:pointer;
+}
+
+.delete-modal-delete-button{
+    width:100px;
+    height:30px;
+    background-color: #d74101;
+    color:#fff;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+.show-modal-header{
+    display:flex;
+    gap:20px;
+    align-items:center;
+}
+
+.show-modal-header img{
+    background-color: #ebf0ff;
+    padding:5px;
+    border-radius:10px;
+}
+
+.show-modal-save-button{
+    width:100px;
+    height:30px;
+    background-color: #0c69ff;
+    color:#fff;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;     
+}
+
+.show-modal-save-button:hover{
+    background-color: #0c50bd;
+   
+}
+
+.add-event-input{
+    width:350px;
+    padding:10px;
+    /* background-color: #35c118; */
+    display:flex;
+    gap:10px;
+    border:1px solid #c1c1c1;
+    border-radius:10px;
+    transition:0.25s;
+    align-items:center;
+    
+}
+
+.add-event-input img{
+    background-color: #ebf0ff;
+    padding:5px;
+    border-radius:10px;
+}
+
+.add-event-input:focus-within{
+    border:1px solid #4f46e5;
+    box-shadow:
+    0 0 0 4px rgba(79,70,229,0.12);
+}
+.add-event-input input{
+    width:280px;
+    height:30px;
+    /* background-color: #a82c2c; */
+    border:none;
+    border-radius:5px;
+    outline:none;
+
+}
+
+
+
+.instruction{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-top:-5px
+}
+
+.instruction p{
+    font-size:small;
+    color:#707070
+}
+
+.event-task-pinned{
+    display:flex;
+    gap:10px;
+}
+
+.event-task-pinned-time{
+    background-color: #cfdaff;
+    padding:5px;
+    border-radius:5px;
+}
+
+.event-task-pinned-warning{
+    color:red;
+    background-color: #ffd7d5;
+    width: 480px;
+    height:35px;
+    font-size:13px;
+    text-align:center;
+    border-radius:5px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:5px;
+    border:1px solid #c1c1c1;
+}
+
+.event-task-pinned-Btn-container{
+    display:flex;
+    gap:20px;
+}
+
+.event-task-pinned-deleteAllBtn{
+     width:230px;
+    height:30px;
+    background-color: #d74101;
+    color:#fff;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+
+.event-task-pinned-cancelBtn{
+
+    width:230px;
+    height:30px;
+    border-radius:5px;
+    border:1px solid #787878;
+    background-color: #fff;
+    font-weight:600;
+    cursor:pointer;
+
+}
+
+
