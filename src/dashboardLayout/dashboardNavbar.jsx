@@ -6,7 +6,7 @@ import './dashboardNavbar.css'
 
 
 
-export default function DashboardNavbar() {
+export default function DashboardNavbar({sidebarToggler}) {
 
     const location = useLocation();
 
@@ -54,7 +54,7 @@ export default function DashboardNavbar() {
             <nav className="dashboardNavContainer">
 
                 <div id="Menu">
-                <img src={Menu}/>
+                <img src={Menu} onClick={sidebarToggler}/>
                 <h2>{title}</h2>  
                 </div>
 

@@ -70,7 +70,7 @@ export default function AddNewJob() {
 
         <div className="entire-page-wrapper">
 
-        <div>
+        <div className="entire-form-container">
             <header className="application-page-header">
                 <div className="page-title-and-backBtn">
                     <h1>Add New Job Application</h1>

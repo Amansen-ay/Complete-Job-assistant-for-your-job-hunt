@@ -10,9 +10,12 @@ import Analytics from './Pages/analytics.jsx'
 import NotesPage from './Pages/notesPage.jsx'
 import Navbar from './dashboardLayout/dashboardNavbar.jsx'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import {useState} from 'react';
 
 
 export default function App(){
+
+
   return (
     <>
     <BrowserRouter>
@@ -31,6 +34,7 @@ export default function App(){
         <Route path="taskPage" element={<TaskPage/>}/>
         <Route path="analytics" element={<Analytics />} />
         <Route path="notesPage" element={<NotesPage />} />
+
       </Route>  
       
 

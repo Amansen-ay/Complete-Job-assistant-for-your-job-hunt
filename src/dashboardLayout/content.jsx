@@ -38,9 +38,8 @@ export default function Content() {
          </div>
 
          <div className="reminder-task-section-container">
-        <ReminderSection/>
-        <TaskSection/>
-        <ExploreJobs/>
+        <ReminderSection />
+        <TaskSection />
          </div>
             
            

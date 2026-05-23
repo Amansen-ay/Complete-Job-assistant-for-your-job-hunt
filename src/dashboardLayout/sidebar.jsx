@@ -14,9 +14,12 @@ import { NavLink } from "react-router-dom";
 import './sidebar.css'
 
 
-export default function Sidebar(){
+export default function Sidebar({showSidebar}){
     return (
         <>
+
+     
+      <div className={showSidebar?"sidebar active":"sidebar"}>
         <main id="sidebarContainer">
           <header className="sidebarHeader">
             <img src={Logo} width="40px" height="40px"/>
@@ -64,6 +67,9 @@ export default function Sidebar(){
         <div id="helpDiv"> <img src={Help} /><p>Need help ?</p></div>
 
         </main>
+
+        </div>
+
         </>
     )
 }

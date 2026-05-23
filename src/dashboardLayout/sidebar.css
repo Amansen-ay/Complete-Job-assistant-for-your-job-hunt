@@ -80,3 +80,19 @@
      border-radius:10px;  
      color:inherit;  
 }
+
+
+.sidebar{
+
+   width:0;
+
+   overflow:hidden;
+
+   transition:0.15s ease;
+
+}
+.sidebar.active{
+
+   width:216px;
+
+}
