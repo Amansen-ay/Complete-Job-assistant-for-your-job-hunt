@@ -1,5 +1,7 @@
 import './taskPage.css'
 import more from '../assets/more.svg'
+import {useState} from 'react';
+import removeBtn from '../assets/removeBtn.svg'
 
 import {
 
@@ -183,6 +185,8 @@ function TaskDonutChart(){
 
 
 export default function TaskPage() {
+
+    const [showTaskModal,setShowTaskModal] = useState(false);
     return (
     <>
     <div className="entire-task-page-container">
@@ -201,7 +205,7 @@ export default function TaskPage() {
                 <button>Completed</button>
             </div>
             <div className="add-new-task-btn">
-                <button>+ Add new task</button>
+                <button onClick={()=>setShowTaskModal(true)}>+ Add new task</button>
             </div>
             
         </div>
@@ -337,6 +341,177 @@ export default function TaskPage() {
         </div>
             
     </div>
+
+    {/* ADD TASK MODAL */}
+
+{
+  showTaskModal && (
+
+    <div className="task-modal-overlay">
+
+      <div className="task-modal">
+
+        {/* HEADER */}
+
+        <div className="task-modal-header">
+
+          <div className="task-modal-title-section">
+
+            <div className="task-modal-icon">
+              <span className="material-symbols-rounded">task_alt</span>
+            </div>
+
+            <div>
+              <h2>Add New Task</h2>
+              <p>Create a new task and track your progress.</p>
+            </div>
+
+          </div>
+
+          <button
+            className="task-modal-close-btn"
+            onClick={() => setShowTaskModal(false)}
+          >
+            <img className="material-symbols-rounded" src={removeBtn}/>
+          </button>
+
+        </div>
+
+        {/* BODY */}
+
+        <div className="task-modal-body">
+
+          {/* TASK TITLE */}
+
+          <div className="task-modal-field">
+
+            <label>Task Title <span>*</span></label>
+
+            <input
+              type="text"
+              placeholder="Enter task title"
+            />
+
+            <p className="task-input-helper">
+              A clear and concise title helps you stay organized.
+            </p>
+
+          </div>
+
+          {/* ROW */}
+
+          <div className="task-modal-row">
+
+            <div className="task-modal-field">
+
+              <label>Related To <span>*</span></label>
+
+              <select>
+                <option>Select company</option>
+                <option>Google</option>
+                <option>Microsoft</option>
+                <option>Amazon</option>
+              </select>
+
+            </div>
+
+            <div className="task-modal-field">
+
+              <label>Due Date <span>*</span></label>
+
+              <input type="date" />
+
+            </div>
+
+            <div className="task-modal-field">
+
+              <label>Priority <span>*</span></label>
+
+              <select>
+                <option>Select priority</option>
+                <option>High</option>
+                <option>Medium</option>
+                <option>Low</option>
+              </select>
+
+            </div>
+
+          </div>
+
+          {/* ROW */}
+
+          <div className="task-modal-row">
+
+            <div className="task-modal-field">
+
+              <label>Status <span>*</span></label>
+
+              <select>
+                <option>Select status</option>
+                <option>To Do</option>
+                <option>In Progress</option>
+                <option>Completed</option>
+              </select>
+
+            </div>
+
+            <div className="task-modal-field">
+
+              <label>Assigned To</label>
+
+              <select>
+                <option>Select assignee (optional)</option>
+              </select>
+
+            </div>
+
+          </div>
+
+          {/* DESCRIPTION */}
+
+          <div className="task-modal-field">
+
+            <label>Description</label>
+
+            <textarea
+              placeholder="Add task details, notes, or any important information..."
+            ></textarea>
+
+            <p className="task-input-helper">
+              Add any additional details that will help you complete this task.
+            </p>
+
+          </div>
+
+        </div>
+
+        {/* FOOTER */}
+
+        <div className="task-modal-footer">
+
+          <button
+            className="task-cancel-btn"
+            onClick={() => setShowTaskModal(false)}
+          >
+            Cancel
+          </button>
+
+          <button className="task-save-btn">
+
+            <span className="material-symbols-rounded">add</span>
+
+            Add Task
+
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  )
+}
         </>
     )
 }
