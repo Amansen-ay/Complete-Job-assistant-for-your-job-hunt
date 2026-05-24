@@ -27,6 +27,7 @@ export default function Calender() {
 
     const [eventRole,setEventRole] = useState("");
 
+
     const [events,setEvents] = useState(()=>{
 
         const savedEvents = localStorage.getItem("calendarEvents"); 
@@ -499,7 +500,8 @@ export default function Calender() {
 
                      role:eventRole,
 
-                     time: eventTime
+                     time: eventTime,
+                     
 
                   }
 

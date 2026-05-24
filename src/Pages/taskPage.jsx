@@ -1,6 +1,6 @@
 import './taskPage.css'
 import more from '../assets/more.svg'
-import {useState} from 'react';
+import {useState,useEffect} from 'react';
 import removeBtn from '../assets/removeBtn.svg'
 
 import {
@@ -187,6 +187,39 @@ function TaskDonutChart(){
 export default function TaskPage() {
 
     const [showTaskModal,setShowTaskModal] = useState(false);
+
+    const [taskObj,setTaskObj] = useState(()=>{
+
+        const savedObj = localStorage.getItem("myTasks");
+
+        return savedObj? JSON.parse(savedObj):[];
+        });
+
+    const [task,setTask] = useState("");
+    const [relatedTo,setRelatedTo] = useState("");
+    const [dueDate,setDueDate] = useState("");
+    const [priority,setPriority] = useState("");
+    const [status,setStatus] = useState(""); 
+    const [showMenu,setShowMenu] = useState(null);
+
+    const [selectedTaskRow,setSelectedTaskRow] = useState(null);
+
+    useEffect(()=>{
+
+        localStorage.setItem("myTasks",JSON.stringify(taskObj))
+
+    },[taskObj])
+
+ 
+    function deleteTaskHandeler() {
+        const filteredTaskObj = taskObj.filter((obj)=>(
+            obj!==selectedTaskRow
+        ))
+         setTaskObj(filteredTaskObj);
+         setShowMenu(false);
+    }
+
+
     return (
     <>
     <div className="entire-task-page-container">
@@ -220,110 +253,81 @@ export default function TaskPage() {
                     <th>Status</th>
                     <th></th>
                 </tr>
+            { taskObj.map((obj,index)=>(
 
-                <tr>
+                <tr key={index}>
                     <td>
-                        <h3>update resume</h3>
-                        <p>Add recent project and skills</p>
+                        <h3>{obj.task}</h3>
+                        {/* <p>-</p> */}
                     </td>
                     <td>
-                        <h3>Google</h3>
-                        <p>Frontend developer </p>
+                        <h3>{obj.relatedTo}</h3>
+                        {/* <p>- </p> */}
                     </td>
                     <td>
-                        <h3>20 May 2025</h3>
-                        <p>Today</p>
+                        <h3>{obj.dueDate}</h3>
+                        {/* <p>-</p> */}
                     </td>
                     <td>
-                        <h3>High</h3>
+                        <h3>{obj.priority}</h3>
                     </td>
-                    <td> To do</td>
-                    <td><img src={more}/></td>
+                    <td> {obj.status}</td>
+                    <td>
+                        <div className="menu-wrapper">
+                            <img  className="three-dots-btn" src={more} onClick={()=>{
+                                setShowMenu(showMenu===index?null:index);
+                                setSelectedTaskRow(obj);
+                        
+                            }}/>
+
+                    {
+                        
+
+                    showMenu === index && (
+
+                    <div className="dropdown-menu">
+
+                     <button onClick={()=>{
+                        setTask(selectedTaskRow.task);
+                        setPriority(selectedTaskRow.priority);
+                        setDueDate(selectedTaskRow.dueDate);
+                        setRelatedTo(selectedTaskRow.relatedTo);
+                        setStatus(selectedTaskRow.status);
+                        setShowTaskModal(true);
+                     }}>Edit</button>
+
+                     <button onClick={deleteTaskHandeler}>Delete</button>
+
+                     <button onClick={()=>{
+                        setTaskObj(
+                            taskObj.map((obj)=>{
+                               return  obj===selectedTaskRow?
+                                {
+                                task:obj.task,
+                                priority:obj.priority,
+                                relatedTo:obj.relatedTo,
+                                dueDate:obj.dueDate,
+                                status:"Completed"
+                                }:obj
+                            })
+                        )
+                     }}>Mark Complete</button>
+
+                    </div>
+
+                        )
+
+                    }
+
+                    </div>
+
+                    </td>
+
                 </tr>
 
+            ))
                 
-                <tr>
-                    <td>
-                        <h3>update resume</h3>
-                        <p>Add recent project and skills</p>
-                    </td>
-                    <td>
-                        <h3>Google</h3>
-                        <p>Frontend developer </p>
-                    </td>
-                    <td>
-                        <h3>20 May 2025</h3>
-                        <p>Today</p>
-                    </td>
-                    <td>
-                        <h3>High</h3>
-                    </td>
-                    <td> To do</td>
-                    <td><img src={more}/></td>
-                </tr>
-
-                
-                <tr>
-                    <td>
-                        <h3>update resume</h3>
-                        <p>Add recent project and skills</p>
-                    </td>
-                    <td>
-                        <h3>Google</h3>
-                        <p>Frontend developer </p>
-                    </td>
-                    <td>
-                        <h3>20 May 2025</h3>
-                        <p>Today</p>
-                    </td>
-                    <td>
-                        <h3>High</h3>
-                    </td>
-                    <td> To do</td>
-                    <td><img src={more}/></td>
-                </tr>
-
-                
-                <tr>
-                    <td>
-                        <h3>update resume</h3>
-                        <p>Add recent project and skills</p>
-                    </td>
-                    <td>
-                        <h3>Google</h3>
-                        <p>Frontend developer </p>
-                    </td>
-                    <td>
-                        <h3>20 May 2025</h3>
-                        <p>Today</p>
-                    </td>
-                    <td>
-                        <h3>High</h3>
-                    </td>
-                    <td> To do</td>
-                    <td><img src={more}/></td>
-                </tr>
-
-                
-                <tr>
-                    <td>
-                        <h3>update resume</h3>
-                        <p>Add recent project and skills</p>
-                    </td>
-                    <td>
-                        <h3>Google</h3>
-                        <p>Frontend developer </p>
-                    </td>
-                    <td>
-                        <h3>20 May 2025</h3>
-                        <p>Today</p>
-                    </td>
-                    <td>
-                        <h3>High</h3>
-                    </td>
-                    <td> To do</td>
-                    <td><img src={more}/></td>
-                </tr>
+            }
             </table>
 
         <div className="pagination-container">
@@ -388,6 +392,8 @@ export default function TaskPage() {
             <label>Task Title <span>*</span></label>
 
             <input
+              onChange={(e)=>setTask(e.target.value)}
+              value={task}
               type="text"
               placeholder="Enter task title"
             />
@@ -406,7 +412,9 @@ export default function TaskPage() {
 
               <label>Related To <span>*</span></label>
 
-              <select>
+              <select
+                onChange={(e)=>setRelatedTo(e.target.value)}
+                value={relatedTo}>
                 <option>Select company</option>
                 <option>Google</option>
                 <option>Microsoft</option>
@@ -419,7 +427,11 @@ export default function TaskPage() {
 
               <label>Due Date <span>*</span></label>
 
-              <input type="date" />
+              <input 
+              onChange={(e)=>setDueDate(e.target.value)}
+              value={dueDate}
+              type="date" 
+              />
 
             </div>
 
@@ -427,7 +439,9 @@ export default function TaskPage() {
 
               <label>Priority <span>*</span></label>
 
-              <select>
+              <select
+                onChange={(e)=>setPriority(e.target.value)}
+                value={priority}>
                 <option>Select priority</option>
                 <option>High</option>
                 <option>Medium</option>
@@ -446,7 +460,9 @@ export default function TaskPage() {
 
               <label>Status <span>*</span></label>
 
-              <select>
+              <select
+                onChange={(e)=>setStatus(e.target.value)}
+                value={status}>
                 <option>Select status</option>
                 <option>To Do</option>
                 <option>In Progress</option>
@@ -496,11 +512,43 @@ export default function TaskPage() {
             Cancel
           </button>
 
-          <button className="task-save-btn">
+          <button className="task-save-btn"
+          onClick={()=>{
+            setTaskObj(
+                selectedTaskRow===null?[
+                    ...taskObj,
+                    {
+                    task:task,
+                    priority:priority,
+                    relatedTo:relatedTo,
+                    status:status,
+                    dueDate:dueDate
+                }]
+                :
+               
+                taskObj.map((obj)=>{
+                    return obj===selectedTaskRow?
+                    {task:task,
+                    relatedTo:relatedTo,
+                    dueDate:dueDate,
+                    priority:priority,
+                    status:status}:obj
+                }),
+                
+            )
+            setTask("");
+            setRelatedTo("");
+            setDueDate("");
+            setPriority("");
+            setStatus("");
+            setShowTaskModal(false);
+            setSelectedTaskRow(null);
+            setShowMenu(null);
+          }}>
 
-            <span className="material-symbols-rounded">add</span>
+            <span className="material-symbols-rounded">Add Task</span>
 
-            Add Task
+            
 
           </button>
 
@@ -512,6 +560,10 @@ export default function TaskPage() {
 
   )
 }
+
+{/* dropdownMenu */}
+
+{}
         </>
     )
 }
