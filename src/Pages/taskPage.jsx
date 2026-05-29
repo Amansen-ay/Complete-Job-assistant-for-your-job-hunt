@@ -1,6 +1,6 @@
 import './taskPage.css'
 import more from '../assets/more.svg'
-import {useState,useEffect} from 'react';
+import {useState,useEffect,useRef} from 'react';
 import removeBtn from '../assets/removeBtn.svg'
 
 import {
@@ -186,7 +186,11 @@ function TaskDonutChart(){
 
 export default function TaskPage() {
 
+    const menuRef = useRef(null)
+
     const [showTaskModal,setShowTaskModal] = useState(false);
+    const [filter,setFilter] = useState("All")
+
 
     const [taskObj,setTaskObj] = useState(()=>{
 
@@ -200,7 +204,8 @@ export default function TaskPage() {
     const [dueDate,setDueDate] = useState("");
     const [priority,setPriority] = useState("");
     const [status,setStatus] = useState(""); 
-    const [showMenu,setShowMenu] = useState(null);
+    const [showMenu,setShowMenu] = useState(-1);
+
 
     const [selectedTaskRow,setSelectedTaskRow] = useState(null);
 
@@ -216,9 +221,32 @@ export default function TaskPage() {
             obj!==selectedTaskRow
         ))
          setTaskObj(filteredTaskObj);
-         setShowMenu(false);
+         setShowMenu(-1);
     }
 
+    useEffect(()=>{
+
+      function handleClickOutside(e){
+
+      if(menuRef.current && !menuRef.current.contains(e.target)) {
+
+        setShowMenu(-1);
+
+      }
+
+    }
+
+    document.addEventListener("mousedown",handleClickOutside);
+
+    return ()=>{
+
+        document.removeEventListener("mousedown",handleClickOutside);
+
+    }
+
+    },[])
+
+   const filteredArray = filter==="All"?taskObj:taskObj.filter((obj)=>obj.status===filter)
 
     return (
     <>
@@ -232,10 +260,10 @@ export default function TaskPage() {
          <div className="header-section-btns-containers">
 
             <div className="header-section-btns">
-                <button>All tasks</button>
-                <button>To do </button>
-                <button>In Progress</button>
-                <button>Completed</button>
+                <button  className={filter==="All"?"active-filter-btn":""} onClick={()=>setFilter("All")}>All tasks</button>
+                <button  className={filter==="To Do" ?"active-filter-btn":""} onClick={()=>setFilter("To Do")}>To do </button>
+                <button  className={filter==="In Progress"?"active-filter-btn":""} onClick={()=>setFilter("In Progress")}>In Progress</button>
+                <button  className={filter==="Completed"?"active-filter-btn":""} onClick={()=>setFilter("Completed")}>Completed</button>
             </div>
             <div className="add-new-task-btn">
                 <button onClick={()=>setShowTaskModal(true)}>+ Add new task</button>
@@ -253,7 +281,7 @@ export default function TaskPage() {
                     <th>Status</th>
                     <th></th>
                 </tr>
-            { taskObj.map((obj,index)=>(
+            { filteredArray.map((obj,index)=>(
 
                 <tr key={index}>
                     <td>
@@ -269,13 +297,31 @@ export default function TaskPage() {
                         {/* <p>-</p> */}
                     </td>
                     <td>
-                        <h3>{obj.priority}</h3>
+                        <h3 className={
+                        obj.priority === "High"
+                        ? "high-priority"
+                        : obj.priority === "Medium"
+                        ? "medium-priority"
+                        : "low-priority"
+                        }>{obj.priority}</h3>
                     </td>
-                    <td> {obj.status}</td>
+                    <td>
+                        <div className={
+                        obj.status === "Completed"
+                        ? "status-complete"
+                        : obj.status === "In Progress"
+                        ? "status-in-progress"
+                        : "status-To-do"
+                        }>
+                            {obj.status}
+
+                        </div>
+                    </td>
+
                     <td>
                         <div className="menu-wrapper">
                             <img  className="three-dots-btn" src={more} onClick={()=>{
-                                setShowMenu(showMenu===index?null:index);
+                                setShowMenu((prev)=>prev===index?-1:index);
                                 setSelectedTaskRow(obj);
                         
                             }}/>
@@ -285,7 +331,7 @@ export default function TaskPage() {
 
                     showMenu === index && (
 
-                    <div className="dropdown-menu">
+                    <div ref={menuRef} className="dropdown-menu" onClick={(e)=>e.stopPropagation()}>
 
                      <button onClick={()=>{
                         setTask(selectedTaskRow.task);
@@ -298,19 +344,21 @@ export default function TaskPage() {
 
                      <button onClick={deleteTaskHandeler}>Delete</button>
 
-                     <button onClick={()=>{
+                     <button onClick={(e )=>{
+                         e.stopPropagation();
                         setTaskObj(
-                            taskObj.map((obj)=>{
-                               return  obj===selectedTaskRow?
+                            taskObj.map((task)=>{
+                               return  task===selectedTaskRow?
                                 {
-                                task:obj.task,
-                                priority:obj.priority,
-                                relatedTo:obj.relatedTo,
-                                dueDate:obj.dueDate,
+                                task:task.task,
+                                priority:task.priority,
+                                relatedTo:task.relatedTo,
+                                dueDate:task.dueDate,
                                 status:"Completed"
-                                }:obj
+                                }:task
                             })
-                        )
+                        );
+                        setShowMenu(-1);
                      }}>Mark Complete</button>
 
                     </div>

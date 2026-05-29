@@ -564,3 +564,70 @@
 .three-dots-btn{
     cursor:pointer;
 }
+
+.dropdown-menu{
+   z-index: 999;
+   position: absolute;
+}
+
+.menu-wrapper{
+   position: relative;
+}
+
+.high-priority {
+    background-color: #f3c6c6;
+    color:red;
+    text-align:center;
+    padding:10px ;
+    width:fit-content;
+    border-radius:10px;
+}
+
+.medium-priority{
+    background-color: rgb(243, 243, 162);
+    color:rgb(255, 132, 0);
+    text-align:center;
+    padding:10px ;
+    width:fit-content;
+    border-radius:10px;
+}
+.low-priority{
+    background-color: #ddf3c6;
+    color:green;
+    text-align:center;
+    padding:10px ;
+    width:fit-content;
+    border-radius:10px;
+}
+
+.active-filter-btn{
+   background-color:#2563eb !important;
+   color:white;
+}
+
+.status-To-do{
+    background-color:rgb(232, 209, 232);
+    color:purple;
+    text-align:center;
+    padding:10px ;
+    width:fit-content;
+    border-radius:10px;
+}
+
+.status-in-progress{
+    background-color:rgb(185, 199, 236);
+    color:rgb(55, 0, 255);
+    text-align:center;
+    padding:10px ;
+    width:fit-content;
+    border-radius:10px;
+}
+
+.status-complete{
+    background-color: #ddf3c6;
+    color:green;
+    text-align:center;
+    padding:10px ;
+    width:fit-content;
+    border-radius:10px;
+}
