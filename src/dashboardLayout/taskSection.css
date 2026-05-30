@@ -1,11 +1,17 @@
 .taskSectionHeader{
     display:flex;
+    justify-content:space-between;
 
 }
 .taskSectionHeader p{
-    margin-left:auto;
     color:blue;
     cursor:pointer;
+    
+}
+
+.view-all-link{
+   text-decoration:none;
+   color:inherit;
 }
 
 .task-section-container{
@@ -58,6 +64,13 @@
     
 }
 
+/* .Task-row-container span{
+    background-color:blue;
+    border-radius:50%;
+    width:10px;
+    height:10px;
+    
+} */
 
 #dateOfTask{
     margin-left:auto;

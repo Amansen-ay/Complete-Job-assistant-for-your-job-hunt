@@ -14,11 +14,16 @@
 
 .reminderSectionHeader{
     display:flex;
+    justify-content:space-between;
     
 }
 
+.view-all-link{
+   text-decoration:none;
+   color:inherit;
+}
+
 .reminderSectionHeader p{
-    margin-left:auto;
     color:blue;
     margin-bottom:15px;
     cursor:pointer;

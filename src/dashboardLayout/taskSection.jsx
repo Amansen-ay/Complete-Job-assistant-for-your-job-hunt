@@ -1,23 +1,24 @@
 import './taskSection.css'
-import {useState} from 'react'
+import {useState,useEffect} from 'react'
+import {NavLink} from 'react-router-dom'
 
-const tasks = ["update resume","upload repo","make cv","apply on job"];
 
-function TaskRow({taskTitle}) {
+
+function TaskRow({taskTitle,dueDate}) {
 
     
     return (
         <>
         <div className="Task-row-container">
             <div className="task-check">
-            <input type="checkbox" />
+            <span>{">"}</span>
             </div>
 
             <div className="task-title">
                 <h3>{taskTitle}</h3>
             </div>
 
-            <h4 id="dateOfTask">Today</h4>
+            <h4 id="dateOfTask">{dueDate}</h4>
             
         </div>
         
@@ -26,8 +27,16 @@ function TaskRow({taskTitle}) {
 }
 
 export default function TaskSection() {
-    const taskList = tasks.map((task)=>(
-                <TaskRow taskTitle={task}/>
+
+    
+
+    const tasks =
+      JSON.parse(localStorage.getItem("myTasks")) || [];
+
+   
+
+    const taskList = tasks.slice(0,4).map((obj)=>(
+                <TaskRow taskTitle={obj.task} dueDate={obj.dueDate}/>
     ))
 
     return (
@@ -35,7 +44,9 @@ export default function TaskSection() {
         <div className="task-section-container">
             <header className="taskSectionHeader">
                 <h3>Tasks</h3>
-                <p>View all </p>
+                <NavLink to="/dashboard/taskPage" className="view-all-link" >
+                    <p>View all </p>
+                </NavLink>
             </header>
           
             <div>
