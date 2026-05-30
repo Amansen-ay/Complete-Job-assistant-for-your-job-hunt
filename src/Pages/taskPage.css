@@ -1,8 +1,3 @@
-.entire-task-page-container{
-    /* display:flex; */
-    /* justify-content:space-between; */
-    
-}
 
 .Task-Page-Top-Header{
     display:flex;
@@ -69,16 +64,9 @@
 }
 
 
-.pagination-container{
-    padding:20px 16px;
-    display:flex;
-    border-top:1px solid #c1c1c1
 
-}
 
-.pagination-container h3{
-    margin-left:auto;
-}
+
 
 /* .donut-chart-task-page-container{
     width:300px;
@@ -630,4 +618,43 @@
     padding:10px ;
     width:fit-content;
     border-radius:10px;
+}
+
+
+
+.pagination-container{
+    display:flex;
+    align-items:center;
+    gap:20px;
+    border-top:1px solid #c1c1c1;
+    
+}
+
+
+#nextBtn{
+    background-color: #fff;
+    padding:5px;
+    border:1px solid #c1c1c1;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+#prevBtn{
+    background-color: #fff;
+    padding:5px;
+    border:1px solid #c1c1c1;
+    border-radius:5px;
+    cursor:pointer;
+    /* margin-left:auto; */
+}
+#nextBtn,
+#prevBtn:hover{
+    background-color: #e0e0e0;
+}
+
+.pagination-ui-block{
+    margin-left:auto;
+     display:flex;
+    align-items:center;
+    gap:20px;
 }

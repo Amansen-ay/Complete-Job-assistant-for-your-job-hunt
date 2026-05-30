@@ -1,7 +1,9 @@
 import './taskPage.css'
 import more from '../assets/more.svg'
 import {useState,useEffect,useRef} from 'react';
-import removeBtn from '../assets/removeBtn.svg'
+import removeBtn from '../assets/removeBtn.svg';
+import previousBtn from '../assets/previous.svg';
+import forwardBtn from '../assets/forward.svg';
 
 import {
 
@@ -186,18 +188,33 @@ function TaskDonutChart(){
 
 export default function TaskPage() {
 
-    const menuRef = useRef(null)
-
-    const [showTaskModal,setShowTaskModal] = useState(false);
-    const [filter,setFilter] = useState("All")
-
-
     const [taskObj,setTaskObj] = useState(()=>{
 
         const savedObj = localStorage.getItem("myTasks");
 
         return savedObj? JSON.parse(savedObj):[];
         });
+
+    const [filter,setFilter] = useState("All");
+
+    const filteredArray = filter==="All"?taskObj:taskObj.filter((obj)=>obj.status===filter);
+
+    const menuRef = useRef(null)
+
+    const [showTaskModal,setShowTaskModal] = useState(false);
+
+    const taskPerPage = 5;
+    const [currentPage,setCurrentPage] = useState(1);
+    const totalPages = Math.ceil(filteredArray.length/taskPerPage);
+
+    const lastIndex = currentPage*taskPerPage;
+    const firstIndex = lastIndex - taskPerPage;
+
+
+    
+
+
+    ;
 
     const [task,setTask] = useState("");
     const [relatedTo,setRelatedTo] = useState("");
@@ -246,7 +263,13 @@ export default function TaskPage() {
 
     },[])
 
-   const filteredArray = filter==="All"?taskObj:taskObj.filter((obj)=>obj.status===filter)
+    useEffect(()=>{
+
+        setCurrentPage(1);
+
+    },[filter]);
+
+   
 
     return (
     <>
@@ -281,7 +304,7 @@ export default function TaskPage() {
                     <th>Status</th>
                     <th></th>
                 </tr>
-            { filteredArray.map((obj,index)=>(
+            { filteredArray.slice(firstIndex,lastIndex).map((obj,index)=>(
 
                 <tr key={index}>
                     <td>
@@ -379,8 +402,30 @@ export default function TaskPage() {
             </table>
 
         <div className="pagination-container">
-           <p>Showing 1 to 6 of 24 Tasks</p>
-           <h3>Pagination placeholder</h3>
+           <div className="pagination-ui-block">
+            
+                <button 
+                
+                id="prevBtn"
+                
+                disabled = {currentPage===1}
+ 
+                onClick={()=>setCurrentPage(currentPage-1)}> {"<"} Prev</button>
+                
+            
+                <p className="pages-data">Page {currentPage} of {totalPages}</p>
+
+                <button 
+
+                id="nextBtn"
+
+                disabled = {currentPage===totalPages}
+ 
+                onClick={()=>setCurrentPage(currentPage+1)}
+
+                >Next {">"}</button>
+           
+           </div>
         </div>
 
 
@@ -615,3 +660,23 @@ export default function TaskPage() {
         </>
     )
 }
+
+
+        // <div className="pagination-container">
+        //     { filteredArray.length>4 ?
+        //         <>
+        //         <p className="pages-data">Page {currentPage} of {totalPages}</p>
+        //         <button 
+
+        //         disabled = {currentPage===totalPages}
+        //         onClick={()=>setCurrentPage(currentPage+1)}
+        //         >Next {">"}</button>
+        //         </>
+        //         :
+        //         <>
+        //         <p>Total tasks 6</p>
+        //         </>
+                
+        //     }
+           
+        // </div>
