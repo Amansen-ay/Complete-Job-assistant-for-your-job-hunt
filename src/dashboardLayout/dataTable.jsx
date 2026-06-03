@@ -1,28 +1,72 @@
 import Amazon from '../assets/amazon.png'
 import './dataTable.css'
+import {NavLink} from 'react-router-dom'
+import recentApplication from '../assets/recentApplications.png'
 
-function TableRow({service,role}) {
+
+
+function Placeholder(){
     return (
         <>
-            <div className="tableRow">
+        <main className="placeholder-container-recent-applications">
+        <div className="empty-placeholder-recent-applications">
+            <img src={recentApplication} alt="not found" width="210px" height="150px"/>
+            <h3 style={{color:"#313131"}}>No recent applications</h3>
+            <p style={{color:"#313131"}}>You haven't added any job application yet.</p>
+            <p>Add your first application to see it here.</p>
+            <NavLink to="/dashboard/addNewJob" className="view-all-link-applications">
+                <button className="go-to-applications">
+                {/* <img src={calendarPurple} alt="not found"/> */}
+               Add your application
+                </button>
+            </NavLink>
+        </div>
+        </main>
+        </>
+    )
+}
+
+
+function TableRow() {
+    const myApplications = JSON.parse(localStorage.getItem("myApplications"))  || [] ;
+
+    return (
+        <>
+
+        { myApplications.length>0?
+
+             myApplications.slice(0,4).map((obj)=>{
+            return (
+                <div className="tableRow">
                 <div className="tableRowLeftPart">
 
                  <img src={Amazon} width="40px" height="40px" />
 
                  <div className="jobRole">
-                  <h4>{service}</h4>
-                  <p>{role}</p>   
+                  <h4>{obj.company}</h4>
+                  <p>{obj.role}</p>   
                  </div>
                 </div>
                 
                
-                <h4 id>Interview</h4>
+                <h4 id>{obj.status}</h4>
                
                 
 
-                <p>20 May 2025</p>
+                <p>{obj.dateApplied}</p>
                 
             </div>  
+            )
+        })
+            
+        
+        :
+        <div className="placeholder-container-applications">
+         <Placeholder/>
+        </div>
+        }
+       
+            
         </>
     )
 }
@@ -33,14 +77,14 @@ export default function datatable() {
         <div className="tableContainer">
             <header className="tableHeader">
              <h3>Recent Applications</h3>
-             <p>View all</p>   
+             <NavLink to="/dashboard/applications" className="view-all-link">
+                <p>View all</p>
+             </NavLink>
+                
             </header    >
      
             <div id="strecher">
-              <TableRow service={"Amazon"} role={"Frontend developer"}/> 
-              <TableRow service={"Microsoft"} role={"Software Engineer"}/>
-              <TableRow service={"Google"} role={"SDE intern"}/>
-              <TableRow  className="lastChild" service={"Netflix"} role={"Full stack developer"}/> 
+              <TableRow/> 
             </div>
             
 

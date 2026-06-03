@@ -4,6 +4,7 @@ import {useState,useEffect,useRef} from 'react';
 import removeBtn from '../assets/removeBtn.svg';
 import previousBtn from '../assets/previous.svg';
 import forwardBtn from '../assets/forward.svg';
+import clipboardPlant from '../assets/clipboardPlant.png'
 
 import {
 
@@ -186,6 +187,7 @@ function TaskDonutChart(){
 }
 
 
+
 export default function TaskPage() {
 
     const [taskObj,setTaskObj] = useState(()=>{
@@ -293,7 +295,8 @@ export default function TaskPage() {
             </div>
             
         </div>
-
+        
+        { filteredArray.length>0?
           <div className="task-page-table-container-wrapper">
             <table className="task-page-table-container">
                 <tr>
@@ -402,7 +405,9 @@ export default function TaskPage() {
             </table>
 
         <div className="pagination-container">
-           <div className="pagination-ui-block">
+
+          { filteredArray.length>0 &&
+             <div className="pagination-ui-block">
             
                 <button 
                 
@@ -425,11 +430,32 @@ export default function TaskPage() {
 
                 >Next {">"}</button>
            
-           </div>
+            </div>
+          }
+          
         </div>
 
 
         </div>
+        :
+        
+        <>
+         <div className="clipboard-plant-img-wrapper">
+          <img src={clipboardPlant}  width="280px" height="200px"/>
+          <h3>You don't have any task yet!</h3>
+          <p>Create your first task to stay organized and</p>
+          <p>keep track of your job search progress.</p>
+
+          <div className="add-new-task-btn-placeholder">
+                <button onClick={()=>setShowTaskModal(true)}>+ Add new task</button>
+            </div>
+        </div>
+
+        
+        </>
+       
+        }
+          
 
         </div>
 

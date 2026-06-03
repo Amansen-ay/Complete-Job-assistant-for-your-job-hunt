@@ -1,5 +1,7 @@
 import './reminderSection.css'
 import {NavLink} from 'react-router-dom';
+import calendarEmpty from '../assets/calendarEmpty.svg'
+import calendarPurple from '../assets/calendarPurple.svg'
 
 const months = [
 
@@ -18,6 +20,25 @@ const months = [
 
 ];
 
+function Placeholder(){
+    return (
+        <>
+        <main className="placeholder-container-calendar">
+        <div className="empty-placeholder-calendar-section">
+            <img src={calendarEmpty} alt="not found" width="60px" height="60px"/>
+            <h3 style={{color:"#313131"}}>No upcoming reminders</h3>
+            <p style={{color:"#313131"}}>Create an event in the calendar.</p>
+            <NavLink to="/dashboard/calendar" className="view-all-link-reminder-section">
+                <button className="go-to-calendar">
+                <img src={calendarPurple} alt="not found"/>
+                Go to calendar
+                </button>
+            </NavLink>
+        </div>
+        </main>
+        </>
+    )
+}
 
 function ReminderSectionTableRow({task,time,role,date,month}) {
     return (
@@ -66,13 +87,24 @@ export default function ReminderSection() {
                     <p >View Calendar</p>
                 </NavLink>
             </header>
-            <div>
+            <div className={upcomingEvents.length===0 && "calendar-section-data-container"}>
+            { upcomingEvents.length>0?
+                <div>
                 {
                     upcomingEvents.slice(0,3).map((obj)=>(
                      <ReminderSectionTableRow task={obj.title} time={obj.time} role={obj.role} date={obj.date} month={obj.month}/>
                     ))
                 }
+                </div>
+                :
+                
+                    <Placeholder/>
+                
+                
+                
+            }
             </div>
+            
 
 
         </div>

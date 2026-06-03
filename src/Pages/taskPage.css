@@ -658,3 +658,35 @@
     align-items:center;
     gap:20px;
 }
+
+.clipboard-plant-img-wrapper{
+    background-color: #fff;
+    margin-top:40px;
+    border-radius:10px;
+    border:1px solid #c1c1c1;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+    padding:30px;
+}
+
+.clipboard-plant-img-wrapper h3{
+    margin:20px;
+}
+
+.clipboard-plant-img-wrapper p{
+    line-height:30px;
+}
+
+.add-new-task-btn-placeholder button{
+    width:200px;
+    height:40px;
+    background-color: rgb(17, 0, 255);
+    border:none;
+    border-radius:5px;
+    color:white;
+    cursor:pointer;
+    margin-top:20px;
+    font-size:15px
+}

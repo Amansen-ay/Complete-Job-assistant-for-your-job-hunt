@@ -18,14 +18,14 @@
     
 }
 
-.view-all-link{
+.view-all-link-reminder-section{
    text-decoration:none;
    color:inherit;
 }
 
 .reminderSectionHeader p{
     color:blue;
-    margin-bottom:15px;
+    /* margin-bottom:15px; */
     cursor:pointer;
 }
 
@@ -54,3 +54,42 @@
     border-radius:3px;
     /* flex:1 */
 }
+
+.placeholder-container-calendar{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    width:300px;
+    justify-content:center;
+}
+
+.empty-placeholder-calendar-section{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:10px;
+    
+}
+
+.go-to-calendar{
+    display:flex;
+    align-items:center;
+    gap:3px;
+    height:35px;
+    padding:5px;
+    font-size:15px;
+    border:1px solid #8C1AF6;
+    border-radius:3px;
+    color:#8C1AF6;
+    background-color: #f7f2fc;
+    font-weight:600;
+    cursor:pointer;
+}
+
+.calendar-section-data-container{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin-top:-10px;
+}
+

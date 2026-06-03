@@ -1,5 +1,5 @@
 import './addNewJob.css';
-import {useState} from 'react';
+import {useState,useEffect} from 'react';
 import removeBtn from '../assets/removeBtn.svg'
 import apartment from '../assets/apartment.svg'
 import globe from '../assets/globe.svg'
@@ -9,12 +9,21 @@ import trackPath from '../assets/trackPathnew.svg'
 import tipsTag from '../assets/tipsTagnew.svg'
 import details from '../assets/details.svg'
 import BackBtn from '../assets/goBack.svg'
+import {NavLink} from 'react-router-dom';
 
 
 export default function AddNewJob() {
+   const [applicationArr,setApplicationArr] = useState(() => {
 
+   return JSON.parse(
+      localStorage.getItem("myApplications")
+   ) || [];
+
+});
     const [tags,setTags]  = useState([]);
+    const [companyWebsite,setCompanyWebsite] = useState("")
     const [input,setInput] = useState("");
+    const [employmentType,setEmploymentType] = useState("")
     const [note,setNote] = useState("");
     const [discription,setDiscription] = useState("");
     const [companyName,setCompanyName] = useState("");
@@ -64,7 +73,12 @@ export default function AddNewJob() {
     function discriptionHandeler(e) {
         setDiscription(e.target.value)
     }
+    
+    useEffect(()=>{
 
+       localStorage.setItem("myApplications",JSON.stringify(applicationArr))
+
+    },[applicationArr])
     return (
         <>
 
@@ -74,10 +88,14 @@ export default function AddNewJob() {
             <header className="application-page-header">
                 <div className="page-title-and-backBtn">
                     <h1>Add New Job Application</h1>
-                    <button>
+
+                    <NavLink to="/dashboard/applications"  className="view-all-link">
+                        <button > 
                         <img src={BackBtn}/>
                         <p>Back to Applications</p>
-                    </button>
+                        </button>
+                    </NavLink>
+                    
                 </div>
                 
                 <p>Add the details of the job you've applied for to keep track of your progress.</p>
@@ -108,7 +126,7 @@ export default function AddNewJob() {
                             <div className="label-and-field">
                                 <label htmlFor="companyWebsite">Company Website*</label>
                                 <div className="input-focus-element">
-                                    <input id="companyWesite" type="text" placeholder="www.companyname.com"  />
+                                    <input id="companyWesite" type="text" placeholder="www.companyname.com"  value={companyWebsite} onChange={(e)=>universalHandeler(e,setCompanyWebsite)}/>
                                     <img src={globe} />
                                 </div>
                                 
@@ -128,7 +146,8 @@ export default function AddNewJob() {
 
                             <div className="label-and-field">
                                 <label htmlFor="employmentType">Employment type*</label>
-                                <select id="employmentType">
+                                <select id="employmentType" value={employmentType} onChange={(e)=>universalHandeler(e,setEmploymentType)}>
+                                    <option>Select type</option>
                                     <option value="Full-time">Full-time</option>
                                     <option value="Part-time">Part-time</option>
                                     <option value="Remote">Remote</option>
@@ -187,14 +206,15 @@ export default function AddNewJob() {
                             <div className="label-and-field">
                                 <label htmlFor="currentStatus">Current Status*</label>
                                 <select  id="currentStatus" value={currentStatus} onChange={(e)=>universalHandeler(e,setCurrentStatus)}>
-
+                                   
+                                    <option>Select status</option>
                                     <option>Applied</option>
 
                                     <option>Under Review</option>
 
                                     <option>Interview Scheduled</option>
 
-                                    <option>Technical Interview</option>
+                                    <option>Tech Interview</option>
 
                                     <option>HR Interview</option>
 
@@ -294,7 +314,39 @@ export default function AddNewJob() {
                    <div className="save-and-cancel-btn">
 
                      <button id="cancelBtn">Cancel</button>
-                     <button id="saveApplicationBtn">Save Application</button>
+                     <button 
+                     id="saveApplicationBtn"
+                     type="button"
+                     onClick={()=>{
+                        companyName!=="" && jobRole!=="" && currentStatus!=="" && dateApplied!=="" && nextStep!=="" && employmentType!=="" &&
+                        setApplicationArr([
+                         ...applicationArr,
+                        {
+                            company:companyName,
+                            role:jobRole,
+                            status:currentStatus,
+                            dateApplied:dateApplied,
+                            nextStep:nextStep,
+                            employmentType:employmentType
+                        }
+                    ]
+                       
+                    )
+
+                    setCompanyName("");
+                    setJobRole("");
+                    setDateApplied("");
+                    setNextStep("");
+                    setEmploymentType("");
+                    setNote("");
+                    setDiscription("");
+                    setCurrentStatus("");
+                    setNextStepDate("");
+                    setCompanyWebsite("");
+
+                     }
+                    
+                     }>Save Application</button>
 
                    </div>
 

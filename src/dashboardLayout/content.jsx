@@ -14,6 +14,11 @@ import Navbar from './dashboardNavbar.jsx'
 
 
 export default function Content() {
+
+    const myApplications = JSON.parse(localStorage.getItem("myApplications")) || [];
+    const interviews = myApplications.filter((obj)=>obj.status==="HR Interview" || obj.status==="Tech Interview" || obj.status==="Interview Scheduled")
+    const rejections = myApplications.filter((obj)=>obj.status==="Rejected");
+    const offers = myApplications.filter((obj)=>obj.status==="Offer Received")
     return (
         <>
         <div>
@@ -22,10 +27,10 @@ export default function Content() {
                 <p>Keep tracking your progress and land your dream job.</p>
             </header>
             <div className="cardContainer">
-                <ContentCard icon={jobIcon} number={24} header={"Applications"} bottomRecord={"12% from  week"} bgc={"#eef2ff"}/>
-                <ContentCard icon={Visibility} number={8} header={"Interview calls"} bottomRecord={"5% from last week"} bgc={"#eef2ff"}/>
-                <ContentCard icon={Bookmark} number={6} header={"saved jobs"} bottomRecord={"8% from last week"} bgc={"#fff0ee"}/>
-                <ContentCard icon={Offer} number={5} header={"Offers"} bottomRecord={"3% from last week"} bgc={"#efffee"}/>
+                <ContentCard icon={jobIcon} number={myApplications.length} header={"Applications"} bottomRecord={"12% from  week"} bgc={"#eef2ff"}/>
+                <ContentCard icon={Visibility} number={interviews.length} header={"Interview calls"} bottomRecord={"5% from last week"} bgc={"#eef2ff"}/>
+                <ContentCard icon={Bookmark} number={rejections.length} header={"Rejections"} bottomRecord={"8% from last week"} bgc={"#fff0ee"}/>
+                <ContentCard icon={Offer} number={offers.length} header={"Offers"} bottomRecord={"3% from last week"} bgc={"#efffee"}/>
             </div>
 
          <div className="chartAndTableContainer">

@@ -748,13 +748,17 @@ export default function Calender() {
             </div>
 
         </div>
-  <div className="reminder-upcoming-container">
-    <header>
+
+{ upcomingEvents.length>0 &&
+    <div className="reminder-upcoming-container">
+        <header>
             <p id="main-header-line">Upcoming Events</p>
             <p id="view-all-btn">View all</p>
-    </header>
-    <table className="upcoming-reminder-table">
-     { upcomingEvents.map((event,index)=>(
+        </header>
+
+    
+      <table className="upcoming-reminder-table">
+            { upcomingEvents.map((event,index)=>(
     
             
                 <tr key={index}>
@@ -772,11 +776,15 @@ export default function Calender() {
            
         
 
-     ))} 
+            ))} 
         
         </table>
+    
+    
 
     </div>
+}
+  
 
         <div className="stats-container">
 
