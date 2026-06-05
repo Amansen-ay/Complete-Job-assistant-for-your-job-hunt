@@ -18,7 +18,10 @@ export default function Content() {
     const myApplications = JSON.parse(localStorage.getItem("myApplications")) || [];
     const interviews = myApplications.filter((obj)=>obj.status==="HR Interview" || obj.status==="Tech Interview" || obj.status==="Interview Scheduled")
     const rejections = myApplications.filter((obj)=>obj.status==="Rejected");
-    const offers = myApplications.filter((obj)=>obj.status==="Offer Received")
+    const offers = myApplications.filter((obj)=>obj.status==="Offer Received");
+    const assessment = myApplications.filter((obj)=>obj.status==="Assessment");
+
+
     return (
         <>
         <div>
@@ -35,7 +38,11 @@ export default function Content() {
 
          <div className="chartAndTableContainer">
             <div className="finalContainer">
-             <Chart/>
+               
+                    <Chart/>
+                    
+                 
+             
             </div>
             <div className="wholeTableContainer">
              <DataTable/>

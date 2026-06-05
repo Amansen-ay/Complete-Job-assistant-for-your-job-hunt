@@ -8,6 +8,7 @@ import {useState} from 'react';
 export default function Dashboard() {
 
   const [showSidebar,setShowSidebar] = useState(false);
+  
 
     return (
         <>
@@ -20,7 +21,7 @@ export default function Dashboard() {
                 setShowSidebar(!showSidebar)
                }}/>
                <div className="dashboardContent mainDashboardSection">
-                <Outlet/>
+                <Outlet context={{showSidebar}}/>
                </div>
             </div>
             

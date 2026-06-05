@@ -82,6 +82,29 @@ export default function TaskSection() {
             :
             <Placeholder/>
           }
+          
+         {
+            taskList.length===1 &&
+            <>
+             <div className="encourage">
+                <p>🎯<b>Stay focused</b> <br /> One completed task is better than ten planned ones.</p>
+            </div>
+
+            <div className="encourage">
+                <p>⏰ Prioritize what matters most. The rest can wait.</p>
+            </div>
+            </>
+         } 
+
+         {
+            taskList.length===2 &&
+            <>
+             <div className="encourage-task-section">
+                <p>🎯<b>Stay focused</b> <br /> One completed task is better than ten planned ones.</p>
+            </div>
+            </>
+         } 
+           
 
         </div>
 

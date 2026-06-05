@@ -1,0 +1,7 @@
+calendar upcoming reminder secton text limitation.
+when you write the task little long and role is also long the layout breaks.
+
+In calendar cell when adding more then two task it shoes + more now if user want to delete the +more task specificly , he cant beacuse clicking on it dont give option , it shoes all task and delete all option.
+
+in task section same problem , layout is breaking when adding longer task.
+

@@ -53,3 +53,20 @@
 
     border-radius:50%;
 }
+
+
+.donut-chart-empty-placeholder{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    align-items:center;
+    margin-top:80px;
+}
+
+.donut-chart-empty-placeholder img{
+    background-color: #d1d2fd;
+    padding:5px;
+    border-radius:50%
+}
+
+

@@ -12,7 +12,8 @@
 
 
 .tableContainer{
-   height:350px;;
+   min-height:350px;
+   
    flex-direction:column;
    background-color: #fff;
    padding:15px;  
@@ -63,11 +64,12 @@
 }
 
 #strecher{
-    padding-bottom:10px;
-   height:100%;
-   display:flex;
+  padding-bottom:10px;
+  height:100%;
+  display:flex;
    flex-direction:column;
-   justify-content:space-between;
+   /* justify-content:space-between; */
+   gap:15px;
 }
 .tableRow:last-child{
     border-bottom:none;
@@ -129,4 +131,20 @@
     text-decoration:none;
    color:inherit;
    cursor:pointer;
+}
+
+.encourage{
+    background-color: #d7dceb68;
+    padding:10px;
+    border-radius:10px;
+    line-height:25px;
+}
+
+.encourage p{
+    white-space: pre-line;
+}
+.encourage-container{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
 }

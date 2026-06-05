@@ -93,3 +93,21 @@
     margin-top:-10px;
 }
 
+
+.encourage{
+    background-color: #d7dceb68;
+    padding:10px;
+    border-radius:10px;
+    line-height:25px;
+    margin-top:10px;
+}
+
+.encourage p{
+    white-space: pre-line;
+}
+.encourage-container{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+}
+

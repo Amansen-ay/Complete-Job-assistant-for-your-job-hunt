@@ -4,7 +4,9 @@ import {NavLink} from 'react-router-dom'
 import recentApplication from '../assets/recentApplications.png'
 
 
+const facts = ["Great start! 💪\nKeep applying to grow your opportunities.","☕A rejection usually means 'not this role', not 'not you'.","Candidates who tailor their resume are more likely to get interview calls."]
 
+const myApplications = JSON.parse(localStorage.getItem("myApplications"))  || [] ;
 function Placeholder(){
     return (
         <>
@@ -28,34 +30,41 @@ function Placeholder(){
 
 
 function TableRow() {
-    const myApplications = JSON.parse(localStorage.getItem("myApplications"))  || [] ;
+    
 
     return (
         <>
 
         { myApplications.length>0?
 
-             myApplications.slice(0,4).map((obj)=>{
+             myApplications.slice(0,3).map((obj)=>{
             return (
-                <div className="tableRow">
-                <div className="tableRowLeftPart">
+                <>
+                <div>
+                    <div className="tableRow">
 
-                 <img src={Amazon} width="40px" height="40px" />
+                    <div className="tableRowLeftPart">
+                        <img src={Amazon} width="40px" height="40px" />
 
-                 <div className="jobRole">
-                  <h4>{obj.company}</h4>
-                  <p>{obj.role}</p>   
-                 </div>
+                        <div className="jobRole">
+                            <h4>{obj.company}</h4>
+                            <p>{obj.role}</p>   
+                        </div>
+                    </div>
+                
+               
+                    <h4 id>{obj.status}</h4>
+               
+                
+
+                    <p>{obj.dateApplied}</p>
+                
+                    </div>  
                 </div>
-                
-               
-                <h4 id>{obj.status}</h4>
-               
-                
-
-                <p>{obj.dateApplied}</p>
-                
-            </div>  
+              
+            
+            </>
+            
             )
         })
             
@@ -85,14 +94,22 @@ export default function datatable() {
      
             <div id="strecher">
               <TableRow/> 
+              {myApplications.length <= 3 && myApplications.length>0 && (
+                
+                    
+                        facts.slice(0,facts.length-myApplications.length+1).map((fact)=>{
+                            return (
+                                <div className="encourage">
+                                <p>{fact}</p>
+                                </div>
+                            )
+                        })
+                    
+                
+            )}
+                 
             </div>
             
-
-            
-
-            
-            
-
         </div>
         </>
     )

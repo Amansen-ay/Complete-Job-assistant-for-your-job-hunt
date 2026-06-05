@@ -20,6 +20,8 @@ const months = [
 
 ];
 
+const facts = ["📈 Great progress! Keep tracking deadlines and interviews.","🎯 Every reminder is a step closer to your next opportunity."];
+
 function Placeholder(){
     return (
         <>
@@ -95,6 +97,7 @@ export default function ReminderSection() {
                      <ReminderSectionTableRow task={obj.title} time={obj.time} role={obj.role} date={obj.date} month={obj.month}/>
                     ))
                 }
+            
                 </div>
                 :
                 
@@ -103,10 +106,18 @@ export default function ReminderSection() {
                 
                 
             }
-            </div>
             
+            {upcomingEvents.length<3 &&
+            facts.slice(0,facts.length-upcomingEvents.length+1).map((fact)=>{
+                return (
+                    <div className="encourage">
+                        <p>{fact}</p>
+                    </div>
+                )
+            })}
 
 
+        </div>
         </div>
         </>
     )
