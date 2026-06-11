@@ -183,7 +183,7 @@ textarea{
 #currentStatus,
 #nextStep,
 #dateApplied,
-#nextStepDate{
+#sourceName{
 
     height:42px;
 
@@ -203,7 +203,7 @@ textarea{
 #currentStatus:focus,
 #nextStep:focus,
 #dateApplied:focus,
-#nextStepDate:focus{
+#sourceName:focus{
 
     border:1px solid #4f46e5;
 

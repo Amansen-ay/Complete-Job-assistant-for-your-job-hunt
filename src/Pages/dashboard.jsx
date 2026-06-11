@@ -19,8 +19,8 @@ export default function Dashboard() {
             <div className="mainDashboardSection">
                <Navbar sidebarToggler={()=>{
                 setShowSidebar(!showSidebar)
-               }}/>
-               <div className="dashboardContent mainDashboardSection">
+               }} showSidebar={showSidebar}/>
+               <div className={showSidebar?"dashboardContent mainDashboardSection margin-active-dashboard":"dashboardContent mainDashboardSection"}>
                 <Outlet context={{showSidebar}}/>
                </div>
             </div>

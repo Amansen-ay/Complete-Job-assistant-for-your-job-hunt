@@ -12,6 +12,8 @@
     display:flex;
 
     flex-direction:column;
+    /* background-color: #ffffff; */
+    
 }
 
 .dashboardContent{
@@ -19,4 +21,9 @@
     flex:1;
 
     padding:20px;
+    margin-top:67px;
+}
+
+.margin-active-dashboard{
+    margin-left:216px
 }

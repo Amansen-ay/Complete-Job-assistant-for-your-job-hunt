@@ -31,9 +31,9 @@ export default function AddNewJob() {
     const [dateApplied,setDateApplied] = useState("");
     const [currentStatus,setCurrentStatus] = useState("");
     const [nextStep,setNextStep] = useState("");
-    const [nextStepDate,setNextStepDate] = useState("");
+    const [portalName,setPortalName] = useState("");
 
-    const fields = [companyName,jobRole,dateApplied,currentStatus,nextStep,nextStepDate];
+    const fields = [companyName,jobRole,dateApplied,currentStatus,nextStep,portalName];
     const completedFields = fields.filter((field) => field.trim() !=="").length;
     const progress = (completedFields/fields.length)*100
 
@@ -261,8 +261,18 @@ export default function AddNewJob() {
                             </div>
 
                             <div className="label-and-field">
-                                <label htmlFor="nextStepDate">Next Step Date*</label>
-                                <input id="nextStepDate" type="date" value={nextStepDate} onChange={(e)=>universalHandeler(e,setNextStepDate)}/>
+                                <label htmlFor="sourceName">Portal Name*</label>
+                                {/* <input id="nextStepDate" type="date" value={nextStepDate} onChange={(e)=>universalHandeler(e,setNextStepDate)}/> */}
+                                <select name="Source" id="sourceName" value={portalName} onChange={(e)=>universalHandeler(e,setPortalName)}>
+                                    <option value="">Select source</option>
+                                    <option value="LinkedIn">LinkedIn</option>
+                                    <option value="Indeed">Indeed</option>
+                                    <option value="Naukri">Naukri</option>
+                                    <option value="Apna">Apna</option>
+                                    <option value="Internshala">Internshala</option>
+                                    <option value="others">others</option>
+    
+                                </select>
                             </div>
 
                         </div>
@@ -327,7 +337,8 @@ export default function AddNewJob() {
                             status:currentStatus,
                             dateApplied:dateApplied,
                             nextStep:nextStep,
-                            employmentType:employmentType
+                            employmentType:employmentType,
+                            portal:portalName,
                         }
                     ]
                        
@@ -341,7 +352,7 @@ export default function AddNewJob() {
                     setNote("");
                     setDiscription("");
                     setCurrentStatus("");
-                    setNextStepDate("");
+                    setPortalName("");
                     setCompanyWebsite("");
 
                      }
@@ -526,7 +537,7 @@ export default function AddNewJob() {
             </div>
 
             {
-                nextStepDate
+                portalName
                 ?
                 <span className="completed">✔</span>
                 :

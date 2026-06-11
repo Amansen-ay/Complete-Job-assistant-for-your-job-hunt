@@ -107,7 +107,7 @@ export default function ReminderSection() {
                 
             }
             
-            {upcomingEvents.length<3 &&
+            {upcomingEvents.length<3 && upcomingEvents>0&&
             facts.slice(0,facts.length-upcomingEvents.length+1).map((fact)=>{
                 return (
                     <div className="encourage">

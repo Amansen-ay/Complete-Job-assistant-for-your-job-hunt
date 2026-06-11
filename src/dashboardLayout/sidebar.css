@@ -94,5 +94,6 @@
 .sidebar.active{
 
    width:216px;
+   position:fixed;
 
 }

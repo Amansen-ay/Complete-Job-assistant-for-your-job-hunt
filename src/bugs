@@ -5,3 +5,4 @@ In calendar cell when adding more then two task it shoes + more now if user want
 
 in task section same problem , layout is breaking when adding longer task.
 
+add useRef functiinality in applications page so you click anywhere to close the delete small modal also add filtration feature.

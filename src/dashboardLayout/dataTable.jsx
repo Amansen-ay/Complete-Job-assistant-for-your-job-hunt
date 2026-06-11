@@ -37,7 +37,7 @@ function TableRow() {
 
         { myApplications.length>0?
 
-             myApplications.slice(0,3).map((obj)=>{
+             myApplications.slice(0,4).map((obj)=>{
             return (
                 <>
                 <div>

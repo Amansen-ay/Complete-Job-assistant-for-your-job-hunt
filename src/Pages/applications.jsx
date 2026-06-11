@@ -59,7 +59,7 @@ function ApplicationTable() {
                         <>
                         <tr key={index}>
                             <td className="service-and-logo">
-                                <p>{obj.company}</p>
+                                <p><b>{obj.company}</b></p>
                             </td>
                             <td>{obj.role}</td>
                             <td>
@@ -147,7 +147,7 @@ function ApplicationTable() {
                   <p>Click the button below to add your first application.</p>
         
                   <NavLink to="/dashboard/addNewJob" className="add-new-job-btn-placeholder">
-                        <button onClick={()=>setShowTaskModal(true)}>+ Add new task</button>
+                        <button onClick={()=>setShowTaskModal(true)}>+ Add new application</button>
                   </NavLink>
         </div>
         

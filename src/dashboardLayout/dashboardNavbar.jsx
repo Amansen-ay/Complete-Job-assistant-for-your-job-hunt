@@ -6,7 +6,9 @@ import './dashboardNavbar.css'
 
 
 
-export default function DashboardNavbar({sidebarToggler}) {
+export default function DashboardNavbar({sidebarToggler,showSidebar}) {
+
+    console.log(showSidebar)
 
     const location = useLocation();
 
@@ -39,7 +41,7 @@ export default function DashboardNavbar({sidebarToggler}) {
     }
     else if (location.pathname === "/dashboard/notesPage"){
 
-        title = "notes"
+        title = "Notes"
 
 
     } else if(location.pathname === "/dashboard/calendar") {
@@ -51,7 +53,7 @@ export default function DashboardNavbar({sidebarToggler}) {
     return (
         <>
         
-            <nav className="dashboardNavContainer">
+            <nav className={showSidebar?"dashboardNavContainer margin-active":"dashboardNavContainer"}>
 
                 <div id="Menu">
                 <img src={Menu} onClick={sidebarToggler}/>
