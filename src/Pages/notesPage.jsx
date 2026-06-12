@@ -51,7 +51,7 @@ function AddnoteModal({ setShowModal, onSave, editingNote, editIndex }) {
                             type="text"
                             placeholder="Google frontend interview"
                             value={noteTitle}
-                            maxLength={25}
+                            maxLength={40}
                             onChange={(e) => setNoteTitle(e.target.value)}
                         />
 
@@ -361,7 +361,7 @@ function NoteCard({ title, description, company, date, category, index, onDelete
                 <div className="note-description-container">
                     <div className="note-description">
                     <p>{description}</p>
-                </div>
+                    </div>
 
                 </div>
 
@@ -496,9 +496,6 @@ export default function NotesPage() {
                                 <tbody>
                                     {notesArr.slice(-4).reverse().map((note, index) => (
                                         <tr key={index}>
-                                            <td>
-
-                                            </td>
                                             <td>
                                                 <b>{note.noteTitle}</b>
                                                 <p>{note.category}</p>

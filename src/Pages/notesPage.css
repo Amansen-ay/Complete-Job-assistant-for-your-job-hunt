@@ -1,3 +1,8 @@
+*{
+   box-sizing:border-box;
+   /* outline:1px solid red; */
+}
+
 .notes-page-main-container{
     display:flex;
     justify-content:space-between;
@@ -59,6 +64,9 @@
     padding:10px;
     overflow:hidden;
     text-overflow: ellipsis;
+    min-height:200px;
+
+    
 
 }
 
@@ -73,6 +81,7 @@
     font-size:15px;
     display:flex;
     justify-content:space-between;
+     min-width:0;
 }
 
 .note-card header div b{
@@ -81,6 +90,7 @@
     white-space:nowrap;
     overflow:hidden;
     text-overflow:ellipsis;
+    min-width:0;
 }
 
 
@@ -91,6 +101,7 @@
     width:fit-content;
     border-radius:3px;
     padding:3px;
+    min-width:0;
 }
 
 .company-and-date{
@@ -111,6 +122,9 @@
     gap:20px;
 
 
+}
+.note-description-container{
+    min-width:0;
 }
 
 .notes-page-right-part{
@@ -208,6 +222,20 @@
 .recent-notes-container header p{
     color:#771dff;
     cursor:pointer;
+}
+
+.recent-notes-container table{
+    width:100%;
+    table-layout:fixed;
+}
+.recent-notes-container td{
+    overflow:hidden;
+}
+.recent-notes-container td b{
+    display:block;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
 }
 
 .quick-actions-container{
@@ -331,12 +359,14 @@
     cursor:pointer;
 }
 
-.note-description{
+.note-description {
     display:-webkit-box;
     -webkit-line-clamp:6;
     -webkit-box-orient:vertical;
     overflow:hidden;
+    min-width:0;
 }
+
 
 .menu-wrapper{
    position:relative;
@@ -344,7 +374,7 @@
 
 .dropdown-menu{
    position:absolute;
-   top:40px;
+   top:30px;
    right:0;
 
    width:180px;
@@ -563,7 +593,7 @@
     /* height:300px; */
     border-radius:10px;
     background-color: #fff;
-    padding:0px;
+    padding:30px;
 
 }
 
