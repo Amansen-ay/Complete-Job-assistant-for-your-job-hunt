@@ -51,7 +51,7 @@ function AddnoteModal({ setShowModal, onSave, editingNote, editIndex }) {
                             type="text"
                             placeholder="Google frontend interview"
                             value={noteTitle}
-                            maxLength={50}
+                            maxLength={25}
                             onChange={(e) => setNoteTitle(e.target.value)}
                         />
 
