@@ -5,6 +5,8 @@ import plusBtn from '../assets/plusBtn.svg'
 import templates from '../assets/templates.svg'
 import emptyNotesImg from '../assets/bookNew.png'
 import donut from '../assets/donut.svg'
+import arrowBack from '../assets/arrowBack.svg'
+import arrowForward from '../assets/arrowForward.svg'
 import { useState } from 'react'
 
 import {
@@ -387,6 +389,14 @@ export default function NotesPage() {
     const [editIndex, setEditIndex] = useState(null);
     const [showViewModal, setShowViewModal] = useState(false);
     const [viewingNote, setViewingNote] = useState(null);
+    const [selectedFilter, setSelectedFilter] = useState("All");
+    const [currentPage, setCurrentPage] = useState(1);
+    const notesPerPage = 9;
+
+    function handleFilterChange(filter) {
+        setSelectedFilter(filter);
+        setCurrentPage(1);
+    }
 
     function saveNote(note, index) {
         let updatedNotes;
@@ -441,11 +451,11 @@ export default function NotesPage() {
                     <div className="header-section-all-btns">
 
                         <div className="filter-btns">
-                            <button><b>All notes ({notesArr.length})</b></button>
-                            <button><b>General ({notesArr.filter(n => n.category === "General").length})</b></button>
-                            <button><b>Interview ({notesArr.filter(n => n.category === "Interview").length})</b></button>
-                            <button><b>Companies ({notesArr.filter(n => n.category === "Companies").length})</b></button>
-                            <button><b>Ideas ({notesArr.filter(n => n.category === "Ideas").length})</b></button>
+                            <button className={selectedFilter === "All" ? "active-filter" : ""} onClick={() => handleFilterChange("All")}><b>All notes ({notesArr.length})</b></button>
+                            <button className={selectedFilter === "General" ? "active-filter" : ""} onClick={() => handleFilterChange("General")}><b>General ({notesArr.filter(n => n.category === "General").length})</b></button>
+                            <button className={selectedFilter === "Interview" ? "active-filter" : ""} onClick={() => handleFilterChange("Interview")}><b>Interview ({notesArr.filter(n => n.category === "Interview").length})</b></button>
+                            <button className={selectedFilter === "Companies" ? "active-filter" : ""} onClick={() => handleFilterChange("Companies")}><b>Companies ({notesArr.filter(n => n.category === "Companies").length})</b></button>
+                            <button className={selectedFilter === "Ideas" ? "active-filter" : ""} onClick={() => handleFilterChange("Ideas")}><b>Ideas ({notesArr.filter(n => n.category === "Ideas").length})</b></button>
                         </div>
 
                         <button className="add-new-note-btn" onClick={() => {
@@ -462,17 +472,66 @@ export default function NotesPage() {
                             setShowModal(true);
                         }} />
                     ) : (
+                        <>
                         <div className="notes-card-container">
-                            {notesArr.map((obj, index) => {
-                                return (
-                                    <>
-                                        <NoteCard key={index} title={obj.noteTitle} description={obj.notesDescription} category={obj.category} company={obj.notesCompany} date={obj.createdAt} index={index} onDelete={deleteNote} onEdit={handleEditNote} onView={handleViewNote} />
-                                    </>
-
-                                )
-                            })}
+                            {notesArr
+                                .map((note, index) => ({ ...note, originalIndex: index }))
+                                .filter(note => selectedFilter === "All" || note.category === selectedFilter)
+                                .slice((currentPage - 1) * notesPerPage, currentPage * notesPerPage)
+                                .map((obj) => {
+                                    return (
+                                        <NoteCard 
+                                            key={obj.originalIndex} 
+                                            title={obj.noteTitle} 
+                                            description={obj.notesDescription} 
+                                            category={obj.category} 
+                                            company={obj.notesCompany} 
+                                            date={obj.createdAt} 
+                                            index={obj.originalIndex} 
+                                            onDelete={deleteNote} 
+                                            onEdit={handleEditNote} 
+                                            onView={handleViewNote} 
+                                        />
+                                    )
+                                })
+                            }
 
                         </div>
+
+                        {notesArr.filter(note => selectedFilter === "All" || note.category === selectedFilter).length > notesPerPage && (
+                            <div className="pagination-container-notes">
+                                <button 
+                                    className="pagination-btn" 
+                                    onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+                                    disabled={currentPage === 1}
+                                >
+                                    <img src={arrowBack} alt="Previous" />
+                                    Previous
+                                </button>
+                                
+                                <div className="page-numbers">
+                                    {Array.from({ length: Math.ceil(notesArr.filter(note => selectedFilter === "All" || note.category === selectedFilter).length / notesPerPage) }, (_, i) => (
+                                        <button 
+                                            key={i + 1} 
+                                            className={`page-num ${currentPage === i + 1 ? 'active' : ''}`}
+                                            onClick={() => setCurrentPage(i + 1)}
+                                        >
+                                            {i + 1}
+                                        </button>
+                                    ))}
+                                </div>
+
+                                <button 
+                                    className="pagination-btn" 
+                                    onClick={() => setCurrentPage(prev => Math.min(prev + 1, Math.ceil(notesArr.filter(note => selectedFilter === "All" || note.category === selectedFilter).length / notesPerPage)))}
+                                    disabled={currentPage === Math.ceil(notesArr.filter(note => selectedFilter === "All" || note.category === selectedFilter).length / notesPerPage)}
+                                >
+                                    Next
+                                    <img src={arrowForward} alt="Next" />
+                                </button>
+                            </div>
+                        )}
+                        </>
                     )}
 
 
