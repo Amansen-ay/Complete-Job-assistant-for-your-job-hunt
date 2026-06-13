@@ -95,14 +95,37 @@
 }
 
 
-.note-card header p{
+.category-tag {
+    width: fit-content;
+    border-radius: 3px;
+    padding: 3px 8px;
+    font-size: 12px;
+    font-weight: 500;
+    min-width: 0;
+}
+
+.category-tag.interview {
     background-color: #f6f0ff79;
-    border:1px solid #771dff;
-    color:#771dff;
-    width:fit-content;
-    border-radius:3px;
-    padding:3px;
-    min-width:0;
+    border: 1px solid #771dff;
+    color: #771dff;
+}
+
+.category-tag.general {
+    background-color: #eef2ff;
+    border: 1px solid #6366f1;
+    color: #4f46e5;
+}
+
+.category-tag.companies {
+    background-color: #fffbeb;
+    border: 1px solid #fbbf24;
+    color: #b45309;
+}
+
+.category-tag.ideas {
+    background-color: #f0fdf4;
+    border: 1px solid #4ade80;
+    color: #15803d;
 }
 
 .company-and-date{
@@ -437,6 +460,7 @@
    cursor:pointer;
 
    font-size:15px;
+   width:100%;
 }
 
 .dropdown-menu button:hover{
@@ -709,4 +733,32 @@
     background-color: #7c3aed;
     border-color: #7c3aed;
     color: #fff;
+}
+
+.modal-body-notes-page input,
+.modal-body-notes-page textarea,
+.modal-body-notes-page select{
+    outline:none;
+    /* border:none; */
+    transition:0.25s
+}
+.modal-body-notes-page input:focus{
+
+    border:1px solid #4f46e5;
+
+    box-shadow:
+    0 0 0 4px rgba(79,70,229,0.12);
+}
+.modal-body-notes-page textarea:focus{
+    
+    border:1px solid #4f46e5;
+
+    box-shadow:
+    0 0 0 4px rgba(79,70,229,0.12);
+}
+.modal-body-notes-page select:focus{
+    border:1px solid #4f46e5;
+
+    box-shadow:
+    0 0 0 4px rgba(79,70,229,0.12);
 }

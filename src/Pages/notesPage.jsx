@@ -7,7 +7,7 @@ import emptyNotesImg from '../assets/bookNew.png'
 import donut from '../assets/donut.svg'
 import arrowBack from '../assets/arrowBack.svg'
 import arrowForward from '../assets/arrowForward.svg'
-import { useState } from 'react'
+import { useState ,useRef,useEffect} from 'react'
 
 import {
     PieChart,
@@ -310,6 +310,7 @@ function Chart({ notesArr }) {
                 <img src={donut} width="50px" height="50px" />
                 <h3>No notes yet</h3>
             <p>Add your first note to refine your plans.</p>
+            
             </div>
         }
            
@@ -322,17 +323,38 @@ function Chart({ notesArr }) {
 
 
 function NoteCard({ title, description, company, date, category, index, onDelete, onEdit, onView }) {
-
     company = company ? company : "";
     const [showMenu, setShowMenu] = useState(false);
+    const menuRef = useRef(null);
+
+        useEffect(()=>{
     
+          function handleClickOutside(e){
+    
+          if(menuRef.current && !menuRef.current.contains(e.target)) {
+    
+            setShowMenu(false);
+    
+          }
+    
+        }
+    
+        document.addEventListener("mousedown",handleClickOutside);
+    
+        return ()=>{
+    
+            document.removeEventListener("mousedown",handleClickOutside);
+    
+        }
+    
+        },[])
     return (
         <>
             <div className="note-card">
                 <header>
                     <div>
                         <b>{title}</b>
-                        <div className="menu-wrapper">
+                        <div className="menu-wrapper" ref={menuRef}>
                             <img src={more} onClick={() => setShowMenu(prev => !prev)} className="three-dots-btn" />
                             {showMenu && (
                                 <div className="dropdown-menu">
@@ -358,7 +380,7 @@ function NoteCard({ title, description, company, date, category, index, onDelete
                             )}
                         </div>
                     </div>
-                    <p>{category}</p>
+                    <p className={`category-tag ${category?.toLowerCase()}`}>{category}</p>
                 </header>
                 <div className="note-description-container">
                     <div className="note-description">
@@ -573,8 +595,8 @@ export default function NotesPage() {
                         </header>
                         <div className="actions">
                             <div>
-                                <img src={plusBtn} />
-                                <p>New note</p>
+                                <img src={plusBtn} style={{cursor:"pointer"}} onClick={()=>setShowModal(prev => !prev)}/>
+                                <p style={{cursor:"pointer"}} onClick={()=>setShowModal(prev => !prev)}>New note</p>
                             </div>
                             <div>
                                 <img src={Import} />
