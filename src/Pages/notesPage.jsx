@@ -156,6 +156,64 @@ function ViewNoteModal({ setShowViewModal, viewingNote }) {
     )
 }
 
+function ImportModal({ setShowImportModal, onImport }) {
+    const [myApplications] = useState(JSON.parse(localStorage.getItem("myApplications")) || []);
+    const [selectedIndices, setSelectedIndices] = useState([]);
+
+    const toggleSelection = (index) => {
+        if (selectedIndices.includes(index)) {
+            setSelectedIndices(selectedIndices.filter(i => i !== index));
+        } else {
+            setSelectedIndices([...selectedIndices, index]);
+        }
+    };
+
+    const handleImportClick = () => {
+        const selectedApps = selectedIndices.map(index => myApplications[index]);
+        onImport(selectedApps);
+    };
+
+    return (
+        <div className="modal-overlay-notes-page">
+            <div className="note-modal import-modal">
+                <div className="modal-header-notes-page">
+                    <h2>Import from Applications</h2>
+                    <button className="close-btn-note-page" onClick={() => setShowImportModal(false)}>✕</button>
+                </div>
+                <div className="modal-body-notes-page import-list-container">
+                    {myApplications.length === 0 ? (
+                        <p className="no-apps-msg">No applications found to import.</p>
+                    ) : (
+                        myApplications.map((app, index) => (
+                            <div key={index} className={`import-item ${selectedIndices.includes(index) ? 'selected' : ''}`} onClick={() => toggleSelection(index)}>
+                                <input 
+                                    type="checkbox" 
+                                    checked={selectedIndices.includes(index)} 
+                                    onChange={() => {}} 
+                                />
+                                <div className="import-item-details">
+                                    <b>{app.role}</b>
+                                    <p>{app.company} • {app.employmentType}</p>
+                                </div>
+                            </div>
+                        ))
+                    )}
+                </div>
+                <div className="modal-footer-notes-page">
+                    <button className="cancel-btn-notes-page" onClick={() => setShowImportModal(false)}>Cancel</button>
+                    <button 
+                        className="save-btn-notes-page" 
+                        disabled={selectedIndices.length === 0}
+                        onClick={handleImportClick}
+                    >
+                        Import Selected ({selectedIndices.length})
+                    </button>
+                </div>
+            </div>
+        </div>
+    );
+}
+
 const COLORS = [
 
     "#7c3aed",
@@ -404,6 +462,7 @@ function NoteCard({ title, description, company, date, category, index, onDelete
 export default function NotesPage() {
 
     const [showModal, setShowModal] = useState(false);
+    const [showImportModal, setShowImportModal] = useState(false);
     const [notesArr, setNotesArr] = useState(
         JSON.parse(localStorage.getItem("notes")) || []
     );
@@ -439,6 +498,21 @@ export default function NotesPage() {
         setEditIndex(null);
     }
 
+    function handleImport(selectedApps) {
+        const newNotes = selectedApps.map(app => ({
+            noteTitle: app.role,
+            category: "Interview",
+            notesCompany: app.company,
+            notesDescription: `Imported from Applications\n\nRole: ${app.role}\nCompany: ${app.company}\nType: ${app.employmentType}\nStatus: ${app.status}\nPortal: ${app.portal}\nDate Applied: ${app.dateApplied}`,
+            createdAt: new Date().toLocaleDateString()
+        }));
+
+        const updatedNotes = [...notesArr, ...newNotes];
+        setNotesArr(updatedNotes);
+        localStorage.setItem("notes", JSON.stringify(updatedNotes));
+        setShowImportModal(false);
+    }
+
     function deleteNote(index) {
         const updatedNotes = notesArr.filter((_, i) => i !== index);
         setNotesArr(updatedNotes);
@@ -460,6 +534,7 @@ export default function NotesPage() {
         <>
             {showModal && <AddnoteModal setShowModal={setShowModal} onSave={saveNote} editingNote={editingNote} editIndex={editIndex} />}
             {showViewModal && <ViewNoteModal setShowViewModal={setShowViewModal} viewingNote={viewingNote} />}
+            {showImportModal && <ImportModal setShowImportModal={setShowImportModal} onImport={handleImport} />}
             <div className="notes-page-main-container">
 
 
@@ -598,7 +673,7 @@ export default function NotesPage() {
                                 <img src={plusBtn} style={{cursor:"pointer"}} onClick={()=>setShowModal(prev => !prev)}/>
                                 <p style={{cursor:"pointer"}} onClick={()=>setShowModal(prev => !prev)}>New note</p>
                             </div>
-                            <div>
+                            <div onClick={() => setShowImportModal(true)} style={{cursor: "pointer"}}>
                                 <img src={Import} />
                                 <p>Import from Applications</p>
                             </div>
