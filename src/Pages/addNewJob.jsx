@@ -32,6 +32,7 @@ export default function AddNewJob() {
     const [currentStatus,setCurrentStatus] = useState("");
     const [nextStep,setNextStep] = useState("");
     const [portalName,setPortalName] = useState("");
+    const [location,setLocation] = useState("");
 
     const fields = [companyName,jobRole,dateApplied,currentStatus,nextStep,portalName];
     const completedFields = fields.filter((field) => field.trim() !=="").length;
@@ -163,7 +164,7 @@ export default function AddNewJob() {
                             <div className="label-and-field">
                                 <label htmlFor="jobLocation">Job location*</label>
                                 <div className="input-focus-element">
-                                    <input id="jobLocation" type="text" placeholder="Enter your location" />
+                                    <input id="jobLocation" type="text" placeholder="Enter your location" value={location} onChange={(e)=>setLocation(e.target.value)}/>
                                     <img src={location} />
                                 </div>
                                 
@@ -354,6 +355,7 @@ export default function AddNewJob() {
                     setCurrentStatus("");
                     setPortalName("");
                     setCompanyWebsite("");
+                    setLocation("")
 
                      }
                     

@@ -10,9 +10,10 @@
 
 .chartHeader{
     display:flex;
+    justify-content:space-between;
 }
 .chartHeader p{
-    margin-left:auto;
+    
     color:blue;
 }
 
@@ -69,4 +70,8 @@
     border-radius:50%
 }
 
+.view-all-link-chart{
+   text-decoration:none;
+   color:inherit;
+}
 

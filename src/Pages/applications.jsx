@@ -5,7 +5,7 @@ import {useEffect,useRef,useState} from 'react';
 import more from '../assets/more.svg'
 import applicationsEmpty from '../assets/applicationsEmpty.png'
 import {NavLink} from 'react-router-dom';
-function ApplicationTable() {
+function ApplicationTable({ activeStatus }) {
 
        
      
@@ -26,18 +26,42 @@ function ApplicationTable() {
         useEffect(()=>{
             localStorage.setItem("myApplications",JSON.stringify(myApplications))
         },[myApplications]);
+
+        useEffect(() => {
+            function handleClickOutside(event) {
+                if (menuRef.current && !menuRef.current.contains(event.target)) {
+                    setShowMenu(-1);
+                }
+            }
+            document.addEventListener("mousedown", handleClickOutside);
+            return () => {
+                document.removeEventListener("mousedown", handleClickOutside);
+            };
+        }, []);
         
+        const filteredApps = myApplications.filter(app => {
+            if (activeStatus === "All Applications") return true;
+            if (activeStatus === "Interview") return app.status.toLowerCase().includes("interview");
+            if (activeStatus === "Assesment") return app.status === "Assessment";
+            if (activeStatus === "Offers") return app.status === "Offer Received";
+            return app.status === activeStatus;
+        });
 
         const jobsPerPage = 5;
         const [currentPage,setCurrentPage] = useState(1);
-        const totalPages = Math.ceil(myApplications.length/jobsPerPage);
+        
+        useEffect(() => {
+            setCurrentPage(1);
+        }, [activeStatus]);
+
+        const totalPages = Math.ceil(filteredApps.length/jobsPerPage);
         const lastIndex = currentPage*jobsPerPage;
         const firstIndex = lastIndex - jobsPerPage;
 
 
     return (
         <>
-        { myApplications.length>0?
+        { filteredApps.length>0?
         <div className="application-table">
           <table>
             <thead>
@@ -54,9 +78,8 @@ function ApplicationTable() {
 
             <tbody>
                 { 
-                   myApplications.slice(firstIndex,lastIndex).map((obj,index)=>{
+                   filteredApps.slice(firstIndex,lastIndex).map((obj,index)=>{
                      return (
-                        <>
                         <tr key={index}>
                             <td className="service-and-logo">
                                 <p><b>{obj.company}</b></p>
@@ -71,7 +94,7 @@ function ApplicationTable() {
                             <td>{obj.nextStep}</td>
                             <td>{obj.employmentType}</td>
                             <td>
-                                <div className="menu-wrapper">
+                                <div className="menu-wrapper" ref={showMenu === index ? menuRef : null}>
                                     <img  className="three-dots-btn" src={more} onClick={()=>{
                                     setShowMenu((prev)=>prev===index?-1:index);
                                     setSelectedApplicationRow(obj);
@@ -95,7 +118,6 @@ function ApplicationTable() {
                             </td>
 
                         </tr>
-                        </>
                      )
                    }) 
                 }
@@ -107,7 +129,7 @@ function ApplicationTable() {
 
           <div className="pagination-container">
 
-          { myApplications.length >0 &&
+          { filteredApps.length > 0 &&
              <div className="pagination-ui-block">
             
                 <button 
@@ -142,12 +164,11 @@ function ApplicationTable() {
         :
         <div className="application-empty-img-wrapper">
                   <img src={applicationsEmpty}  width="280px" height="250px"/>
-                  <h3>No applications yet!</h3>
-                  <p>You haven't added any job application yet.</p>
-                  <p>Click the button below to add your first application.</p>
-        
+                  <h3>No applications found!</h3>
+                  <p>You haven't added any applications with the status "{activeStatus}" yet.</p>
+                  
                   <NavLink to="/dashboard/addNewJob" className="add-new-job-btn-placeholder">
-                        <button onClick={()=>setShowTaskModal(true)}>+ Add new application</button>
+                        <button>+ Add new application</button>
                   </NavLink>
         </div>
         
@@ -159,23 +180,44 @@ function ApplicationTable() {
 
 
 export default function Applications() {
+    const [myApplications] = useState(JSON.parse(localStorage.getItem("myApplications")) || []);
+    const [activeStatus, setActiveStatus] = useState("All Applications");
+    
+    const getCount = (status) => {
+        if (status === "All Applications") return myApplications.length;
+        if (status === "Interview") return myApplications.filter(app => app.status.toLowerCase().includes("interview")).length;
+        if (status === "Assesment") return myApplications.filter(app => app.status === "Assessment").length;
+        if (status === "Offers") return myApplications.filter(app => app.status === "Offer Received").length;
+        return myApplications.filter(app => app.status === status).length;
+    };
+
+    const statuses = [
+        { label: "All Applications", value: "All Applications" },
+        { label: "Applied", value: "Applied" },
+        { label: "Interview", value: "Interview" },
+        { label: "Assesment", value: "Assesment" },
+        { label: "Offers", value: "Offers" },
+        { label: "Rejected", value: "Rejected" }
+    ];
+
     return (
         <> 
         <div>
             <header className="appliation-navs-container" >
                 <div className="application-navs">
-                    <p>All Applications</p>
-                    <p>Applied</p>
-                    <p>Interview</p>
-                    <p>Assesment</p>
-                    <p>Offers</p>
-                    <p>Rejected</p> 
+                    {statuses.map(status => (
+                        <p 
+                            key={status.value} 
+                            onClick={() => setActiveStatus(status.value)}
+                            className={activeStatus === status.value ? "active" : ""}
+                        >
+                            {status.label} ({getCount(status.value)})
+                        </p>
+                    ))}
                 </div>
 
                 <div className="filter-and-addJob">
-                    <div><img src={Filter} />
-                    <p>Filter</p>
-                    </div>
+                   
                     <NavLink to="/dashboard/addNewJob">
                         <button> + Add New Job</button>
                     </NavLink>
@@ -185,7 +227,7 @@ export default function Applications() {
             </header>
 
             <div className="application-table-container">
-                <ApplicationTable/>
+                <ApplicationTable activeStatus={activeStatus}/>
             </div>
         </div>
         </>

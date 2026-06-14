@@ -20,7 +20,7 @@ const months = [
 
 ];
 
-const facts = ["📈 Great progress! Keep tracking deadlines and interviews.","🎯 Every reminder is a step closer to your next opportunity."];
+const facts = ["📈 Great progress! Keep tracking deadlines and interviews.","🎯 Every reminder is a step closer to your next opportunity.","hi"];
 
 function Placeholder(){
     return (
@@ -46,15 +46,19 @@ function ReminderSectionTableRow({task,time,role,date,month}) {
     return (
         <>
         <div className="ReminderSectionTableRow">
-            <div className="dateContainer">
-            <h3>{date}</h3>
-            <p>{months[month]}</p> 
+            <div className="date-reminder-container">
+                <div className="dateContainer">
+                <h3>{date}</h3>
+                <p>{months[month]}</p> 
             </div>
 
             <div className="schedule">
                 <h3>{task}</h3>
                 <p>{time}</p>
             </div>
+
+            </div>
+           
 
             <h4 id="levelOfAppliction">{role}</h4>
             
@@ -107,14 +111,15 @@ export default function ReminderSection() {
                 
             }
             
-            {upcomingEvents.length<3 && upcomingEvents>0&&
-            facts.slice(0,facts.length-upcomingEvents.length+1).map((fact)=>{
+            {upcomingEvents.length<3 && upcomingEvents.length>0 && (
+            facts.slice(0,facts.length-upcomingEvents.length).map((fact)=>{
                 return (
                     <div className="encourage">
                         <p>{fact}</p>
                     </div>
                 )
-            })}
+            
+            }))}
 
 
         </div>

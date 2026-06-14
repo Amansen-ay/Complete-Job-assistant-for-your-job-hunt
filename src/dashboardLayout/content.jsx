@@ -30,10 +30,10 @@ export default function Content() {
                 <p>Keep tracking your progress and land your dream job.</p>
             </header>
             <div className="cardContainer">
-                <ContentCard icon={jobIcon} number={myApplications.length} header={"Applications"} bottomRecord={"12% from  week"} bgc={"#eef2ff"}/>
-                <ContentCard icon={Visibility} number={interviews.length} header={"Interview calls"} bottomRecord={"5% from last week"} bgc={"#eef2ff"}/>
-                <ContentCard icon={Bookmark} number={rejections.length} header={"Rejections"} bottomRecord={"8% from last week"} bgc={"#fff0ee"}/>
-                <ContentCard icon={Offer} number={offers.length} header={"Offers"} bottomRecord={"3% from last week"} bgc={"#efffee"}/>
+                <ContentCard icon={jobIcon} number={myApplications.length} header={"Applications"} bottomRecord={"Total applications tracked"} bgc={"#eef2ff"}/>
+                <ContentCard icon={Visibility} number={interviews.length} header={"Interview calls"} bottomRecord={"Interview stage reached"} bgc={"#eef2ff"}/>
+                <ContentCard icon={Bookmark} number={rejections.length} header={"Rejections"} bottomRecord={"Applications rejected"} bgc={"#fff0ee"}/>
+                <ContentCard icon={Offer} number={offers.length} header={"Offers"} bottomRecord={"Offer received"} bgc={"#efffee"}/>
             </div>
 
          <div className="chartAndTableContainer">

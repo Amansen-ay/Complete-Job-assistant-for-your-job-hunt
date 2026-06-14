@@ -7,6 +7,7 @@ import {
 
 import './chart.css'
 import donut from '../assets/donut.svg'
+import {NavLink} from 'react-router-dom'
 
     const myApplications = JSON.parse(localStorage.getItem("myApplications")) || [];
     const interviews = myApplications.filter((obj)=>obj.status==="HR Interview" || obj.status==="Tech Interview" || obj.status==="Interview Scheduled")
@@ -58,7 +59,10 @@ export default function Chart(){
   
     <header className="chartHeader">
      <h3>Application overview</h3>
-     <p>view all</p>
+     <NavLink to="/dashboard/analytics" className="view-all-link-chart">
+      <p>view analytics</p>
+     </NavLink>
+     
     </header>
     
     { showChart?

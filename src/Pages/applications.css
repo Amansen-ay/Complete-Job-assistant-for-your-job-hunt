@@ -7,21 +7,27 @@
 
 .application-navs{
     display:flex;
-    gap:30px;
+    gap:20px;
     
 }
 
 .application-navs p{
     cursor:pointer;
     padding:8px 15px;
-    
+    transition: all 0.3s ease;
+    border-bottom: 2px solid transparent;
+    color: #6b7280;
+    font-weight: 500;
 }
 
-.application-navs p:hover{
-    background-color: #c9d4fb;
-    border-radius:5px;
-    color:#0031e2
-    
+.application-navs p:hover,
+.application-navs p.active {
+    color:#771dff;
+    border-bottom: 2px solid #771dff;
+}
+
+.application-navs p.active {
+    font-weight: 700;
 }
 
 .filter-and-addJob{

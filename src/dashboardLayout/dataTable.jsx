@@ -44,8 +44,7 @@ function TableRow() {
                     <div className="tableRow">
 
                     <div className="tableRowLeftPart">
-                        <img src={Amazon} width="40px" height="40px" />
-
+                        
                         <div className="jobRole">
                             <h4>{obj.company}</h4>
                             <p>{obj.role}</p>   
@@ -53,7 +52,11 @@ function TableRow() {
                     </div>
                 
                
-                    <h4 id>{obj.status}</h4>
+                    <div className="status-badge-container">
+                        <div className={`status-badge ${obj.status==="Interview Scheduled" || obj.status==="Tech Interview" || obj.status==="HR Interview" ? "Interview" : obj.status==="Applied" ?"Applied" : obj.status==="Under Review" ? "Under-Review" : obj.status==="Assessment" || obj.status==="Offer Received" ? "assessment-offer" : "Rejected" }`}>
+                            {obj.status}
+                        </div>
+                    </div>
                
                 
 

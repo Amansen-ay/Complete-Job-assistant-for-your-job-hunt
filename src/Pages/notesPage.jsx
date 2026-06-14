@@ -180,7 +180,7 @@ function ImportModal({ setShowImportModal, onImport }) {
                     <h2>Import from Applications</h2>
                     <button className="close-btn-note-page" onClick={() => setShowImportModal(false)}>✕</button>
                 </div>
-                <div className="modal-body-notes-page import-list-container">
+                <div className="import-list-container">
                     {myApplications.length === 0 ? (
                         <p className="no-apps-msg">No applications found to import.</p>
                     ) : (

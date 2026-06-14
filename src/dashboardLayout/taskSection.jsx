@@ -6,14 +6,14 @@ import assignment from '../assets/assignment.svg'
 
 
 
-function TaskRow({taskTitle,dueDate}) {
+function TaskRow({taskTitle,dueDate,priority}) {
 
     
     return (
         <>
         <div className="Task-row-container">
             <div className="task-check">
-            <span>{">"}</span>
+            <p>{priority==="High"?"🔴":priority==="Medium"?"🟡":"🟢"}</p>
             </div>
 
             <div className="task-title">
@@ -58,7 +58,7 @@ export default function TaskSection() {
    
 
     const taskList = tasks.slice(0,4).map((obj)=>(
-                <TaskRow taskTitle={obj.task} dueDate={obj.dueDate}/>
+                <TaskRow taskTitle={obj.task} dueDate={obj.dueDate} priority={obj.priority}/>
     ))
 
     return (

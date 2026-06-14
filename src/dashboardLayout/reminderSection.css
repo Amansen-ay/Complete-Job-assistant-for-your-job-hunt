@@ -33,7 +33,13 @@
     display:flex;
     gap:40px;
     margin-bottom:10px;
+    justify-content:space-between;
     
+}
+
+.date-reminder-container{
+    display:flex;
+    gap:20px;
 }
 
 .schedule p{ 
@@ -44,9 +50,7 @@
 .schedule h3{
     font-size:small;
 }
-#levelOfAppliction{
-    margin-left:auto;
-}
+
 
 .dateContainer{
     background-color: #eef2ff;
