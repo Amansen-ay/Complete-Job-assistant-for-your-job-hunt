@@ -579,28 +579,28 @@ tr:last-child td{
 }
 
 .all-events-pill{
-
    background:#eef2ff;
-
    padding:10px;
-
    border-radius:8px;
-
    margin-top:10px;
-
    font-size:14px;
-
-   width:480px;
-
+   width:100%;
    display:flex;
-
    justify-content:space-between;
-
    align-items:center;
-
    border:1px solid #c1c1c1;
+}
 
-   
+.all-events-list-container {
+    max-height: 320px; /* Fits approximately four items */
+    overflow-y: auto;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 0; /* Gap is handled by margin-top on pills */
+    padding-right: 10px;
+    width: 480px;
+    flex-wrap: nowrap !important; /* Force vertical stacking */
 }
 
 .warning-text,
@@ -763,6 +763,31 @@ tr:last-child td{
     background-color: #cfdaff;
     padding:5px;
     border-radius:5px;
+    white-space: nowrap;
+}
+
+.event-row-right-section {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.individual-delete-btn-svg {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    padding: 6px;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    background-color: #f3f4f6;
+    color: #4b5563;
+    stroke-width: 2.5px;
+}
+
+.individual-delete-btn-svg:hover {
+    background-color: #fee2e2;
+    color: #dc2626;
+    transform: scale(1.1);
 }
 
 .event-task-pinned-warning{

@@ -65,7 +65,7 @@ export default function TaskSection() {
         <>
         <div className="task-section-container">
             <header className="taskSectionHeader">
-                <h3>Tasks</h3>
+                <h3>Recent Tasks</h3>
                 <NavLink to="/dashboard/taskPage" className="view-all-link" >
                     <p>View all </p>
                 </NavLink>
@@ -76,7 +76,9 @@ export default function TaskSection() {
           {taskList.length>0?
             <div>
            {
-            taskList
+            tasks.slice(-4).reverse().map((obj)=>(
+                <TaskRow taskTitle={obj.task} dueDate={obj.dueDate} priority={obj.priority}/>
+            ))
            }
             </div>
             :

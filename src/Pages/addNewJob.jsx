@@ -77,7 +77,8 @@ export default function AddNewJob() {
     
     useEffect(()=>{
 
-       localStorage.setItem("myApplications",JSON.stringify(applicationArr))
+       localStorage.setItem("myApplications",JSON.stringify(applicationArr));
+       window.dispatchEvent(new Event("applicationsUpdated"));
 
     },[applicationArr])
     return (
@@ -118,7 +119,7 @@ export default function AddNewJob() {
                             <div className="label-and-field">
                                 <label htmlFor="companyName">Company Name*</label>
                                 <div className="input-focus-element">
-                                    <input  id="companyName" type="text" placeholder="Enter your company name" value={companyName} onChange={(e)=>universalHandeler(e,setCompanyName)} />
+                                    <input maxLength={40} id="companyName" type="text" placeholder="Enter your company name" value={companyName} onChange={(e)=>universalHandeler(e,setCompanyName)} />
                                     <img src={apartment} />
                                 </div>
                                 
@@ -140,7 +141,7 @@ export default function AddNewJob() {
                             <div className="label-and-field">
                                 <label htmlFor="jobRole">Job Title / Role*</label>
                                 <div className="input-focus-element"> 
-                                    <input id="jobRole" type="text" placeholder="Enter your job role" value={jobRole} onChange={(e)=>universalHandeler(e,setJobRole)} />
+                                    <input maxLength={50} id="jobRole" type="text" placeholder="Enter your job role" value={jobRole} onChange={(e)=>universalHandeler(e,setJobRole)} />
                                 </div>
                                 
                             </div>
@@ -164,7 +165,7 @@ export default function AddNewJob() {
                             <div className="label-and-field">
                                 <label htmlFor="jobLocation">Job location*</label>
                                 <div className="input-focus-element">
-                                    <input id="jobLocation" type="text" placeholder="Enter your location" value={location} onChange={(e)=>setLocation(e.target.value)}/>
+                                    <input maxLength={50} id="jobLocation" type="text" placeholder="Enter your location" value={location} onChange={(e)=>setLocation(e.target.value)}/>
                                     <img src={location} />
                                 </div>
                                 

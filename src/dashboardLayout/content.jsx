@@ -11,11 +11,22 @@ import Chart from './chart.jsx'
 import TaskSection from './taskSection.jsx'
 import ExploreJobs from './exploreJobsSection.jsx'
 import Navbar from './dashboardNavbar.jsx'
+import { useState, useEffect } from 'react'
 
 
 export default function Content() {
 
-    const myApplications = JSON.parse(localStorage.getItem("myApplications")) || [];
+    const [myApplications, setMyApplications] = useState(() => JSON.parse(localStorage.getItem("myApplications")) || []);
+
+    useEffect(() => {
+        const handleUpdate = () => {
+            setMyApplications(JSON.parse(localStorage.getItem("myApplications")) || []);
+        };
+
+        window.addEventListener("applicationsUpdated", handleUpdate);
+        return () => window.removeEventListener("applicationsUpdated", handleUpdate);
+    }, []);
+
     const interviews = myApplications.filter((obj)=>obj.status==="HR Interview" || obj.status==="Tech Interview" || obj.status==="Interview Scheduled")
     const rejections = myApplications.filter((obj)=>obj.status==="Rejected");
     const offers = myApplications.filter((obj)=>obj.status==="Offer Received");
@@ -39,13 +50,13 @@ export default function Content() {
          <div className="chartAndTableContainer">
             <div className="finalContainer">
                
-                    <Chart/>
+                    <Chart myApplications={myApplications}/>
                     
                  
              
             </div>
             <div className="wholeTableContainer">
-             <DataTable/>
+             <DataTable myApplications={myApplications}/>
             </div>
          </div>
 

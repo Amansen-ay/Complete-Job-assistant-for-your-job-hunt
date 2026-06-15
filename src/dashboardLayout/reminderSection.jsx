@@ -97,7 +97,7 @@ export default function ReminderSection() {
             { upcomingEvents.length>0?
                 <div>
                 {
-                    upcomingEvents.slice(0,3).map((obj)=>(
+                    upcomingEvents.slice(-3).reverse().map((obj)=>(
                      <ReminderSectionTableRow task={obj.title} time={obj.time} role={obj.role} date={obj.date} month={obj.month}/>
                     ))
                 }

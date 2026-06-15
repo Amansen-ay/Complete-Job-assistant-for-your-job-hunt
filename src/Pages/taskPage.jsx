@@ -228,6 +228,12 @@ export default function TaskPage() {
 
     const [selectedTaskRow,setSelectedTaskRow] = useState(null);
 
+    const isFormValid = task.trim() !== "" && 
+                       relatedTo !== "" && relatedTo !== "Select company" &&
+                       dueDate !== "" && 
+                       priority !== "" && priority !== "Select priority" &&
+                       status !== "" && status !== "Select status";
+
     useEffect(()=>{
 
         localStorage.setItem("myTasks",JSON.stringify(taskObj))
@@ -307,7 +313,7 @@ export default function TaskPage() {
                     <th>Status</th>
                     <th></th>
                 </tr>
-            { filteredArray.slice(firstIndex,lastIndex).map((obj,index)=>(
+            { [...filteredArray].reverse().slice(firstIndex,lastIndex).map((obj,index)=>(
 
                 <tr key={index}>
                     <td>
@@ -515,6 +521,7 @@ export default function TaskPage() {
               value={task}
               type="text"
               placeholder="Enter task title"
+              maxLength={50}
             />
 
             <p className="task-input-helper">
@@ -631,44 +638,45 @@ export default function TaskPage() {
             Cancel
           </button>
 
-          <button className="task-save-btn"
-          onClick={()=>{
-            setTaskObj(
-                selectedTaskRow===null?[
-                    ...taskObj,
-                    {
-                    task:task,
-                    priority:priority,
-                    relatedTo:relatedTo,
-                    status:status,
-                    dueDate:dueDate
-                }]
-                :
-               
-                taskObj.map((obj)=>{
-                    return obj===selectedTaskRow?
-                    {task:task,
-                    relatedTo:relatedTo,
-                    dueDate:dueDate,
-                    priority:priority,
-                    status:status}:obj
-                }),
+          <button 
+            className="task-save-btn"
+            disabled={!isFormValid}
+            onClick={()=>{
+              setTaskObj(
+                  selectedTaskRow===null?[
+                      ...taskObj,
+                      {
+                      task:task,
+                      priority:priority,
+                      relatedTo:relatedTo,
+                      status:status,
+                      dueDate:dueDate
+                  }]
+                  :
                 
-            )
-            setTask("");
-            setRelatedTo("");
-            setDueDate("");
-            setPriority("");
-            setStatus("");
-            setShowTaskModal(false);
-            setSelectedTaskRow(null);
-            setShowMenu(null);
-          }}>
-
-            <span className="material-symbols-rounded">Add Task</span>
-
-            
-
+                  taskObj.map((obj)=>{
+                      return obj===selectedTaskRow?
+                      {task:task,
+                      relatedTo:relatedTo,
+                      dueDate:dueDate,
+                      priority:priority,
+                      status:status}:obj
+                  }),
+                  
+              )
+              setTask("");
+              setRelatedTo("");
+              setDueDate("");
+              setPriority("");
+              setStatus("");
+              setShowTaskModal(false);
+              setSelectedTaskRow(null);
+              setShowMenu(-1);
+            }}
+          >
+            <span className="material-symbols-rounded">
+              {selectedTaskRow ? "Update Task" : "Add Task"}
+            </span>
           </button>
 
         </div>

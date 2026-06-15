@@ -6,7 +6,6 @@ import recentApplication from '../assets/recentApplications.png'
 
 const facts = ["Great start! 💪\nKeep applying to grow your opportunities.","☕A rejection usually means 'not this role', not 'not you'.","Candidates who tailor their resume are more likely to get interview calls."]
 
-const myApplications = JSON.parse(localStorage.getItem("myApplications"))  || [] ;
 function Placeholder(){
     return (
         <>
@@ -29,7 +28,7 @@ function Placeholder(){
 }
 
 
-function TableRow() {
+function TableRow({ myApplications = [] }) {
     
 
     return (
@@ -37,10 +36,9 @@ function TableRow() {
 
         { myApplications.length>0?
 
-             myApplications.slice(0,4).map((obj)=>{
+             myApplications.slice(-4).reverse().map((obj, index)=>{
             return (
-                <>
-                <div>
+                <div key={index}>
                     <div className="tableRow">
 
                     <div className="tableRowLeftPart">
@@ -64,9 +62,6 @@ function TableRow() {
                 
                     </div>  
                 </div>
-              
-            
-            </>
             
             )
         })
@@ -83,7 +78,7 @@ function TableRow() {
     )
 }
 
-export default function datatable() {
+export default function datatable({ myApplications = [] }) {
     return (
         <>
         <div className="tableContainer">
@@ -96,13 +91,13 @@ export default function datatable() {
             </header    >
      
             <div id="strecher">
-              <TableRow/> 
+              <TableRow myApplications={myApplications}/> 
               {myApplications.length <= 3 && myApplications.length>0 && (
                 
                     
-                        facts.slice(0,facts.length-myApplications.length+1).map((fact)=>{
+                        facts.slice(0,facts.length-myApplications.length+1).map((fact, index)=>{
                             return (
-                                <div className="encourage">
+                                <div className="encourage" key={index}>
                                 <p>{fact}</p>
                                 </div>
                             )

@@ -9,42 +9,30 @@ import './chart.css'
 import donut from '../assets/donut.svg'
 import {NavLink} from 'react-router-dom'
 
-    const myApplications = JSON.parse(localStorage.getItem("myApplications")) || [];
-    const interviews = myApplications.filter((obj)=>obj.status==="HR Interview" || obj.status==="Tech Interview" || obj.status==="Interview Scheduled")
-    const rejections = myApplications.filter((obj)=>obj.status==="Rejected");
-    const offers = myApplications.filter((obj)=>obj.status==="Offer Received");
-    const assessment = myApplications.filter((obj)=>obj.status==="Assessment");
-
-    const showChart = myApplications.length || interviews.length || rejections.length || offers.length || assessment.length
-    
-
-const data = [
-
-  { name: "Applied", value: myApplications.length},
-
-  { name: "Interview", value: interviews.length },
-
-  { name: "Assessment", value: rejections.length },
-
-  { name: "Offer", value: offers.length},
-
-  { name: "Rejected", value: assessment.length}
-
-];
-
-
-
 const COLORS = [
-
   "#7c3aed",
   "#6366f1",
   "#fbbf24",
   "#4ade80",
   "#f87171"
-
 ];
 
-export default function Chart(){
+export default function Chart({ myApplications = [] }){
+
+    const interviews = myApplications.filter((obj)=>obj.status==="HR Interview" || obj.status==="Tech Interview" || obj.status==="Interview Scheduled")
+    const rejections = myApplications.filter((obj)=>obj.status==="Rejected");
+    const offers = myApplications.filter((obj)=>obj.status==="Offer Received");
+    const assessment = myApplications.filter((obj)=>obj.status==="Assessment");
+
+    const showChart = myApplications.length > 0;
+    
+    const data = [
+      { name: "Applied", value: myApplications.length},
+      { name: "Interview", value: interviews.length },
+      { name: "Assessment", value: assessment.length },
+      { name: "Offer", value: offers.length},
+      { name: "Rejected", value: rejections.length}
+    ];
 
   const total = data.reduce(
     (acc, item) => acc + item.value,

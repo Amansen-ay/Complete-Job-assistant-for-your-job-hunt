@@ -11,8 +11,10 @@ function ApplicationTable({ activeStatus }) {
      
        const menuRef = useRef()
        const [myApplications,setMyApplications] = useState(JSON.parse(localStorage.getItem("myApplications")) || []) 
-       const [showMenu,setShowMenu] = useState(false);
+       const [showMenu,setShowMenu] = useState(-1);
        const [selectedApplicationRow,setSelectedApplicationRow] = useState({});
+       const [showEditModal, setShowEditModal] = useState(false);
+       const [editData, setEditData] = useState({});
 
 
         function deleteApplicationHandeler() {
@@ -23,8 +25,23 @@ function ApplicationTable({ activeStatus }) {
          setShowMenu(-1);
         }
 
+        function handleEditClick() {
+            setEditData(selectedApplicationRow);
+            setShowEditModal(true);
+            setShowMenu(-1);
+        }
+
+        function handleUpdateApplication(updatedApp) {
+            const updatedApps = myApplications.map(app => 
+                app === selectedApplicationRow ? updatedApp : app
+            );
+            setMyApplications(updatedApps);
+            setShowEditModal(false);
+        }
+
         useEffect(()=>{
-            localStorage.setItem("myApplications",JSON.stringify(myApplications))
+            localStorage.setItem("myApplications",JSON.stringify(myApplications));
+            window.dispatchEvent(new Event("applicationsUpdated"));
         },[myApplications]);
 
         useEffect(() => {
@@ -39,7 +56,7 @@ function ApplicationTable({ activeStatus }) {
             };
         }, []);
         
-        const filteredApps = myApplications.filter(app => {
+        const filteredApps = [...myApplications].reverse().filter(app => {
             if (activeStatus === "All Applications") return true;
             if (activeStatus === "Interview") return app.status.toLowerCase().includes("interview");
             if (activeStatus === "Assesment") return app.status === "Assessment";
@@ -105,6 +122,7 @@ function ApplicationTable({ activeStatus }) {
                             
                                         <div ref={menuRef} className="dropdown-menu" onClick={(e)=>e.stopPropagation()}>
                             
+                                        <button onClick={handleEditClick}>Edit</button>
                                         <button onClick={deleteApplicationHandeler}>Delete</button>
                             
                                         </div>
@@ -173,9 +191,78 @@ function ApplicationTable({ activeStatus }) {
         </div>
         
         }
+
+        {showEditModal && (
+            <EditModal 
+                data={editData} 
+                onClose={() => setShowEditModal(false)} 
+                onSave={handleUpdateApplication}
+            />
+        )}
        
         </>
     )
+}
+
+function EditModal({ data, onClose, onSave }) {
+    const [formData, setFormData] = useState({ ...data });
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData(prev => ({ ...prev, [name]: value }));
+    };
+
+    return (
+        <div className="modal-overlay-notes-page">
+            <div className="note-modal edit-app-modal">
+                <div className="modal-header-notes-page">
+                    <h2>Edit Application</h2>
+                    <button className="close-btn-note-page" onClick={onClose}>✕</button>
+                </div>
+                <div className="modal-body-notes-page">
+                    <div className="label-and-field">
+                        <label>Company</label>
+                        <input maxLength={50} name="company" value={formData.company} onChange={handleChange} />
+                    </div>
+                    <div className="label-and-field">
+                        <label>Role</label>
+                        <input maxLength={50}name="role" value={formData.role} onChange={handleChange} />
+                    </div>
+                    <div className="label-and-field">
+                        <label>Status</label>
+                        <select name="status" value={formData.status} onChange={handleChange}>
+                            <option>Applied</option>
+                            <option>Under Review</option>
+                            <option>Interview Scheduled</option>
+                            <option>Tech Interview</option>
+                            <option>HR Interview</option>
+                            <option>Assessment</option>
+                            <option>Offer Received</option>
+                            <option>Rejected</option>
+                        </select>
+                    </div>
+                    <div className="label-and-field">
+                        <label>Next Step</label>
+                        <input name="nextStep" value={formData.nextStep} onChange={handleChange} />
+                    </div>
+                    <div className="label-and-field">
+                        <label>Employment Type</label>
+                        <select name="employmentType" value={formData.employmentType} onChange={handleChange}>
+                            <option value="Full-time">Full-time</option>
+                            <option value="Part-time">Part-time</option>
+                            <option value="Remote">Remote</option>
+                            <option value="Full-time / Remote">Full-time / Remote</option>
+                            <option value="Part-time / Remote">Part-time / Remote</option>
+                        </select>
+                    </div>
+                </div>
+                <div className="modal-footer-notes-page">
+                    <button className="cancel-btn-notes-page" onClick={onClose}>Cancel</button>
+                    <button className="save-btn-notes-page" onClick={() => onSave(formData)}>Save Changes</button>
+                </div>
+            </div>
+        </div>
+    );
 }
 
 
