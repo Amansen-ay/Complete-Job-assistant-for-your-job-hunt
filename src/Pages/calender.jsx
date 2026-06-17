@@ -14,6 +14,7 @@ import timer from '../assets/timer.svg'
 import removeBtn from '../assets/removeBtn.svg'
 import help from '../assets/help.svg'
 import pin from '../assets/pin.svg'
+import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell } from 'recharts';
 
 export default function Calender() {
 
@@ -26,6 +27,8 @@ export default function Calender() {
     const [eventTitle,setEventTitle] = useState("");
 
     const [eventRole,setEventRole] = useState("");
+
+    const [eventCategory,setEventCategory] = useState("General");
 
 
     const [events,setEvents] = useState(()=>{
@@ -221,6 +224,15 @@ export default function Calender() {
         setSelectedDayEvents(prev => prev.filter(event => event !== eventToDelete));
     }
 
+    function convertTo12Hour(time24) {
+        if (!time24) return "Not set";
+        const [hours, minutes] = time24.split(':');
+        const hour = parseInt(hours, 10);
+        const ampm = hour >= 12 ? 'PM' : 'AM';
+        const hour12 = hour % 12 || 12;
+        return `${hour12}:${minutes} ${ampm}`;
+    }
+
     useEffect(()=>{
 
         localStorage.setItem(
@@ -232,6 +244,20 @@ export default function Calender() {
         );
 
     },[events]);
+
+    const categories = ["General", "Interview", "Follow up", "Asessment", "Offer"];
+    const categoryCounts = events.reduce((acc, event) => {
+        const cat = event.category === "Select category" || !event.category ? "General" : event.category;
+        acc[cat] = (acc[cat] || 0) + 1;
+        return acc;
+    }, {});
+
+    const chartData = categories.map(cat => ({
+        name: cat,
+        value: categoryCounts[cat] || 0
+    }));
+
+    const COLORS = ['#2668bf', '#ff4d4d', '#ff9f43', '#00d2d3', '#5f27cd'];
 
     return (
       <>
@@ -466,6 +492,25 @@ export default function Calender() {
             <p>Select the schedue time for this event. </p>
         </div>
 
+        
+        
+        <label htmlFor="category">Enter category </label>
+
+        <div className="add-event-input">
+
+        <select  id="category"  value={eventCategory} onChange={(e)=>setEventCategory(e.target.value)}>
+            <option>Select category</option>
+            <option value="General">General</option>
+            <option value="Interview">Interview</option>
+            <option value="Follow up">Follow up</option>
+            <option value="Asessment">Asessment</option>
+            <option value="Offer">Offer</option>
+           
+        </select>
+    
+
+        </div>
+
          <div className="modalBtns">
 
             <button
@@ -509,6 +554,8 @@ export default function Calender() {
                      role:eventRole,
 
                      time: eventTime,
+
+                     category:eventCategory,
                      
 
                   }
@@ -522,6 +569,7 @@ export default function Calender() {
                setEventRole("");
 
                setEventTime("");
+               setEventCategory("General");
             }}  
 
             >
@@ -580,7 +628,7 @@ export default function Calender() {
                 <img src={timer} width="30px" height="30px" />
                 <div className="label-and-titles">
                     <p>Time</p>
-                    <h3>{selectedPill.time}</h3>
+                    <h3>{convertTo12Hour(selectedPill.time)}</h3>
                 </div>
             </div>
         
@@ -664,7 +712,7 @@ export default function Calender() {
                        <line x1="10" y1="11" x2="10" y2="17"></line>
                        <line x1="14" y1="11" x2="14" y2="17"></line>
                    </svg>
-                   <div className="event-task-pinned-time">{event.time}</div>
+                   <div className="event-task-pinned-time">{convertTo12Hour(event.time)}</div>
                </div>
 
             </div>
@@ -797,7 +845,7 @@ export default function Calender() {
                     </td>
                     <td>
                         <p >{event.date} {months[event.month]}</p>
-                        <p>{event.time}</p>
+                        <p>{convertTo12Hour(event.time)}</p>
                     </td>
                 </tr>
 
@@ -817,60 +865,37 @@ export default function Calender() {
         <div className="stats-container">
 
         <header>
-            <p id="main-header-line">Calendar Stats</p>
-            <button>This Month</button>
+            <p id="main-header-line">Total Event Distribution</p>
         </header>
 
-       <div className="stats-data-cell-container-wrapper-perent">
-            <div className="stats-data-cell-container-wrapper">
-
-            <div className="stats-data-cell-container"> 
-                <img id="interviews-img" src={dateBlue} width="30px" height="30px" />
-                <div className="stats-data-cell">
-                    <h1>7</h1>
-                    <p>Interviws</p>
-                </div>
-
-            </div>
-
-            <div className="stats-data-cell-container"> 
-                <img id="assesment-img" src={dateRed} width="30px" height="30px" />
-                <div className="stats-data-cell">
-                    <h1>7</h1>
-                    <p>Assesment</p>
-                </div>
-
-            
-            </div>    
-
-          </div> 
-
-
-          <div className="stats-data-cell-container-wrapper">
-
-            <div className="stats-data-cell-container"> 
-                <img id="follow-up-img" src={followUp} width="30px" height="30px" />
-                <div className="stats-data-cell">
-                    <h1>7</h1>
-                    <p>Follow up</p>
-                </div>
-
-            </div>
-
-            <div className="stats-data-cell-container"> 
-                <img id="meetings-img" src={dateBlue} width="30px" height="30px" />
-                <div className="stats-data-cell">
-                    <h1>7</h1>
-                    <p>Meetings</p>
-                </div>
-
-            
-            </div>    
-
-          </div> 
-
-
-        </div>    
+        <div style={{ width: '100%', height: '220px', marginTop: '20px' }}>
+            <ResponsiveContainer width="100%" height="100%">
+                <BarChart
+                    layout="vertical"
+                    data={chartData}
+                    margin={{ top: 5, right: 30, left: -25, bottom: 5 }}
+                >
+                    <XAxis type="number" hide />
+                    <YAxis 
+                        dataKey="name" 
+                        type="category" 
+                        width={100} 
+                        tick={{ fontSize: 12, fill: '#5c5c5c' }}
+                        axisLine={false}
+                        tickLine={false}
+                    />
+                    <Tooltip 
+                        cursor={{ fill: 'transparent' }}
+                        contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}
+                    />
+                    <Bar dataKey="value" radius={[0, 4, 4, 0]} barSize={20}>
+                        {chartData.map((entry, index) => (
+                            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                        ))}
+                    </Bar>
+                </BarChart>
+            </ResponsiveContainer>
+        </div>
 
         </div>
 

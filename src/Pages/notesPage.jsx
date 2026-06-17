@@ -678,10 +678,10 @@ export default function NotesPage() {
                                 <p>Import from Applications</p>
                             </div>
 
-                            <div>
+                            {/* <div>
                                 <img src={templates} />
                                 <p>Templates</p>
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                 </div>

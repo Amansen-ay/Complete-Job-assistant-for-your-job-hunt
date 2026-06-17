@@ -151,7 +151,7 @@
 
    padding:3px;
 
-   background:#ffffff;
+   background:#f3f1ff;
 
    font-size:10px;
 
@@ -204,7 +204,6 @@
 
    transition:0.2s;
 
-   cursor:pointer;
 }
 
 .mini-empty-cell{
@@ -440,14 +439,14 @@ tr:last-child td{
     margin-top:20px;
 }
 
-.stats-data-cell-container{
+/* .stats-data-cell-container{
     display:flex;
     gap:10px;
     align-items:center;
     border:1px solid #c1c1c1;
     padding:10px;
     border-radius:5px;
-}
+} */
 
 #follow-up-img{
     background-color: #e8ffe2;
@@ -834,3 +833,13 @@ tr:last-child td{
 }
 
 
+#category{
+    outline:none;
+    border:none;
+}
+
+#main-header-line{
+    border-bottom:1px solid #dedcdc;
+    width:100%;
+    padding-bottom:10px;
+}

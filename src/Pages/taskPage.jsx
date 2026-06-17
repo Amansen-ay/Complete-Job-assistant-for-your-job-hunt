@@ -5,6 +5,7 @@ import removeBtn from '../assets/removeBtn.svg';
 import previousBtn from '../assets/previous.svg';
 import forwardBtn from '../assets/forward.svg';
 import clipboardPlant from '../assets/clipboardPlant.png'
+import Logo from '../assets/logo.png'
 
 import {
 
@@ -317,16 +318,19 @@ export default function TaskPage() {
 
                 <tr key={index}>
                     <td>
-                        <h3>{obj.task}</h3>
-                        {/* <p>-</p> */}
+                        <div className="task-title-badge">
+                            {obj.task}
+                        </div>
                     </td>
                     <td>
-                        <h3>{obj.relatedTo}</h3>
-                        {/* <p>- </p> */}
+                        <div className="secondary-badge">
+                            {obj.relatedTo}
+                        </div>
                     </td>
                     <td>
-                        <h3>{obj.dueDate}</h3>
-                        {/* <p>-</p> */}
+                        <div className="secondary-badge">
+                            {obj.dueDate}
+                        </div>
                     </td>
                     <td>
                         <h3 className={
@@ -486,9 +490,9 @@ export default function TaskPage() {
 
           <div className="task-modal-title-section">
 
-            <div className="task-modal-icon">
-              <span className="material-symbols-rounded">task_alt</span>
-            </div>
+            
+              <img src={Logo} width="60px" height="60px"/>
+            
 
             <div>
               <h2>Add New Task</h2>

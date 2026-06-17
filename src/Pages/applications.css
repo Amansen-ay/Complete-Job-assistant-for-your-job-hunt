@@ -146,47 +146,79 @@ td{
 }
 
 
-.Applied{
-    background-color:rgb(249, 233, 249);
-    color:purple;
-    text-align:center;
-    padding:10px ;
-    width:fit-content;
-    border-radius:10px;
+.status-badge {
+    text-align: center;
+    padding: 6px 12px;
+    width: fit-content;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid transparent;
 }
 
-.Interview{
-    background-color:rgb(216, 235, 248);
-    color:rgb(0, 140, 255);
-    text-align:center;
-    padding:10px ;
-    width:fit-content;
-    border-radius:10px;
+.status-applied {
+    background-color: #f5f3ff;
+    color: #7c3aed;
+    border-color: #ddd6fe;
 }
 
-.Under-Review{
-    background-color:rgb(253, 253, 234);
-    color:rgb(255, 170, 0);
-    text-align:center;
-    padding:10px ;
-    width:fit-content;
-    border-radius:10px;
+.status-interview {
+    background-color: #eff6ff;
+    color: #2563eb;
+    border-color: #dbeafe;
 }
 
-.assessment-offer{
-    background-color: #f2fae9;
-    color:green;
-    text-align:center;
-    padding:10px ;
-    width:fit-content;
-    border-radius:10px;
+.status-review {
+    background-color: #fffbeb;
+    color: #d97706;
+    border-color: #fef3c7;
 }
 
-.Rejected{
-    background-color: #f0dcdc;
-    color:rgb(255, 0, 0);
-    text-align:center;
-    padding:10px ;
-    width:fit-content;
-    border-radius:10px;
+.status-assessment {
+    background-color: #fdf2f8;
+    color: #db2777;
+    border-color: #fce7f3;
+}
+
+.status-offer {
+    background-color: #ecfdf5;
+    color: #059669;
+    border-color: #d1fae5;
+}
+
+.status-rejected {
+    background-color: #fef2f2;
+    color: #dc2626;
+    border-color: #fee2e2;
+}
+
+.company-badge {
+    padding: 8px 14px;
+    background-color: #3f71c0;
+    color: #ffffff;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 700;
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    letter-spacing: 0.5px;
+}
+
+.next-step-badge {
+    padding: 4px 10px;
+    background-color: #f8fafc;
+    color: #475569;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 500;
+    width: fit-content;
+    display: inline-flex;
+    align-items: center;
 }

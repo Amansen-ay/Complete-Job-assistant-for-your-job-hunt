@@ -99,17 +99,44 @@ function ApplicationTable({ activeStatus }) {
                      return (
                         <tr key={index}>
                             <td className="service-and-logo">
-                                <p><b>{obj.company}</b></p>
+                                <div className="company-badge">
+                                    {obj.company}
+                                </div>
                             </td>
-                            <td>{obj.role}</td>
                             <td>
-                                <div className={obj.status==="Interview Scheduled" || obj.status==="Tech Interview" || obj.status==="HR Interview" ? "Interview" : obj.status==="Applied" ?"Applied" : obj.status==="Under Review" ? "Under-Review" : obj.status==="Assessment" || obj.status==="Offer Received" ? "assessment-offer" : "Rejected" }>
+                                <div className="next-step-badge">
+                                    {obj.role}
+                                </div>
+                            </td>
+                            <td>
+                                <div className={`status-badge ${
+                                    obj.status === "Interview Scheduled" || obj.status === "Tech Interview" || obj.status === "HR Interview" ? "status-interview" : 
+                                    obj.status === "Applied" ? "status-applied" : 
+                                    obj.status === "Under Review" ? "status-review" : 
+                                    obj.status === "Assessment" ? "status-assessment" : 
+                                    obj.status === "Offer Received" ? "status-offer" : 
+                                    "status-rejected"
+                                }`}>
                                     {obj.status}
                                 </div>
                             </td>
-                            <td>{obj.dateApplied}</td>
-                            <td>{obj.nextStep}</td>
-                            <td>{obj.employmentType}</td>
+                            <td>
+                                <div className="next-step-badge">
+                                    {obj.dateApplied}
+                                </div>
+                            </td>
+                            <td>
+                                {obj.nextStep && (
+                                    <div className="next-step-badge">
+                                        {obj.nextStep}
+                                    </div>
+                                )}
+                            </td>
+                            <td>
+                                <div className="next-step-badge">
+                                    {obj.employmentType}
+                                </div>
+                            </td>
                             <td>
                                 <div className="menu-wrapper" ref={showMenu === index ? menuRef : null}>
                                     <img  className="three-dots-btn" src={more} onClick={()=>{
