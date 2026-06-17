@@ -3,7 +3,6 @@ import jobIcon from '../assets/job.svg'
 import Bookmark from '../assets/bookmark.svg'
 import Offer from '../assets/offer.svg'
 import Visibility from '../assets/visibility.svg'
-import Chart from '../dashboardLayout/chart.jsx'
 import insightsBulb from '../assets/bulbInsight.svg'
 import caseInsights from '../assets/caseInsights.svg'
 import hikeArrow from '../assets/hikeArrow.svg'
@@ -28,14 +27,156 @@ import {
   XAxis,
   YAxis,
   Tooltip,
-  CartesianGrid
+  CartesianGrid,
+  BarChart as ReBarChart,
+  Bar,
+  Cell as ReCell
 } from "recharts";
 
-    const myApplications = JSON.parse(localStorage.getItem("myApplications")) || [];
+import {
+  PieChart,
+  Pie,
+  Cell
+} from "recharts";
+
+
+import donut from '../assets/donut.svg'
+
+const COLORS = [
+  "#7c3aed",
+  "#6366f1",
+  "#fbbf24",
+  "#4ade80",
+  "#f87171"
+];
+
+
+function Chart({ myApplications = [] }){
+
     const interviews = myApplications.filter((obj)=>obj.status==="HR Interview" || obj.status==="Tech Interview" || obj.status==="Interview Scheduled")
     const rejections = myApplications.filter((obj)=>obj.status==="Rejected");
     const offers = myApplications.filter((obj)=>obj.status==="Offer Received");
     const assessment = myApplications.filter((obj)=>obj.status==="Assessment");
+
+    const showChart = myApplications.length > 0;
+    
+    const data = [
+      { name: "Applied", value: myApplications.length},
+      { name: "Interview", value: interviews.length },
+      { name: "Assessment", value: assessment.length },
+      { name: "Offer", value: offers.length},
+      { name: "Rejected", value: rejections.length}
+    ];
+
+  const total = data.reduce(
+    (acc, item) => acc + item.value,
+    0
+  );
+
+  return(
+
+    <>
+    
+
+  
+    <header className="chartHeader">
+     <h3>Application overview</h3>
+    
+    </header>
+    
+    { showChart?
+
+    <>
+
+      
+      <div className="chartWrapper">
+
+
+      <div className="chartContainer">
+
+        <PieChart width={250} height={250}>
+
+          <Pie
+            data={data}
+            innerRadius={70}
+            outerRadius={100}
+            dataKey="value"
+          >
+
+            {
+              data.map((entry, index) => (
+
+                <Cell
+                  key={index}
+                  fill={COLORS[index]}
+                />
+
+              ))
+            }
+
+          </Pie>
+
+          <Tooltip />
+
+        </PieChart>
+
+      </div>
+
+     
+
+      <div className="legendContainer">
+
+        {
+          data.map((item, index) => (
+
+            <div
+              key={index}
+              className="legendItem"
+            >
+
+              <div className="legendLeft">
+
+                <span
+                  className="dot"
+                  style={{
+                    backgroundColor: COLORS[index]
+                  }}
+                ></span>
+
+                <p>{item.name}</p>
+
+              </div>
+
+              <span>
+
+                {item.value}
+
+              </span>
+
+            </div>
+
+          ))
+        }
+
+      </div>
+    </div>
+    </>
+    
+    
+    
+    
+  :
+  
+  <div className="donut-chart-empty-placeholder">
+    <img src={donut} width="50px" height="50px" />
+    <h3>No application data yet</h3>
+    <p>Start applyting to jobs and track your progress.</p>
+  </div>}
+    </>
+  )
+}
+
+
 
 const monthNames = [
   "Jan","Feb","Mar","Apr","May","Jun",
@@ -44,207 +185,13 @@ const monthNames = [
 
 const logos  = [LinkedIn,indeed,naukri,apna,internshala]
 
-
-const monthlyCount  = {};
-
-myApplications.forEach((app) => {
-
-  const date = new Date(app.dateApplied);
-
-  const month = monthNames[date.getMonth()];
-
-  monthlyCount[month] = (monthlyCount[month] || 0) + 1;
-
-});
-
-const data = monthNames.map((month) => ({
-  month,
-  applications: monthlyCount[month] || 0
-}));
-
-
-const months = Object.keys(monthlyCount);
-
-const mostActiveMonth =
-  months.length > 0
-    ? months.reduce((maxMonth, currentMonth) =>
-        monthlyCount[currentMonth] > monthlyCount[maxMonth]
-          ? currentMonth
-          : maxMonth
-      )
-    : "-";
-
-const roles = myApplications.map((obj)=>{
-    return obj.role
-})
-const freq = roles.reduce((acc, role) => {
-  acc[role] = (acc[role] || 0) + 1;
-  return acc;
-}, {});
-
-
-const roleKeys = Object.keys(freq);
-
-const mostAppliedRole =
-  roleKeys.length > 0
-    ? roleKeys.reduce((maxRole, currentRole) =>
-        freq[currentRole] > freq[maxRole]
-          ? currentRole
-          : maxRole
-      )
-    : "-";
-
-    const interviewRate =
-        myApplications.length > 0
-        ? ((interviews.length / myApplications.length) * 100).toFixed(0)
-        : 0;
-
-    const rejectionRate = 
-        myApplications.length > 0
-        ? ((rejections.length / myApplications.length) * 100).toFixed(0)
-        : 0;
-   
-    const offerRate =
-    myApplications.length > 0
-    ? ((offers.length / myApplications.length) * 100).toFixed(0)
-    : 0;
-
-
-    const applicationsThisWeek = myApplications.filter((app) => {
-
-        const today = new Date();
-
-        const applicationDate = new Date(app.dateApplied);
-
-        const differenceInDays =
-        (today - applicationDate) /
-        (1000 * 60 * 60 * 24);
-
-        return differenceInDays >= 0 &&
-         differenceInDays <= 7;
-});
-
-    const portals = [
-            "LinkedIn",
-            "Indeed",
-            "Naukri",
-            "Apna",
-            "Internshala",
-            "Others"
-        ];
-
-
-    const portalStats = {};
-    myApplications.forEach((app) => {
-
-    if (!portalStats[app.portal]) {
-    portalStats[app.portal] = {
-      applications: 0,
-      interviews: 0,
-      offers: 0
-    };
-  }
-
-    portalStats[app.portal].applications++;
-
-    if (
-    app.status === "HR Interview" ||
-    app.status === "Tech Interview" ||
-    app.status === "Interview Scheduled"
-    ) {
-        portalStats[app.portal].interviews++;
-    }
-
-    if (app.status === "Offer Received") {
-    portalStats[app.portal].offers++;
-    }
-
-    });
-    const sourceData = portals.map((portal) => ({
-    portal,
-    applications: portalStats[portal]?.applications || 0,
-    interviews: portalStats[portal]?.interviews || 0,
-    offers: portalStats[portal]?.offers || 0
-}));
-
-    const activeSources = sourceData.filter(
-    source => source.applications > 0
-    );
-
-    const topSource =
-    activeSources.length > 0
-    ? activeSources.reduce((max, current) =>
-        current.applications > max.applications
-          ? current
-          : max
-      )
-    : null;
-
-    const topSourceByOffer =
-    activeSources.length > 0
-    ? activeSources.reduce((max, current) =>
-        current.offer > max.offer
-          ? current
-          : max
-      )
-    : null;
-
-
-    console.log(topSourceByOffer)
-
-
-    const sourcesWithRates = activeSources.map(source => ({
-    ...source,
-    interviewRate:
-    source.applications > 0
-      ? (source.interviews / source.applications) * 100
-      : 0,
-
-    offerRate:
-    source.applications > 0
-      ? (source.offers / source.applications) * 100
-      : 0
-
-    }));
-
-    const highestInterviewSource =
-    sourcesWithRates.length > 0
-    ? sourcesWithRates.reduce((max, current) =>
-        current.interviewRate > max.interviewRate
-          ? current
-          : max
-      )
-    : null;
-
-    const highestOfferSource =
-    sourcesWithRates.length > 0
-    ? sourcesWithRates.reduce((max, current) =>
-        current.offerRate > max.offerRate
-          ? current
-          : max
-      )
-    : null;
-
-
-function MonthlyApplicationsChart() {
-
-//   const data = [
-//     { month: "Jan", applications: 8 },
-//     { month: "Feb", applications: 14 },
-//     { month: "Mar", applications: 11 },
-//     { month: "Apr", applications: 18 },
-//     { month: "May", applications: 22 },
-//     { month: "Jun", applications: 15 },
-//   ];
+function MonthlyApplicationsChart({ data }) {
 
   return (
     <div className="line-chart-card">
 
       <header className="line-chart-header">
         <h3>Applications submitted per month</h3>
-        {/* <select>
-          <option>This year</option>
-        </select> */}
         <p>This year</p>
       </header>
 
@@ -297,7 +244,7 @@ function MonthlyApplicationsChart() {
 }
 
 
-function SourceTable(){
+function SourceTable({ sourceData }){
     return (
         <>
          <div className="applicaton-sources-container">
@@ -313,8 +260,8 @@ function SourceTable(){
 
                 <tbody>
                     {sourceData.map((source,index)=>(
-                    <tr>
-                        <td key={source.portal}>
+                    <tr key={source.portal}>
+                        <td>
                             <img src={logos[index]} width="30px" height="30px" />
                             {source.portal}
                         </td>
@@ -333,91 +280,49 @@ function SourceTable(){
         </>
     )
 }
-function Connecter(){
-    return (
-        <>
-        <div className="connceterContainer">
-                    <div className="connceter">
-                        <p>———————</p>
-                        <h3 ><span style={{color:"blue"}}>{myApplications.length}</span> Applied</h3>
-                    </div>
 
-                    <div className="connceter">
-                        <p>———————</p>
-                        <h3><span style={{color:"rgb(0, 157, 255)"}}>{interviews.length}</span> Interviews</h3>
-                    </div>
+function FunnelChart({ applications, interviews, assessment, offers }){
 
-                    <div className="connceter">
-                        <p>———————</p>
-                        <h3><span style={{color:"rgb(235, 166, 47)"}}>{assessment.length}</span> Assessments</h3>
-                    </div>
-
-                    <div className="connceter">
-                        <p>———————</p>
-                        <h3><span style={{color:"rgb(0, 255, 128)"}}>{offers.length}</span> offers</h3>
-                    </div>
-        </div>        
-        </>
-    )
-}
-function FunnelChart(){
+    const chartData = [
+        { value: applications.length, name: "Applied", fill: "#4f46e5" },
+        { value: interviews.length, name: "Interview", fill: "#3b82f6" },
+        { value: assessment.length, name: "Assessment", fill: "#f59e0b" },
+        { value: offers.length, name: "Offers", fill: "#10b981" }
+    ];
 
     return (
 
         <>
-        
-
-            <div className="funnel-container">
-
-           <div className="funnel-bar-container">
-             <div className="funnel-step">
-                <div className="applied">
-                    <h3>{myApplications.length}</h3>
-                    <p>Applied</p>
-                </div>
-                <div className="arrow">↓</div>
-            </div>
-           </div>
-           
-        
-            
-
-            <div className="funnel-bar-container">
-                <div className="funnel-step">
-
-                    <div className="interview">
-                        <h3>{interviews.length}</h3>
-                        <p>Interview</p>
-                    </div>
-                    <div className="arrow">↓</div>
-                </div>
-            </div>
-        
-        
-
-       
-
-        <div className="funnel-bar-container">
-            
-            <div className="funnel-step">
-                <div className="assessment">
-                    <h3>{assessment.length}</h3>
-                    <p>Assessment</p>
-                </div>
-                <div className="arrow">↓</div>
-            </div>
-        </div>
-
-        
-
-        <div className="funnel-bar-container">
-            <div className="funnel-step">
-                <div className="offer">
-                    <h3>{offers.length}</h3>
-                    <p>Offers</p>
-                </div>
-            </div>
-        </div>
+    
+            <div className="funnel-container" style={{ width: '100%', height: '280px', marginTop: '20px' }}>
+               
+              
+                <ResponsiveContainer width="100%" height="100%">
+                    <ReBarChart
+                        layout="vertical"
+                        data={chartData}
+                        margin={{ top: 5, right: 30, left: -12, bottom: 5 }}
+                    >
+                        <XAxis type="number" hide/>
+                        <YAxis 
+                            dataKey="name" 
+                            type="category" 
+                            width={100} 
+                            tick={{ fontSize: 13, fill: '#5c5c5c', fontWeight: 600 }}
+                            axisLine={false}
+                            tickLine={false}
+                        />
+                        <Tooltip 
+                            cursor={{ fill: 'transparent' }}
+                            contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}
+                        />
+                        <Bar dataKey="value" radius={[0, 4, 4, 0]} barSize={25}>
+                            {chartData.map((entry, index) => (
+                                <ReCell key={`cell-${index}`} fill={entry.fill} />
+                            ))}
+                        </Bar>
+                    </ReBarChart>
+                </ResponsiveContainer>
 
             </div>
 
@@ -434,8 +339,106 @@ export default function Analytics() {
     const interviews = myApplications.filter((obj)=>obj.status==="HR Interview" || obj.status==="Tech Interview" || obj.status==="Interview Scheduled")
     const rejections = myApplications.filter((obj)=>obj.status==="Rejected");
     const offers = myApplications.filter((obj)=>obj.status==="Offer Received")
-    const { showSidebar } = useOutletContext();
-    // console.log("sidebarState =", sidebarState);
+    const assessment = myApplications.filter((obj)=>obj.status==="Assessment");
+
+    const monthlyCount  = {};
+
+    myApplications.forEach((app) => {
+      const date = new Date(app.dateApplied);
+      const month = monthNames[date.getMonth()];
+      monthlyCount[month] = (monthlyCount[month] || 0) + 1;
+    });
+
+    const data = monthNames.map((month) => ({
+      month,
+      applications: monthlyCount[month] || 0
+    }));
+
+    const monthsWithData = Object.keys(monthlyCount);
+    const mostActiveMonth = monthsWithData.length > 0
+        ? monthsWithData.reduce((maxMonth, currentMonth) =>
+            monthlyCount[currentMonth] > monthlyCount[maxMonth]
+              ? currentMonth
+              : maxMonth
+          )
+        : "-";
+
+    const roles = myApplications.map((obj)=>obj.role);
+    const freq = roles.reduce((acc, role) => {
+      acc[role] = (acc[role] || 0) + 1;
+      return acc;
+    }, {});
+
+    const roleKeys = Object.keys(freq);
+    const mostAppliedRole = roleKeys.length > 0
+        ? roleKeys.reduce((maxRole, currentRole) =>
+            freq[currentRole] > freq[maxRole]
+              ? currentRole
+              : maxRole
+          )
+        : "-";
+
+    const interviewRate = myApplications.length > 0
+        ? ((interviews.length / myApplications.length) * 100).toFixed(0)
+        : 0;
+
+    const rejectionRate = myApplications.length > 0
+        ? ((rejections.length / myApplications.length) * 100).toFixed(0)
+        : 0;
+   
+    const offerRate = myApplications.length > 0
+        ? ((offers.length / myApplications.length) * 100).toFixed(0)
+        : 0;
+
+    const applicationsThisWeek = myApplications.filter((app) => {
+        const today = new Date();
+        const applicationDate = new Date(app.dateApplied);
+        const differenceInDays = (today - applicationDate) / (1000 * 60 * 60 * 24);
+        return differenceInDays >= 0 && differenceInDays <= 7;
+    });
+
+    const portals = ["LinkedIn", "Indeed", "Naukri", "Apna", "Internshala", "Others"];
+
+    const portalStats = {};
+    myApplications.forEach((app) => {
+        if (!portalStats[app.portal]) {
+            portalStats[app.portal] = { applications: 0, interviews: 0, offers: 0 };
+        }
+        portalStats[app.portal].applications++;
+        if (app.status === "HR Interview" || app.status === "Tech Interview" || app.status === "Interview Scheduled") {
+            portalStats[app.portal].interviews++;
+        }
+        if (app.status === "Offer Received") {
+            portalStats[app.portal].offers++;
+        }
+    });
+
+    const sourceData = portals.map((portal) => ({
+        portal,
+        applications: portalStats[portal]?.applications || 0,
+        interviews: portalStats[portal]?.interviews || 0,
+        offers: portalStats[portal]?.offers || 0
+    }));
+
+    const activeSources = sourceData.filter(source => source.applications > 0);
+    const topSource = activeSources.length > 0
+        ? activeSources.reduce((max, current) => current.applications > max.applications ? current : max)
+        : null;
+
+    const sourcesWithRates = activeSources.map(source => ({
+        ...source,
+        interviewRate: source.applications > 0 ? (source.interviews / source.applications) * 100 : 0,
+        offerRate: source.applications > 0 ? (source.offers / source.applications) * 100 : 0
+    }));
+
+    const highestInterviewSource = sourcesWithRates.length > 0
+        ? sourcesWithRates.reduce((max, current) => current.interviewRate > max.interviewRate ? current : max)
+        : null;
+
+    const highestOfferSource = sourcesWithRates.length > 0
+        ? sourcesWithRates.reduce((max, current) => current.offerRate > max.offerRate ? current : max)
+        : null;
+
     return (
         <>
         
@@ -452,35 +455,36 @@ export default function Analytics() {
 
         <div className="chart-funnel-container-analytics-page">
             <div className="chart-container-analytics-page">
-                <Chart/>
+                <Chart myApplications={myApplications}/>
             </div>
 
 
-        <div className="funnel-container-analytics-page-perent">
-
-            <header className="funnel-container-header">
-                <h3>Application funnel</h3>
-                <p>View all</p>
-            </header>
-
-            <div className="funnel-container-analytics-page">
+            <div className="bar-chart-conatiner">
+                <header>
+                    <h3>Application bar chart</h3>
+                </header>
                 
-                <FunnelChart/>
+                 <FunnelChart 
+                    applications={myApplications} 
+                    interviews={interviews} 
+                    assessment={assessment} 
+                    offers={offers} 
+                />
+            </div>
             
-             {
-              !showSidebar && 
-              <Connecter/>
-             }
                 
-            </div>
+          
+                
+               
+            
 
         </div>
-        </div>
+        
 
         {/* <div className="lineChartContainer"> */}
             
             <div className="line-chart-and-insights">
-                 <MonthlyApplicationsChart/>
+                 <MonthlyApplicationsChart data={data} />
 
                  <div className="insights-card-container">
                     <header>
@@ -548,7 +552,7 @@ export default function Analytics() {
 
         <div className="source-table-and-top-performer-conatiner">
             <div className="source-table-wraper">
-                <SourceTable/>
+                <SourceTable sourceData={sourceData} />
             </div>
               
             

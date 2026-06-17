@@ -24,90 +24,24 @@
     height:350px; 
 }
 
-.funnel-container-analytics-page-perent{
-    width:48%;
-    padding:20px;
-    height:350px; 
-    background-color: #fff;
-    border:1px solid #c1c1c1;
-    border-radius:10px;
-    margin-top:20px;
-    padding:20px;
-    display:flex;
-    flex-direction:column;
-    gap:40px;
-    
-}
-.funnel-container-analytics-page{
-    /* width:100%; */
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-}
-
-.funnel-container-header{
-    display:flex;
-    justify-content:space-between;
-}
-
-.funnel-container-header p{
-    color:blue;
-    cursor:pointer;
-}
 .funnel-container{
     display:flex;
     flex-direction:column;
-    align-items:center;
     background-color: #fff;
-   
+    width: 100%;
 }
 
-.funnel-bar-container{
-    display:flex;
-    gap:10px;
-    align-items:center;
-    
-}
-
-.applied{
-   width:260px;
-   background-color:blue;
-   text-align:center;
-   color:white;
+.bar-chart-conatiner{
+    width:50%;
+    border:1px solid #c1c1c1;
+    height:350px;
+    margin-top:20px;
+    background-color: #fff;
     border-radius:10px;
-}
-
-.interview{
-   width:210px;
-   background-color:rgb(0, 157, 255);
-   text-align:center;
-   color:white;
-    border-radius:10px
-}
-
-.assessment{
-    width:160px;
-    background-color:rgb(235, 166, 47);
-    text-align:center;
-    color:white;
-    border-radius:10px;
-}
-
-.offer{
-    width:110px;
-    background-color:rgb(0, 255, 128);
-    text-align:center;
-    color:white;
-    border-radius:10px;
+    padding:20px;
 }
 
 
-.funnel-step{
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    
-}
 
 
 @media(min-width:1200px) {
