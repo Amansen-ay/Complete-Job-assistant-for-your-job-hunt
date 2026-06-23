@@ -75,3 +75,26 @@
    color:inherit;
 }
 
+/* Media Queries for Chart Responsiveness */
+@media (max-width: 768px) {
+    .chartWrapper {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+    
+    .legendContainer {
+        width: 100%;
+        max-width: 280px;
+        gap: 12px;
+    }
+    
+    .legendItem {
+        gap: 20px;
+    }
+    
+    .donut-chart-empty-placeholder {
+        margin-top: 40px;
+    }
+}
+

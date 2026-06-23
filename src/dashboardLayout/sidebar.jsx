@@ -10,6 +10,8 @@ import Analytics from '../assets/sidebarIcons/analytics.svg'
 import Settings from '../assets/sidebarIcons/settings.svg'
 import Help from '../assets/sidebarIcons/help.svg'
 import { NavLink } from "react-router-dom";
+import close from '../assets/close.svg';
+
 
 import './sidebar.css'
 
@@ -64,7 +66,8 @@ export default function Sidebar({showSidebar}){
             </NavLink>
             
         </div>
-        <div id="helpDiv"> <img src={Help} /><p>Need help ?</p></div>
+
+
 
         </main>
 

@@ -30,3 +30,18 @@
     justify-content:center;
 }
 
+/* Media Queries for Card Responsiveness */
+@media (max-width: 1024px) {
+    .contentCard {
+        width: calc(50% - 8px);
+        margin-top: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .contentCard {
+        width: 100%;
+        gap: 16px;
+    }
+}
+

@@ -9,6 +9,7 @@
     min-height: 100vh;
     padding: 20px 15px;
     border-right: 1px solid #e5e7eb;
+    /* background-color: #ad3737; */
 }
 
 .sidebarHeader{
@@ -121,5 +122,25 @@
 .sidebar.active{
    width: 210px;
    position: fixed;
+   /* top: 0;
+   left: 0; */
+   height: 100vh;
+   /* overflow-y: auto; */
    z-index: 1000;
 }
+
+/* Explicit sidebar height overrides for mobile screens */
+@media (max-width: 768px) {
+    .sidebar.active {
+        height: 100% !important;
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        bottom: 0 !important;
+    }
+    #sidebarContainer {
+        min-height: 100vh !important;
+        height: 100% !important;
+    }
+}
+

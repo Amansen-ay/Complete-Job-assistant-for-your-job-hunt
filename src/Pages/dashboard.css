@@ -27,3 +27,39 @@
 .margin-active-dashboard{
     margin-left:216px
 }
+
+/* Responsiveness overrides for the Dashboard Layout Shell */
+@media (max-width: 1024px) {
+    .margin-active-dashboard {
+        margin-left: 0;
+    }
+    
+    .dashboardContent {
+        padding: 16px;
+    }
+}
+
+
+@media (max-width: 375px) {
+    .dashboardContent {
+        padding: 12px;
+    }
+}
+
+/* Sidebar Overlay Backdrop for mobile/tablet */
+.sidebarOverlay {
+    display: none;
+}
+
+@media (max-width: 1024px) {
+    .sidebarOverlay {
+        display: block;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.4);
+        z-index: 998; /* behind fixed sidebar (1000) and menu button/navbar (999) */
+    }
+}

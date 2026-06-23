@@ -136,3 +136,27 @@
     gap:10px;
 }
 
+/* Media Queries for Reminders Responsiveness */
+@media (max-width: 1024px) {
+    .reminderSectionContainer {
+        width: 100%;
+        flex: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .placeholder-container-calendar {
+        width: 100%;
+        max-width: 280px;
+    }
+    
+    .ReminderSectionTableRow {
+        gap: 12px;
+    }
+    
+    #levelOfAppliction {
+        max-width: 80px;
+        font-size: 11px;
+    }
+}
+

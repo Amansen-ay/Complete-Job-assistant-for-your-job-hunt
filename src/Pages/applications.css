@@ -1,3 +1,7 @@
+*{
+    box-sizing:border-box;
+}
+
 .appliation-navs-container{
     display:flex;
     align-items:center;
@@ -196,18 +200,22 @@ td{
 }
 
 .company-badge {
-    padding: 8px 14px;
+  padding: 8px 14px;
     background-color: #3f71c0;
     color: #ffffff;
     border-radius: 8px;
     font-size: 14px;
     font-weight: 700;
-    width: fit-content;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+
+    display: inline-block;
+
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     letter-spacing: 0.5px;
+
+    max-width: 250px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 .next-step-badge {

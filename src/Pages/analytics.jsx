@@ -447,10 +447,10 @@ export default function Analytics() {
             <p>Track your application performance and progress overtime.</p>
         </header>
        <div className="cardContainer-analytics-page">
-                       <ContentCard icon={jobIcon} number={myApplications.length} header={"Applications"} bottomRecord={"12% from  week"} bgc={"#eef2ff"}/>
-                       <ContentCard icon={Visibility} number={interviews.length} header={"Interview calls"} bottomRecord={"5% from last week"} bgc={"#eef2ff"}/>
-                       <ContentCard icon={Bookmark} number={rejections.length} header={"Rejections"} bottomRecord={"8% from last week"} bgc={"#fff0ee"}/>
-                       <ContentCard icon={Offer} number={offers.length} header={"Offers"} bottomRecord={"3% from last week"} bgc={"#efffee"}/>
+                       <ContentCard icon={jobIcon} number={myApplications.length} header={"Applications"} bottomRecord={"Total applications tracked"} bgc={"#eef2ff"}/>
+                       <ContentCard icon={Visibility} number={interviews.length} header={"Interview calls"} bottomRecord={"Interview stage reached"} bgc={"#eef2ff"}/>
+                       <ContentCard icon={Bookmark} number={rejections.length} header={"Rejections"} bottomRecord={"Application rejected"} bgc={"#fff0ee"}/>
+                       <ContentCard icon={Offer} number={offers.length} header={"Offers"} bottomRecord={"Offer received"} bgc={"#efffee"}/>
         </div>
 
         <div className="chart-funnel-container-analytics-page">

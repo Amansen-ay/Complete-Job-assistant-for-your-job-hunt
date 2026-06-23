@@ -503,7 +503,7 @@ export default function NotesPage() {
             noteTitle: app.role,
             category: "Interview",
             notesCompany: app.company,
-            notesDescription: `Imported from Applications\n\nRole: ${app.role}\nCompany: ${app.company}\nType: ${app.employmentType}\nStatus: ${app.status}\nPortal: ${app.portal}\nDate Applied: ${app.dateApplied}`,
+            notesDescription: app.note?app.note:`Imported from Applications\n\nRole: ${app.role}\nCompany: ${app.company}\nType: ${app.employmentType}\nStatus: ${app.status}\nPortal: ${app.portal}\nDate Applied: ${app.dateApplied}`,
             createdAt: new Date().toLocaleDateString()
         }));
 
@@ -678,10 +678,7 @@ export default function NotesPage() {
                                 <p>Import from Applications</p>
                             </div>
 
-                            {/* <div>
-                                <img src={templates} />
-                                <p>Templates</p>
-                            </div> */}
+                            
                         </div>
                     </div>
                 </div>

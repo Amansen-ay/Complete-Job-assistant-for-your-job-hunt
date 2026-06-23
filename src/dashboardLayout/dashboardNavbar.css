@@ -2,20 +2,39 @@
     display:flex;
     align-items:center;
     justify-content:space-between;
-    padding:20px;
-    width:100%;
-    background-color: #fff;
-    border-bottom: 1px solid #c1c1c1;
-    border-left:1px solid #c1c1c1;
+
     position:fixed;
+    top:0;
+    left:0;
+
+    width:100%;
+    box-sizing:border-box;
+
+    padding:20px;
+
+    background:#fff;
+    border-bottom:1px solid #c1c1c1;
+
     z-index:999;
 }
-
 
 .margin-active{
     margin-left:200px;
     width:84%
 }
+
+@media (max-width: 768px) {
+    .margin-active {
+        margin-left: 0;
+        width: 100%;
+    }
+    
+    .dashboardNavContainer {
+        padding: 15px;
+    }
+}
+
+
 #Menu{
     display:flex;
     gap:10px;
@@ -30,10 +49,11 @@
 #profileSection{
     /* margin-left:auto; */
     display:flex;
-    gap:30px;
+    gap:15px;
     align-items:center;
 }
 
 #profileSection img{
     cursor:pointer;
 }
+

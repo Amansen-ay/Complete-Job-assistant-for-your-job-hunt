@@ -146,6 +146,30 @@
     gap:10px;
 }
 
+/* Media Queries for Tasks Responsiveness */
+@media (max-width: 1024px) {
+    .task-section-container,
+    .reminderSectionContainer {
+        width: 100% !important;
+        flex: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .placeholder-container-task {
+        width: 100%;
+        max-width: 280px;
+    }
+    
+    .Task-row-container {
+        gap: 10px;
+    }
+    
+    #dateOfTask {
+        font-size: 11px;
+    }
+}
+
 
 
 

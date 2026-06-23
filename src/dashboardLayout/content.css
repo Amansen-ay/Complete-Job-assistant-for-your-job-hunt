@@ -6,7 +6,9 @@
 
 .cardContainer{
     display:flex;
-    justify-content:space-between
+    justify-content:space-between;
+    flex-wrap:wrap; 
+    gap:16px;
 }
 
 .finalContainer{
@@ -38,5 +40,30 @@
     display:flex;
     gap:20px;
 
+}
+
+/* Media Queries for Responsiveness */
+
+@media (max-width: 1024px) {
+    .reminder-task-section-container {
+        flex-direction: column;
+        gap: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .finalContainer {
+        width: 100%;
+    }
+    .wholeTableContainer {
+        width: 100%;
+        flex: none;
+    }
+}
+
+@media (max-width: 480px) {
+    #headerWithUsername h3 {
+        font-size: 18px;
+    }
 }
 

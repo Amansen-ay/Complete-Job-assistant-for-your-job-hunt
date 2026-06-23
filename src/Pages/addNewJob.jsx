@@ -33,6 +33,7 @@ export default function AddNewJob() {
     const [nextStep,setNextStep] = useState("");
     const [portalName,setPortalName] = useState("");
     const [location,setLocation] = useState("");
+   
 
     const fields = [companyName,jobRole,dateApplied,currentStatus,nextStep,portalName];
     const completedFields = fields.filter((field) => field.trim() !=="").length;
@@ -287,12 +288,12 @@ export default function AddNewJob() {
                 <main className="additional-info-container">
                     <header className="additional-info-header">
                         <h3>Additional information</h3>
-                        <p>Job description (optional)</p>
+                        {/* <p>Job description (optional)</p> */}
                     </header>
-                    <div className="discription-container">
+                    {/* <div className="discription-container">
                         <textarea  maxLength={500} placeholder="Write the job discription" onChange={discriptionHandeler}></textarea>
                         <p>{discription.length}/500</p>
-                    </div>
+                    </div> */}
 
                    <div className="tags-and-input-container-wrapper">
                     <header>
@@ -317,7 +318,7 @@ export default function AddNewJob() {
                         <h3>Notes (optional)</h3>
                     </header>
                     <div className="noteText-and-length-container">
-                        <textarea maxLength={200} className="notes-textarea" placeholder="Add your note " onChange={noteTextHandeler}></textarea>
+                        <textarea maxLength={200} className="notes-textarea" placeholder="Add your note " value={note} onChange={noteTextHandeler}></textarea>
                         <p>{note.length}/200</p>
                     </div>
                     
@@ -341,6 +342,7 @@ export default function AddNewJob() {
                             nextStep:nextStep,
                             employmentType:employmentType,
                             portal:portalName,
+                            note:note,
                         }
                     ]
                        

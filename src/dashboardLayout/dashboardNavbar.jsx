@@ -61,9 +61,9 @@ export default function DashboardNavbar({sidebarToggler,showSidebar}) {
                 </div>
 
                 <div id="profileSection">
-                    <img src={Search} />
+                    {/* <img src={Search} /> */}
                     <img src={Notifications} />
-                    <p>porfile placeholder</p>
+                    <p>porfile</p>
                 </div>
                 
             </nav>

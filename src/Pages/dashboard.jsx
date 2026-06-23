@@ -16,6 +16,10 @@ export default function Dashboard() {
            
             <Sidebar showSidebar={showSidebar}/>
             
+            {showSidebar && (
+                <div className="sidebarOverlay" onClick={() => setShowSidebar(false)}></div>
+            )}
+            
             <div className="mainDashboardSection">
                <Navbar sidebarToggler={()=>{
                 setShowSidebar(!showSidebar)
