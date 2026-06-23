@@ -92,7 +92,7 @@ export default function AddNewJob() {
                 <div className="page-title-and-backBtn">
                     <h1>Add New Job Application</h1>
 
-                    <NavLink to="/dashboard/applications"  className="view-all-link">
+                    <NavLink to="/dashboard/applications"  className="view-all-link-add-new-job">
                         <button > 
                         <img src={BackBtn}/>
                         <p>Back to Applications</p>

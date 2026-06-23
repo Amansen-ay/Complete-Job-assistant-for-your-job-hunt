@@ -230,3 +230,251 @@ td{
     display: inline-flex;
     align-items: center;
 }
+
+/* Scoped Dropdown Menu and Actions */
+.menu-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.three-dots-btn {
+    cursor: pointer;
+    padding: 6px;
+    border-radius: 50%;
+    transition: background-color 0.2s;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.three-dots-btn:hover {
+    background-color: #f1f5f9;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: 120px;
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 4px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    z-index: 100;
+}
+
+.dropdown-menu button {
+    border: none;
+    background: none;
+    padding: 8px 12px;
+    text-align: left;
+    font-size: 13px;
+    color: #334155;
+    cursor: pointer;
+    border-radius: 6px;
+    width: 100%;
+    font-weight: 500;
+}
+
+.dropdown-menu button:hover {
+    background-color: #f1f5f9;
+    color: #0f172a;
+}
+
+/* Pagination block styles */
+.pagination-container {
+    padding: 20px 16px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    border-top: 1px solid #f1f5f9;
+}
+
+.pagination-ui-block {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.pagination-ui-block button {
+    padding: 6px 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    background-color: #fff;
+    color: #334155;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.pagination-ui-block button:hover:not(:disabled) {
+    background-color: #f1f5f9;
+    border-color: #94a3b8;
+}
+
+.pagination-ui-block button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.pages-data {
+    font-size: 13px;
+    color: #475569;
+    font-weight: 500;
+    margin: 0;
+}
+
+/* Card layout for screen sizes below 1024px */
+.mobile-applications-view {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 16px;
+}
+
+.application-card {
+    background-color: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.company-and-role h3 {
+    font-size: 16px;
+    font-weight: 700;
+    color: #0f172a;
+    margin: 0 0 4px 0;
+}
+
+.company-and-role p {
+    font-size: 14px;
+    color: #64748b;
+    margin: 0;
+}
+
+.card-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.card-divider {
+    height: 1px;
+    background-color: #f1f5f9;
+    margin: 14px 0;
+}
+
+.card-details {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.detail-item {
+    flex: 1;
+    min-width: 0;
+}
+
+.detail-label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    color: #64748b;
+    margin-bottom: 4px;
+}
+
+.detail-label .icon {
+    display: flex;
+    align-items: center;
+    color: #64748b;
+}
+
+.detail-value {
+    font-size: 13px;
+    font-weight: 600;
+    color: #334155;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Tablet and Mobile media queries */
+@media (max-width: 1024px) {
+    .application-table-container {
+        margin-top: 30px;
+        background-color: transparent;
+        border: none;
+        border-radius: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .appliation-navs-container {
+        display: flex;
+        flex-direction: column;
+        height: auto;
+        align-items: stretch;
+        gap: 15px;
+    }
+    
+    .application-navs {
+        gap: 10px;
+        overflow-x: auto;
+        white-space: nowrap;
+        width: 100%;
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: 8px;
+        border-bottom: 1px solid #f1f5f9;
+    }
+    
+    .application-navs p {
+        padding: 6px 10px;
+        font-size: 13px;
+        flex-shrink: 0;
+    }
+    
+    .filter-and-addJob {
+        margin-left: 0;
+        width: 100%;
+        justify-content: flex-end;
+    }
+}
+
+@media (max-width: 480px) {
+    .card-details {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+    }
+    
+    .detail-item:last-child {
+        grid-column: 1 / -1;
+    }
+    
+    .pagination-container {
+        justify-content: center;
+    }
+    
+    .pagination-ui-block {
+        width: 100%;
+        justify-content: space-between;
+    }
+}
+
