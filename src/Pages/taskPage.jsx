@@ -212,12 +212,21 @@ export default function TaskPage() {
 
     const lastIndex = currentPage*taskPerPage;
     const firstIndex = lastIndex - taskPerPage;
+    
+    const [isMobile, setIsMobile] = useState(window.innerWidth < 1025);
 
+       useEffect(() => {
+           const handleResize = () => {
+               setIsMobile(window.innerWidth < 1025);
+           };
+           window.addEventListener("resize", handleResize);
+           return () => window.removeEventListener("resize", handleResize);
+       }, []);
 
     
 
 
-    ;
+    
 
     const [task,setTask] = useState("");
     const [relatedTo,setRelatedTo] = useState("");
@@ -304,8 +313,9 @@ export default function TaskPage() {
         </div>
         
         { filteredArray.length>0?
-          <div className="task-page-table-container-wrapper">
-            <table className="task-page-table-container">
+          <div className={!isMobile?"task-page-table-container-wrapper":""}>
+            {!isMobile?
+               <table className="task-page-table-container">
                 <tr>
                     <th>Task</th>
                     <th>Related To</th>
@@ -413,6 +423,102 @@ export default function TaskPage() {
                 
             }
             </table>
+            :
+            ([...filteredArray].reverse().slice(firstIndex,lastIndex).map((obj,index)=>(
+              <div key={index} className="task-card-wrapper">
+                <div className="task-card-header">
+                  <h3 className="task-title-badge">{obj.task}</h3>
+                  <div className="menu-wrapper">
+                     <img src={more} onClick={()=>{
+                                setShowMenu((prev)=>prev===index?-1:index);
+                                setSelectedTaskRow(obj)}}/>
+
+                      {
+                        
+
+                    showMenu === index && (
+
+                    <div ref={menuRef} className="dropdown-menu" onClick={(e)=>e.stopPropagation()}>
+
+                     <button onClick={()=>{
+                        setTask(selectedTaskRow.task);
+                        setPriority(selectedTaskRow.priority);
+                        setDueDate(selectedTaskRow.dueDate);
+                        setRelatedTo(selectedTaskRow.relatedTo);
+                        setStatus(selectedTaskRow.status);
+                        setShowTaskModal(true);
+                     }}>Edit</button>
+
+                     <button onClick={deleteTaskHandeler}>Delete</button>
+
+                     <button onClick={(e )=>{
+                         e.stopPropagation();
+                        setTaskObj(
+                            taskObj.map((task)=>{
+                               return  task===selectedTaskRow?
+                                {
+                                task:task.task,
+                                priority:task.priority,
+                                relatedTo:task.relatedTo,
+                                dueDate:task.dueDate,
+                                status:"Completed"
+                                }:task
+                            })
+                        );
+                        setShowMenu(-1);
+                     }}>Mark Complete</button>
+
+                    </div>
+
+                        )
+
+                    }          
+                  </div>
+                 
+                </div>
+                  
+                <div className="task-card-footer">
+                    <div className="task-card-cell">
+                      <p>Related to</p>
+                      <b className="secondary-badge">{obj.relatedTo}</b>
+                    </div>
+                    
+                    <div className="task-card-cell">
+                      <p>Due Date</p>
+                      <b className="secondary-badge">{obj.dueDate}</b>
+                    </div>
+                    <div className="task-card-cell">
+                      <p>Priority</p>
+                      <b className={
+                        obj.priority === "High"
+                        ? "high-priority"
+                        : obj.priority === "Medium"
+                        ? "medium-priority"
+                        : "low-priority"}
+                        >{obj.priority}
+                        </b>
+                    </div>
+                    <div className="task-card-cell">
+                      <p>Status</p>
+
+                      <b className={
+                        obj.status === "Completed"
+                        ? "status-complete"
+                        : obj.status === "In Progress"
+                        ? "status-in-progress"
+                        : "status-To-do"
+                        }>
+                        {obj.status}
+                      </b>
+                    </div>
+                </div>
+
+                
+              </div>
+            )))
+            
+            }
+           
 
         <div className="pagination-container">
 

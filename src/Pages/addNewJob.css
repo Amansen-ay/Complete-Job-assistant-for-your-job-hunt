@@ -530,7 +530,7 @@ textarea{
 
 /* RESPONSIVE */
 
-@media(max-width:1024px){
+@media(min-width:344px) and (max-width:1024px){
 
     .entire-page-wrapper{
         flex-direction:column;
@@ -538,7 +538,9 @@ textarea{
 
     .tips-and-progress-container-wrapper{
         width:100%;
+        
     }
+    
 }
 
 @media(max-width:765px){
@@ -557,4 +559,5 @@ textarea{
     .company-and-role-details-container{
         width:100vh;
     }
+   
 }

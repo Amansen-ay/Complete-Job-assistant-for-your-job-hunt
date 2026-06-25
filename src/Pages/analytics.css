@@ -7,6 +7,12 @@
     line-height:40px;
 }
 
+.chartWrapper-analytics{
+    display:flex;
+    align-items:center;
+    justify-content:space-around;
+}
+
 
 .chart-funnel-container-analytics-page{
     display:flex;
@@ -223,3 +229,46 @@
     margin-top:10px;
 }
 
+@media(max-width:1024px){
+    .chart-funnel-container-analytics-page{
+    display:flex;
+    flex-direction:column;
+    }
+    .chart-container-analytics-page{
+        width:100%;
+    }
+    .bar-chart-conatiner{
+        width:100%;
+    }
+    .line-chart-and-insights{
+        flex-direction:column;
+        height:auto;
+    }
+    .line-chart-card{
+        width:100%;
+        margin-bottom:20px;
+    }
+    .insights-card-container{
+        width:100%;
+        /* background-color: #4ed415; */
+    }
+    .source-table-and-top-performer-conatiner{
+        flex-direction:column;
+    }
+    .source-table-wraper{
+        width:100%;
+    }
+    .top-performer-container{
+        width:100%;
+    }
+     .cardContainer-analytics-page{
+        display:grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap:16px;
+    }
+    .contentCard{
+        width:100%;
+    }
+    
+
+}

@@ -642,7 +642,7 @@ export default function NotesPage() {
                     <div className="recent-notes-container">
                         <header>
                             <b>Recent notes</b>
-                            <p>View all</p>
+                            {/* <p>View all</p> */}
                         </header>
 
                         {notesArr.length === 0 ? (

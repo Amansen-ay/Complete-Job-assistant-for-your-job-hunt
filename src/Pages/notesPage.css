@@ -272,7 +272,7 @@
 
 .recent-notes-container table{
     width:100%;
-    table-layout:fixed;
+    /* table-layout:fixed; */
 }
 .recent-notes-container td{
     overflow:hidden;
@@ -860,4 +860,52 @@
 
     box-shadow:
     0 0 0 4px rgba(79,70,229,0.12);
+}
+
+@media(max-width:1024px) {
+    .notes-page-main-container{
+        flex-direction:column;
+    }
+    .notes-container-left-part{
+        width:100%;
+    }
+    .notes-page-right-part{
+        width:100%;
+    }
+    
+}
+@media(max-width:768px){
+    .notes-card-container{
+        grid-template-columns:repeat(2,1fr);
+    }
+    .legendItem>span{
+       margin-right:80px;
+    }
+    .chartWrapper-notes-page{
+        margin-right:40px;
+    }
+    
+    
+}
+
+@media(max-width:760px){
+    .filter-btns{
+        display:grid;
+        grid-template-columns:repeat(2,1fr)
+    }
+    .add-new-note-btn{
+        height:40px;
+    }
+    .entire-container-chart-notes-page{
+        margin-top:20px;    
+    }
+}
+
+@media(min-width:768px) and (max-width:1024px) {
+    .chart-content{
+    display:flex;
+    align-items:center;
+    justify-content:space-evenly;
+    }
+    
 }

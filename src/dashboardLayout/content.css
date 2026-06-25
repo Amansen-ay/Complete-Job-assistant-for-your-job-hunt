@@ -7,8 +7,8 @@
 .cardContainer{
     display:flex;
     justify-content:space-between;
-    flex-wrap:wrap; 
-    gap:16px;
+    /* flex-wrap:wrap;  */
+    /* gap:16px; */
 }
 
 .finalContainer{
@@ -48,6 +48,11 @@
     .reminder-task-section-container {
         flex-direction: column;
         gap: 20px;
+    }
+    .cardContainer{
+        display:grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap:16px;
     }
 }
 

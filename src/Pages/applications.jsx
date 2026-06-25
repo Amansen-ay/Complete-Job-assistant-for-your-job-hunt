@@ -13,11 +13,11 @@ function ApplicationTable({ activeStatus }) {
        const [selectedApplicationRow,setSelectedApplicationRow] = useState({});
        const [showEditModal, setShowEditModal] = useState(false);
        const [editData, setEditData] = useState({});
-       const [isMobile, setIsMobile] = useState(window.innerWidth < 1024);
+       const [isMobile, setIsMobile] = useState(window.innerWidth < 1025);
 
        useEffect(() => {
            const handleResize = () => {
-               setIsMobile(window.innerWidth < 1024);
+               setIsMobile(window.innerWidth < 1025);
            };
            window.addEventListener("resize", handleResize);
            return () => window.removeEventListener("resize", handleResize);

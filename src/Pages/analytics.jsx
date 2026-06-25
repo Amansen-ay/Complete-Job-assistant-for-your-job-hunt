@@ -89,7 +89,7 @@ function Chart({ myApplications = [] }){
     <>
 
       
-      <div className="chartWrapper">
+      <div className="chartWrapper-analytics">
 
 
       <div className="chartContainer">
