@@ -5,3 +5,7 @@
  box-sizing:border-box;
  /* flex-wrap:wrap; */
 }
+
+html {
+    scroll-behavior: smooth;
+}

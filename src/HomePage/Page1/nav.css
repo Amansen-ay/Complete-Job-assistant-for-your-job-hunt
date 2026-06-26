@@ -1,45 +1,161 @@
-#texts p{
-    margin-left:60px;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
-#signBtns p {
- margin-right:30px;
+.navbar{
+    width:100%;
+    height:78px;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:0 90px;
+
+    background:#fff;
+
+    border-bottom:1px solid #ececec;
+    margin-top:-10px;
 }
-#signBtns button{
-    margin-right:20px;
-    height:35px;
-    width:120px;
-    background-color: #2e25d8;
+
+/* ---------------- Logo ---------------- */
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.logo-icon{
+    width:24px;
+    height:24px;
+
+    background:#6C63FF;
     color:white;
-    border-radius:5px;
-    border:2px solid #2e25d8;
+
+    border-radius:7px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:14px;
+    font-weight:700;
 }
 
-.navOptions:hover{
-  color:#2e25d8;
+.logo h2{
+    font-size:24px;
+    font-weight:700;
+    color:#171717;
 }
 
-.navOptions {
-    cursor:pointer
+/* ---------------- Links ---------------- */
+
+.nav-links{
+    display:flex;
+    align-items:center;
+    gap:42px;
 }
 
+.nav-links a{
+    text-decoration:none;
+    color:#6b7280;
+    font-size:16px;
+    font-weight:500;
 
-#loginBtn{
-    padding:10px;
+    transition:.25s;
 }
 
-#loginBtn:hover{
- color:rgb(17, 0, 255);
- cursor: pointer;
- /* background-color: #2e25d8; */
- border-radius:5px;
- /* color:white; */
-  transition: all 0.25s ease;
+.nav-links a:hover{
+    color:#5B4DFF;
+}
+
+.nav-links .active{
+    color:#111827;
+    font-weight:600;
+}
+
+/* ---------------- Buttons ---------------- */
+
+.nav-buttons{
+    display:flex;
+    align-items:center;
+    gap:14px;
+}
+
+.sign-in-btn{
+    width:90px;
+    height:42px;
+
+    background:white;
+
+    border:1px solid #d1d5db;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+    font-size:15px;
+    font-weight:600;
+
+    transition:.25s;
+}
+
+.sign-in-btn:hover{
+    background:#f8fafc;
+}
+
+.get-started-btn{
+    width:120px;
+    height:42px;
+
+    border:none;
+
+    border-radius:10px;
+
+    background:#6C63FF;
+    color:white;
+
+    cursor:pointer;
+
+    font-size:15px;
+    font-weight:600;
+
+    transition:.25s;
+}
+
+.get-started-btn:hover{
+    background:#5648f5;
+}
+
+/* ---------------- Responsive ---------------- */
+
+@media(max-width:1024px){
+
+    .navbar{
+        padding:0 40px;
+    }
+
+    .nav-links{
+        gap:25px;
+    }
 
 }
 
-#signBtns button:hover{
-   background-color:rgb(17, 0, 255);
-   border:2px solid rgb(17, 0, 255);
-   cursor:pointer;
+@media(max-width:768px){
+
+    .navbar{
+        padding:0 20px;
+    }
+
+    .nav-links{
+        display:none;
+    }
+
+    .sign-in-btn{
+        display:none;
+    }
+
 }
