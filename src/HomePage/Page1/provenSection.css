@@ -1,0 +1,13 @@
+.grid-skills{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    max-width: 900px;
+    margin:0 auto 48px auto;
+}
+
+@media (max-width:768px){
+    .grid-skills{
+        grid-template-columns: repeat(2,1fr);
+    }
+}

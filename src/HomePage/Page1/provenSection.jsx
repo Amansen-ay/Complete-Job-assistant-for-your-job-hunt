@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import './provenSection.css'
 const styles = {
   section: {
     background: "#f4f4f8",
@@ -32,13 +32,6 @@ const styles = {
     maxWidth: "460px",
     margin: "0 auto 48px auto",
     lineHeight: 1.6,
-  },
-  grid: {
-    display: "grid",
-    gridTemplateColumns: "repeat(4, 1fr)",
-    gap: "16px",
-    maxWidth: "900px",
-    margin: "0 auto 48px auto",
   },
   card: {
     background: "#fff",
@@ -156,7 +149,7 @@ export default function ProvenResultsSection() {
         Join thousands of developers, designers, and product managers who use Trackify to land roles at top companies.
       </p>
 
-      <div style={styles.grid}>
+      <div className="grid-skills">
         {stats.map((s) => (
           <StatCard key={s.title} {...s} />
         ))}

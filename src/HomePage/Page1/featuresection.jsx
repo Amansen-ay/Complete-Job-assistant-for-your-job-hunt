@@ -34,13 +34,6 @@ const styles = {
     margin: "0 auto 48px auto",
     lineHeight: 1.6,
   },
-  grid: {
-    display: "grid",
-    gridTemplateColumns: "repeat(3, 1fr)",
-    gap: "20px",
-    maxWidth: "960px",
-    margin: "0 auto",
-  },
   card: {
     background: "#fff",
     borderRadius: "16px",
@@ -119,7 +112,7 @@ export default function FeaturesSection() {
       <p style={styles.subheading}>
         From application tracking to interview prep, we have everything you need to land your dream role faster than ever before.
       </p>
-      <div style={styles.grid} className="feature-card-container">
+      <div  className="grid">
         {features.map((f) => (
           <div key={f.title} style={styles.card}>
             <div style={{ ...styles.iconWrapper, background: f.iconBg }}>
