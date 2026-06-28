@@ -1,4 +1,5 @@
 import "./nav.css";
+import logo from '../../assets/logo.png'
 import { useNavigate } from 'react-router-dom';
 
 export default function Navbar() {
@@ -8,8 +9,8 @@ export default function Navbar() {
   return (
     <header className="navbar">
       <div className="logo">
-        <div className="logo-icon">✓</div>
-        <h2>Trackify</h2>
+        <img  src={logo} width="40px" height="40px"/>
+        <h2>Trackly</h2>
       </div>
 
       <nav className="nav-links">

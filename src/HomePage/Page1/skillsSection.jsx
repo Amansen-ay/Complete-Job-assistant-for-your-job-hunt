@@ -242,7 +242,7 @@ export default function SkillIntelligenceSection() {
         <span style={styles.eyebrow}>Skill Intelligence</span>
         <h2 style={styles.heading}>Focus on the right skills</h2>
         <p style={styles.subheading}>
-          Trackify analyzes the job descriptions you applied to and surfaces the exact skills you need to invest in to dramatically improve your interview rate.
+          Trackly analyzes the job descriptions you applied to and surfaces the exact skills you need to invest in to dramatically improve your interview rate.
         </p>
 
         <div style={styles.featureList}>

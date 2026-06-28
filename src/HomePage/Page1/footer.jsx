@@ -300,7 +300,7 @@ export default function CtaFooterSection() {
         <div style={styles.ctaLeft}>
           <h2 style={styles.ctaHeading}>Ready to get organized and get hired?</h2>
           <p style={styles.ctaSubheading}>
-            Join over 10,000 job seekers using Trackify to turn their job search into a streamlined, data-driven process. Start free — no credit card required.
+            Join over 10,000 job seekers using Trackly to turn their job search into a streamlined, data-driven process. Start free — no credit card required.
           </p>
           <div style={styles.ctaBtnRow}>
             <button style={styles.btnPrimary} onClick={()=>navigate('/signUp')}>Get Started Free</button>
@@ -368,7 +368,7 @@ export default function CtaFooterSection() {
           <div style={styles.footerBrand}>
             <div style={styles.footerLogo}>
               <div style={styles.logoIcon}>✓</div>
-              <span style={styles.logoName}>Trackify</span>
+              <span style={styles.logoName}>Trackly</span>
             </div>
             <p style={styles.footerTagline}>
               The smarter way to manage your job search. Track, analyze, and get hired faster.
@@ -415,7 +415,7 @@ export default function CtaFooterSection() {
 
         {/* Bottom bar */}
         <div style={styles.footerBottom}>
-          <span style={styles.footerCopy}>© 2026 Trackify, Inc. All rights reserved.</span>
+          <span style={styles.footerCopy}>© 2026 Trackly, Inc. All rights reserved.</span>
           <div style={styles.footerBottomLinks}>
             {["Privacy", "Terms", "Cookies"].map((l) => (
               <FooterBottomLink key={l}>{l}</FooterBottomLink>

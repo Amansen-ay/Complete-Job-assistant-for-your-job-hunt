@@ -8,6 +8,7 @@ import dateRed from '../assets/dateRed.svg'
 import followUp from '../assets/followUp.svg'
 import warning from '../assets/warning.svg'
 import blueCalendar from '../assets/calendarBlue.svg'
+import calendarEmpty from '../assets/calendarEmpty.svg'
 import eventImg from '../assets/event.svg'
 import Case from '../assets/case.svg'
 import timer from '../assets/timer.svg'
@@ -825,14 +826,13 @@ export default function Calender() {
 
         </div>
 
-{ upcomingEvents.length>0 &&
     <div className="reminder-upcoming-container">
         <header>
             <p id="main-header-line">Upcoming Events</p>
             {/* <p id="view-all-btn">View all</p> */}
         </header>
 
-    
+    { upcomingEvents.length > 0 ? (
       <table className="upcoming-reminder-table">
             { upcomingEvents.map((event,index)=>(
     
@@ -855,11 +855,15 @@ export default function Calender() {
             ))} 
         
         </table>
-    
+    ) : (
+        <div className="empty-events-placeholder">
+            <img src={calendarEmpty} alt="No upcoming events" className="empty-events-icon" />
+            <p className="empty-events-text">No upcoming events</p>
+        </div>
+    )}
     
 
     </div>
-}
   
 
         <div className="stats-container">

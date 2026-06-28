@@ -878,6 +878,43 @@ tr:last-child td{
 }
 @media(min-width:344px) and (max-width:430px){
     .entire-page-wrapper-calendar {
-        width:120%;
+        width:115%;
     }
+    .mini-calendar-wrapper{
+        width:49vh;
+    }
+    .reminder-upcoming-container{
+        width:49vh;
+    }
+   
+    
+}
+@media(max-width:768px){
+    .entire-page-wrapper-calendar{
+        margin-right:20px;
+    }
+}
+
+
+
+.empty-events-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 30px 10px;
+    text-align: center;
+}
+
+.empty-events-icon {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 12px;
+}
+
+.empty-events-text {
+    font-size: 14px;
+    color: #666;
+    font-weight: 500;
+    margin: 0;
 }

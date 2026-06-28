@@ -146,7 +146,7 @@ export default function ProvenResultsSection() {
       <span style={styles.eyebrow}>Proven Results</span>
       <h2 style={styles.heading}>Built for people who want to get hired</h2>
       <p style={styles.subheading}>
-        Join thousands of developers, designers, and product managers who use Trackify to land roles at top companies.
+        Join thousands of developers, designers, and product managers who use Trackly to land roles at top companies.
       </p>
 
       <div className="grid-skills">
@@ -155,7 +155,7 @@ export default function ProvenResultsSection() {
         ))}
       </div>
 
-      <p style={styles.companiesLabel}>Trackify users have landed roles at</p>
+      <p style={styles.companiesLabel}>Trackly users have landed roles at</p>
       <div style={styles.pillsRow}>
         {companies.map((c) => (
           <CompanyPill key={c} name={c} />
