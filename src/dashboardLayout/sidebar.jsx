@@ -49,9 +49,9 @@ export default function Sidebar({showSidebar}){
                <img src={Tasks} /><p>Tasks</p>
             </NavLink>
             
-            <NavLink className="sidebarOption" style={{textDecoration:"none"}}>
+            {/* <NavLink className="sidebarOption" style={{textDecoration:"none"}}>
                <img src={Contacts}/><p>Contacts</p>
-            </NavLink>
+            </NavLink> */}
 
             <NavLink to="/dashboard/notesPage" className={({isActive})=> isActive ? "sidebarOption active-option-in-sidebar":"sidebarOption non-active-option-in-sidebar"}>
               <img src={Notes}/><p>Notes</p>
@@ -61,9 +61,9 @@ export default function Sidebar({showSidebar}){
                 <img src={Analytics} /><p>Analytics</p>
             </NavLink>
             
-            <NavLink className="sidebarOption" style={{textDecoration:"none"}}>
+            {/* <NavLink className="sidebarOption" style={{textDecoration:"none"}}>
               <img src={Settings} /><p>Settings</p>
-            </NavLink>
+            </NavLink> */}
             
         </div>
 

@@ -57,3 +57,10 @@
     cursor:pointer;
 }
 
+#profile-pic{
+    background-color: #2f71ff;
+    padding:8px 12px 8px 12px;
+    border-radius:50%;
+    color:white;
+    /* border:1px solid #9f5050 */
+}

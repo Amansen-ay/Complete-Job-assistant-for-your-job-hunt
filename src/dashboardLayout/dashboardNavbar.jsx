@@ -1,12 +1,15 @@
 import Menu from '../assets/sidebarIcons/menu.svg'
-import Search from  '../assets/sidebarIcons/search.svg'
-import Notifications from  '../assets/sidebarIcons/notifications.svg'
-import { useLocation } from "react-router-dom";
+import Search from '../assets/sidebarIcons/search.svg'
+import Home from '../assets/home.svg'
+import { useLocation , NavLink} from "react-router-dom";
 import './dashboardNavbar.css'
 
 
 
-export default function DashboardNavbar({sidebarToggler,showSidebar}) {
+export default function DashboardNavbar({ sidebarToggler, showSidebar }) {
+
+    const username = JSON.parse(localStorage.getItem("users"))[0].name.split(" ")[0]
+
 
     console.log(showSidebar)
 
@@ -14,37 +17,37 @@ export default function DashboardNavbar({sidebarToggler,showSidebar}) {
 
     let title = "";
 
-    if(location.pathname === "/dashboard"){
+    if (location.pathname === "/dashboard") {
 
         title = "Dashboard";
 
     }
-    else if(location.pathname === "/dashboard/taskPage"){
+    else if (location.pathname === "/dashboard/taskPage") {
 
         title = "Tasks";
 
     }
-    else if(location.pathname === "/dashboard/applications"){
+    else if (location.pathname === "/dashboard/applications") {
 
         title = "Applications";
 
     }
-    else if(location.pathname === "/dashboard/addNewJob"){
+    else if (location.pathname === "/dashboard/addNewJob") {
 
         title = "Add New Job"
 
     }
-    else if(location.pathname === "/dashboard/analytics"){
+    else if (location.pathname === "/dashboard/analytics") {
 
         title = "Analytics"
 
     }
-    else if (location.pathname === "/dashboard/notesPage"){
+    else if (location.pathname === "/dashboard/notesPage") {
 
         title = "Notes"
 
 
-    } else if(location.pathname === "/dashboard/calendar") {
+    } else if (location.pathname === "/dashboard/calendar") {
 
         title = "calendar"
 
@@ -52,22 +55,25 @@ export default function DashboardNavbar({sidebarToggler,showSidebar}) {
 
     return (
         <>
-        
-            <nav className={showSidebar?"dashboardNavContainer margin-active":"dashboardNavContainer"}>
+
+            <nav className={showSidebar ? "dashboardNavContainer margin-active" : "dashboardNavContainer"}>
 
                 <div id="Menu">
-                <img src={Menu} onClick={sidebarToggler}/>
-                <h2>{title}</h2>  
+                    <img src={Menu} onClick={sidebarToggler} />
+                    <h2>{title}</h2>
                 </div>
 
                 <div id="profileSection">
                     {/* <img src={Search} /> */}
-                    <img src={Notifications} />
-                    <p>porfile</p>
+                    <NavLink to="/dashboard">
+                        <img src={Home} />
+                    </NavLink>
+                    
+                    <p id="profile-pic">{username[0]}</p>
                 </div>
-                
+
             </nav>
-        
+
         </>
     )
 }

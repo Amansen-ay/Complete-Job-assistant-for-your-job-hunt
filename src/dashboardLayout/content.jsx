@@ -17,6 +17,8 @@ import { useState, useEffect } from 'react'
 export default function Content() {
 
     const [myApplications, setMyApplications] = useState(() => JSON.parse(localStorage.getItem("myApplications")) || []);
+    const username = JSON.parse(localStorage.getItem("users"))[0].name.split(" ")[0]
+    console.log(username)
 
     useEffect(() => {
         const handleUpdate = () => {
@@ -37,7 +39,7 @@ export default function Content() {
         <>
         <div>
             <header id="headerWithUsername">
-                <h3>Welcome back, Aman!👋 </h3>
+                <h3>Welcome back, {username}!👋 </h3>
                 <p>Keep tracking your progress and land your dream job.</p>
             </header>
             <div className="cardContainer">
