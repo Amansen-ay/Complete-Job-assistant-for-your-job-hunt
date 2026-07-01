@@ -68,12 +68,12 @@ export default function  SignupForm() {
 
      const existingUsers = JSON.parse(localStorage.getItem("users")) || [];
      
-     const userExists = existingUsers.some((user) => user.email === email);
+    //  const userExists = existingUsers.some((user) => user.email === email);
 
-    if(userExists){
-      alert("User already exists with the current email");
-      return;
-    }
+    // if(userExists){
+    //   alert("User already exists with the current email");
+    //   return;
+    // }
 
       existingUsers.push(userData);
 
