@@ -8,7 +8,7 @@ import './dashboardNavbar.css'
 
 export default function DashboardNavbar({ sidebarToggler, showSidebar }) {
 
-    const username = JSON.parse(localStorage.getItem("users"))[0].name.split(" ")[0]
+    const username = JSON.parse(localStorage.getItem("users")).at(-1).name.split(" ")[0]
 
 
     console.log(showSidebar)
