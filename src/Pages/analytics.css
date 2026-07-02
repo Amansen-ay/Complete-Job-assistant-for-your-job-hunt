@@ -418,3 +418,10 @@
     flex-direction:column;
     gap:10px;
 }
+
+.quotes p {
+    font-size: 15px;
+line-height: 1.7;
+font-weight: 400;
+color: #6b7280;
+}
