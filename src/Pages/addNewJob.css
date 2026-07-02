@@ -561,3 +561,14 @@ textarea{
     }
    
 }
+.add-tag-btn{
+    padding:6px 10px;
+
+    background:#e5ebff;
+
+    border-radius:8px;
+    border:none;
+    color:#1f17b8;
+    font-size:20px;
+    cursor:pointer;
+}
