@@ -254,10 +254,22 @@ const notes = [
 ];
 
 const features = [
-  { icon: "📄", text: "Rich text notes linked directly to each application" },
-  { icon: "✅", text: "Task lists with tags, due dates, and priorities" },
-  { icon: "🔔", text: "Automatic reminders for follow-ups and deadlines" },
-  { icon: "🔍", text: "Full-text search across all notes and applications" },
+  {
+    icon: "📝",
+    text: "Create unlimited notes for interviews and applications."
+  },
+  {
+    icon: "🏢",
+    text: "Keep company-specific information organized in one place."
+  },
+  {
+    icon: "📚",
+    text: "Store preparation tips, interview questions, and observations."
+  },
+  {
+    icon: "⚡",
+    text: "Access your notes anytime while tracking your applications."
+  }
 ];
 
 export default function NotesTasksSection() {

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import {useNavigate} from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 const styles = {
   section: {
@@ -12,6 +12,8 @@ const styles = {
     gap: "60px",
     flexWrap: "wrap",
   },
+
+  // LEFT
   left: {
     maxWidth: "420px",
     flex: "1 1 340px",
@@ -41,47 +43,39 @@ const styles = {
     lineHeight: 1.7,
     marginBottom: "28px",
   },
-  statsList: {
+  featureList: {
     display: "flex",
     flexDirection: "column",
-    gap: "0",
-    border: "1px solid #ececec",
-    borderRadius: "14px",
-    overflow: "hidden",
-    marginBottom: "28px",
+    gap: "16px",
+    marginBottom: "32px",
   },
-  statRow: {
-    padding: "14px 18px",
-    borderBottom: "1px solid #ececec",
+  featureItem: {
+    display: "flex",
+    alignItems: "flex-start",
+    gap: "12px",
+  },
+  featureIconBox: {
+    width: "36px",
+    height: "36px",
+    borderRadius: "9px",
+    background: "#ede9fb",
     display: "flex",
     alignItems: "center",
-    justifyContent: "space-between",
-    background: "#fff",
+    justifyContent: "center",
+    fontSize: "16px",
+    flexShrink: 0,
   },
-  statRowLast: {
-    padding: "14px 18px",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "space-between",
-    background: "#fff",
+  featureTitle: {
+    fontWeight: "700",
+    fontSize: "14px",
+    color: "#1a1a2e",
+    marginBottom: "2px",
   },
-  statLabel: {
+  featureDesc: {
     fontSize: "12px",
     color: "#aaa",
-    marginBottom: "3px",
-  },
-  statValue: {
-    fontSize: "18px",
-    fontWeight: "800",
-    color: "#1a1a2e",
-  },
-  badge: {
-    background: "#e8fbf3",
-    color: "#34c48b",
-    fontSize: "12px",
-    fontWeight: "700",
-    borderRadius: "20px",
-    padding: "4px 10px",
+    margin: 0,
+    lineHeight: 1.5,
   },
   btn: {
     background: "#7c5cbf",
@@ -93,180 +87,262 @@ const styles = {
     fontWeight: "700",
     cursor: "pointer",
   },
+
+  // RIGHT
   right: {
-    flex: "1 1 380px",
-    maxWidth: "460px",
+    flex: "1 1 420px",
+    maxWidth: "500px",
     display: "flex",
     flexDirection: "column",
-    gap: "16px",
+    gap: "14px",
   },
-  chartCard: {
+
+  // Top row: donut + weekly goal
+  topRow: {
+    display: "grid",
+    gridTemplateColumns: "1fr 1fr",
+    gap: "14px",
+  },
+  card: {
     background: "#fff",
     border: "1px solid #ececec",
     borderRadius: "16px",
-    padding: "20px 20px 12px 20px",
+    padding: "18px",
     boxShadow: "0 2px 12px rgba(120,100,220,0.06)",
   },
-  chartHeader: {
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    marginBottom: "10px",
-  },
-  chartTitle: {
+  cardTitle: {
     fontWeight: "700",
-    fontSize: "14px",
+    fontSize: "13px",
     color: "#1a1a2e",
+    marginBottom: "14px",
   },
-  tabRow: {
-    display: "flex",
-    gap: "4px",
-  },
-  tab: {
-    fontSize: "12px",
-    fontWeight: "600",
-    padding: "3px 9px",
-    borderRadius: "6px",
-    cursor: "pointer",
-    border: "none",
-    background: "transparent",
-    color: "#aaa",
-  },
-  tabActive: {
-    fontSize: "12px",
-    fontWeight: "700",
-    padding: "3px 9px",
-    borderRadius: "6px",
-    cursor: "pointer",
-    border: "none",
-    background: "#ede9fb",
-    color: "#7c5cbf",
-  },
+
+  // Donut legend
   legendRow: {
     display: "flex",
-    gap: "16px",
-    marginBottom: "8px",
+    flexDirection: "column",
+    gap: "5px",
+    marginTop: "8px",
   },
   legendItem: {
     display: "flex",
     alignItems: "center",
-    gap: "6px",
-    fontSize: "12px",
+    justifyContent: "space-between",
+    fontSize: "11px",
     color: "#555",
+  },
+  legendLeft: {
+    display: "flex",
+    alignItems: "center",
+    gap: "6px",
   },
   legendDot: {
     width: "8px",
     height: "8px",
     borderRadius: "50%",
+    flexShrink: 0,
   },
-  infoCardsRow: {
-    display: "grid",
-    gridTemplateColumns: "repeat(3, 1fr)",
-    gap: "12px",
-  },
-  infoCard: {
-    background: "#fff",
-    border: "1px solid #ececec",
-    borderRadius: "12px",
-    padding: "12px 14px",
-    boxShadow: "0 2px 8px rgba(120,100,220,0.04)",
-  },
-  infoCardTop: {
-    display: "flex",
-    alignItems: "center",
-    gap: "6px",
-    marginBottom: "4px",
-  },
-  infoCardLabel: {
-    fontSize: "11px",
-    color: "#aaa",
-  },
-  infoCardValue: {
-    fontSize: "15px",
+
+  // Weekly goal
+  goalNumber: {
+    fontSize: "36px",
     fontWeight: "800",
     color: "#1a1a2e",
+    lineHeight: 1,
+    marginBottom: "4px",
+  },
+  goalSub: {
+    fontSize: "12px",
+    color: "#aaa",
+    marginBottom: "14px",
+  },
+  progressTrack: {
+    height: "8px",
+    background: "#ececec",
+    borderRadius: "99px",
+    overflow: "hidden",
+    marginBottom: "12px",
+  },
+  progressFill: {
+    height: "100%",
+    background: "#7c5cbf",
+    borderRadius: "99px",
+    width: "100%",
+  },
+  goalNote: {
+    fontSize: "11px",
+    color: "#888",
+    lineHeight: 1.5,
+    marginBottom: "8px",
+  },
+  goalBadge: {
+    display: "inline-block",
+    fontSize: "11px",
+    fontWeight: "700",
+    color: "#7c5cbf",
+  },
+
+  // Bottom row: bar chart + insights
+  bottomRow: {
+    display: "grid",
+    gridTemplateColumns: "1.4fr 1fr",
+    gap: "14px",
+  },
+
+  // Insights
+  insightRow: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    padding: "8px 0",
+    borderBottom: "1px solid #f5f5f5",
+  },
+  insightRowLast: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    padding: "8px 0",
+  },
+  insightLabel: {
+    display: "flex",
+    alignItems: "center",
+    gap: "8px",
+    fontSize: "12px",
+    color: "#555",
+  },
+  insightValue: {
+    fontSize: "12px",
+    fontWeight: "700",
+    color: "#7c5cbf",
   },
 };
 
-// SVG Line Chart
-const WEEKS = ["W1", "W2", "W3", "W4", "W5", "W6", "W7", "W8"];
-const appsData =      [30, 45, 52, 60, 58, 72, 80, 95];
-const interviewData =  [10, 18, 22, 28, 30, 35, 38, 48];
+// ── Donut Chart ──
+const donutData = [
+  { label: "Applied",    value: 21, color: "#7c5cbf" },
+  { label: "Interview",  value: 5,  color: "#3b82f6" },
+  { label: "Assessment", value: 3,  color: "#f59e42" },
+  { label: "Offer",      value: 3,  color: "#34c48b" },
+  { label: "Rejected",   value: 1,  color: "#ef4444" },
+];
 
-function LineChart() {
-  const W = 380, H = 160;
-  const padL = 10, padR = 10, padT = 10, padB = 24;
+function DonutChart() {
+  const total = donutData.reduce((s, d) => s + d.value, 0);
+  const cx = 52, cy = 52, r = 38, stroke = 14;
+  const circ = 2 * Math.PI * r;
+  let offset = circ * 0.25;
+
+  return (
+    <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
+      <svg width="104" height="104" style={{ flexShrink: 0 }}>
+        <circle cx={cx} cy={cy} r={r} fill="none" stroke="#f0f0f0" strokeWidth={stroke} />
+        {donutData.map((d) => {
+          const dash = (d.value / total) * circ - 2;
+          const el = (
+            <circle
+              key={d.label}
+              cx={cx} cy={cy} r={r}
+              fill="none"
+              stroke={d.color}
+              strokeWidth={stroke}
+              strokeDasharray={`${dash} ${circ}`}
+              strokeDashoffset={offset}
+              strokeLinecap="round"
+            />
+          );
+          offset -= (d.value / total) * circ;
+          return el;
+        })}
+      </svg>
+      <div style={styles.legendRow}>
+        {donutData.map((d) => (
+          <div key={d.label} style={styles.legendItem}>
+            <div style={styles.legendLeft}>
+              <span style={{ ...styles.legendDot, background: d.color }} />
+              {d.label}
+            </div>
+            <span style={{ fontWeight: "700", color: "#1a1a2e", marginLeft: "8px" }}>{d.value}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// ── Bar/Area Chart (Applications per month) ──
+const MONTHS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+const monthData = [0,0,0,0,0,10,11,0,0,0,0,0];
+
+function MonthChart() {
+  const W = 280, H = 120;
+  const padL = 24, padR = 10, padT = 16, padB = 28;
   const chartW = W - padL - padR;
   const chartH = H - padT - padB;
-  const maxVal = 110;
+  const maxVal = 12;
 
-  const toX = (i) => padL + (i / (WEEKS.length - 1)) * chartW;
+  const toX = (i) => padL + (i / (MONTHS.length - 1)) * chartW;
   const toY = (v) => padT + chartH - (v / maxVal) * chartH;
 
-  const polyline = (data) =>
-    data.map((v, i) => `${toX(i)},${toY(v)}`).join(" ");
+  const pts = monthData.map((v, i) => `${toX(i)},${toY(v)}`).join(" L ");
+  const area = `M ${toX(0)},${toY(0)} L ${pts} L ${toX(11)},${toY(0)} Z`;
+  const line = `M ${pts}`;
 
-  const areaPath = (data) => {
-    const pts = data.map((v, i) => `${toX(i)},${toY(v)}`).join(" L ");
-    return `M ${toX(0)},${toY(data[0])} L ${pts} L ${toX(data.length - 1)},${toY(0) + padB} L ${toX(0)},${toY(0) + padB} Z`;
-  };
+  // Y axis labels
+  const yLabels = [0, 3, 6, 9, 12];
 
   return (
     <svg width="100%" viewBox={`0 0 ${W} ${H}`} style={{ display: "block" }}>
       <defs>
-        <linearGradient id="appGrad" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#7c5cbf" stopOpacity="0.18" />
+        <linearGradient id="monthGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#7c5cbf" stopOpacity="0.22" />
           <stop offset="100%" stopColor="#7c5cbf" stopOpacity="0" />
-        </linearGradient>
-        <linearGradient id="intGrad" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#34c48b" stopOpacity="0.13" />
-          <stop offset="100%" stopColor="#34c48b" stopOpacity="0" />
         </linearGradient>
       </defs>
 
-      {/* Dashed grid lines */}
-      {[0.25, 0.5, 0.75].map((p, i) => (
-        <line
-          key={i}
-          x1={padL} y1={padT + chartH * (1 - p)}
-          x2={W - padR} y2={padT + chartH * (1 - p)}
-          stroke="#ececec" strokeWidth="1" strokeDasharray="4 4"
-        />
+      {/* Y axis labels */}
+      {yLabels.map((v) => (
+        <text key={v} x={padL - 4} y={toY(v) + 4} textAnchor="end" fontSize="9" fill="#ccc">{v}</text>
       ))}
 
-      {/* Area fills */}
-      <path d={areaPath(appsData)} fill="url(#appGrad)" />
-      <path d={areaPath(interviewData)} fill="url(#intGrad)" />
+      {/* Grid lines */}
+      {yLabels.map((v) => (
+        <line key={v} x1={padL} y1={toY(v)} x2={W - padR} y2={toY(v)} stroke="#f0f0f0" strokeWidth="1" />
+      ))}
 
-      {/* Lines */}
-      <polyline points={polyline(appsData)} fill="none" stroke="#7c5cbf" strokeWidth="2.5" strokeLinejoin="round" strokeLinecap="round" />
-      <polyline points={polyline(interviewData)} fill="none" stroke="#34c48b" strokeWidth="2.5" strokeLinejoin="round" strokeLinecap="round" />
+      {/* Area + line */}
+      <path d={area} fill="url(#monthGrad)" />
+      <path d={line} fill="none" stroke="#7c5cbf" strokeWidth="2.5" strokeLinejoin="round" strokeLinecap="round" />
+
+      {/* Data point labels */}
+      {monthData.map((v, i) => v > 0 && (
+        <text key={i} x={toX(i)} y={toY(v) - 5} textAnchor="middle" fontSize="9" fontWeight="700" fill="#7c5cbf">{v}</text>
+      ))}
 
       {/* X labels */}
-      {WEEKS.map((w, i) => (
-        <text key={w} x={toX(i)} y={H - 4} textAnchor="middle" fontSize="10" fill="#bbb">{w}</text>
+      {MONTHS.map((m, i) => (
+        <text key={m} x={toX(i)} y={H - 4} textAnchor="middle" fontSize="8" fill="#bbb">{m}</text>
       ))}
     </svg>
   );
 }
 
-const stats = [
-  { label: "Response rate", value: "34%", badge: "↑ +12%", last: false },
-  { label: "Avg. time to response", value: "4.2 days", badge: "↑ -1.5d", last: false },
-  { label: "Interview conversion", value: "62%", badge: "↑ +8%", last: false },
-  { label: "Active applications", value: "24", badge: "↑ +6", last: true },
+const insights = [
+  { icon: "💼", label: "Most applied role",   value: "Frontend Dev",  last: false },
+  { icon: "📈", label: "Interview rate",       value: "24%",           last: false },
+  { icon: "🏆", label: "Offer rate",           value: "14%",           last: false },
+  { icon: "📅", label: "Most active month",    value: "Jul",           last: false },
+  { icon: "⚡", label: "Applications this week", value: "11",          last: false },
+  { icon: "👤", label: "Rejection rate",       value: "5%",            last: true  },
 ];
 
-const infoCards = [
-  { icon: "📅", label: "Best day to apply", value: "Tuesday" },
-  { icon: "🔗", label: "Top channel", value: "LinkedIn" },
-  { icon: "💰", label: "Avg. salary target", value: "$125k" },
+const features = [
+  { icon: "🍩", title: "Application overview", desc: "Visual donut breakdown of Applied, Interview, Offer, and Rejected." },
+  { icon: "🎯", title: "Weekly goal tracking",  desc: "Set a weekly target and watch your progress bar fill up." },
+  { icon: "📊", title: "Monthly trends",        desc: "Area chart showing applications submitted across the year." },
+  { icon: "💡", title: "Job search insights",   desc: "Key metrics like interview rate, offer rate, and top roles at a glance." },
 ];
-
-const TABS = ["8W", "3M", "1Y"];
 
 export default function AnalyticsSection() {
-  const [activeTab, setActiveTab] = useState("8W");
   const navigate = useNavigate();
 
   return (
@@ -276,64 +352,75 @@ export default function AnalyticsSection() {
         <span style={styles.eyebrow}>Analytics</span>
         <h2 style={styles.heading}>Analytics that help you improve</h2>
         <p style={styles.subheading}>
-          Understand exactly where you stand in your job search. Track response rates, identify the best-performing application strategies, and make data-driven decisions.
+          Understand exactly where you stand in your job search. Trackly gives you a full picture — from weekly goals to monthly trends and smart insights.
         </p>
 
-        <div style={styles.statsList}>
-          {stats.map((s) => (
-            <div key={s.label} style={s.last ? styles.statRowLast : styles.statRow}>
+        <div style={styles.featureList}>
+          {features.map((f) => (
+            <div key={f.title} style={styles.featureItem}>
+              <div style={styles.featureIconBox}>{f.icon}</div>
               <div>
-                <div style={styles.statLabel}>{s.label}</div>
-                <div style={styles.statValue}>{s.value}</div>
+                <div style={styles.featureTitle}>{f.title}</div>
+                <p style={styles.featureDesc}>{f.desc}</p>
               </div>
-              <span style={styles.badge}>{s.badge}</span>
             </div>
           ))}
         </div>
 
-        <button style={styles.btn} onClick={()=>navigate('/signUp')}>View Full Analytics</button>
+        <button style={styles.btn} onClick={() => navigate("/signUp")}>
+          View Full Analytics
+        </button>
       </div>
 
       {/* RIGHT */}
       <div style={styles.right}>
-        <div style={styles.chartCard}>
-          <div style={styles.chartHeader}>
-            <span style={styles.chartTitle}>Application Trends</span>
-            <div style={styles.tabRow}>
-              {TABS.map((t) => (
-                <button
-                  key={t}
-                  style={activeTab === t ? styles.tabActive : styles.tab}
-                  onClick={() => setActiveTab(t)}
-                >
-                  {t}
-                </button>
-              ))}
+        {/* Row 1: Donut + Weekly Goal */}
+        <div style={styles.topRow}>
+          <div style={styles.card}>
+            <div style={styles.cardTitle}>Application overview</div>
+            <DonutChart />
+          </div>
+
+          <div style={styles.card}>
+            <div style={styles.cardTitle}>Weekly Goal</div>
+            <div style={styles.goalNumber}>11 <span style={{ fontSize: "16px", color: "#aaa", fontWeight: "500" }}>/ 10</span></div>
+            <div style={styles.goalSub}>applications this week</div>
+            <div style={styles.progressTrack}>
+              <div style={styles.progressFill} />
+            </div>
+            <div style={styles.goalNote}>You've gone beyond your weekly target. Your dedication is paying off.</div>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+              <span style={{ fontSize: "11px", color: "#888" }}>🔥 1 above your goal</span>
+              <span style={styles.goalBadge}>Outstanding 🚀</span>
             </div>
           </div>
-          <div style={styles.legendRow}>
-            <div style={styles.legendItem}>
-              <span style={{ ...styles.legendDot, background: "#7c5cbf" }} />
-              Applications
-            </div>
-            <div style={styles.legendItem}>
-              <span style={{ ...styles.legendDot, background: "#34c48b" }} />
-              Interviews
-            </div>
-          </div>
-          <LineChart />
         </div>
 
-        <div style={styles.infoCardsRow}>
-          {infoCards.map((c) => (
-            <div key={c.label} style={styles.infoCard}>
-              <div style={styles.infoCardTop}>
-                <span>{c.icon}</span>
-                <span style={styles.infoCardLabel}>{c.label}</span>
-              </div>
-              <div style={styles.infoCardValue}>{c.value}</div>
+        {/* Row 2: Monthly chart + Insights */}
+        <div style={styles.bottomRow}>
+          <div style={styles.card}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "10px" }}>
+              <div style={styles.cardTitle}>Applications per month</div>
+              <span style={{ fontSize: "11px", color: "#aaa" }}>This year</span>
             </div>
-          ))}
+            <MonthChart />
+          </div>
+
+          <div style={styles.card}>
+            <div style={{ display: "flex", alignItems: "center", gap: "7px", marginBottom: "12px" }}>
+              <span style={{ fontSize: "16px" }}>💡</span>
+              <div style={styles.cardTitle}>Job search insights</div>
+            </div>
+            {insights.map((ins) => (
+              <div key={ins.label} style={ins.last ? styles.insightRowLast : styles.insightRow}>
+                <div style={styles.insightLabel}>
+                  <span>{ins.icon}</span>
+                  {ins.label}
+                </div>
+                <span style={styles.insightValue}>{ins.value}</span>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

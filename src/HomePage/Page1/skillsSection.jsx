@@ -1,8 +1,9 @@
-import React from "react";
-import {useNavigate} from 'react-router-dom';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 const styles = {
   section: {
-    background: "rgb(255, 255, 255)",
+    background: "#fff",
     padding: "80px 24px",
     fontFamily: "'Inter', 'Segoe UI', sans-serif",
     display: "flex",
@@ -53,13 +54,17 @@ const styles = {
     gap: "14px",
     alignItems: "flex-start",
   },
-  featureIcon: {
-    fontSize: "22px",
-    width: "32px",
+  featureIconBox: {
+    width: "38px",
+    height: "38px",
+    borderRadius: "10px",
+    background: "#ede9fb",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    fontSize: "18px",
     flexShrink: 0,
-    marginTop: "2px",
   },
-  featureText: {},
   featureTitle: {
     fontWeight: "700",
     fontSize: "14px",
@@ -85,171 +90,277 @@ const styles = {
 
   // RIGHT
   right: {
-    flex: "1 1 360px",
-    maxWidth: "460px",
+    flex: "1 1 400px",
+    maxWidth: "500px",
     display: "flex",
     flexDirection: "column",
     gap: "14px",
   },
-  skillCard: {
+  card: {
     background: "#fff",
+    border: "1px solid #ececec",
     borderRadius: "16px",
-    padding: "22px 22px 16px 22px",
-    boxShadow: "0 2px 12px rgba(120,100,220,0.07)",
+    padding: "18px",
+    boxShadow: "0 2px 12px rgba(120,100,220,0.06)",
   },
-  skillCardHeader: {
+  cardTitle: {
+    fontWeight: "700",
+    fontSize: "13px",
+    color: "#1a1a2e",
+    marginBottom: "12px",
+  },
+
+  // Calendar
+  calHeader: {
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
-    marginBottom: "20px",
+    marginBottom: "12px",
   },
-  skillCardTitle: {
+  calMonthLabel: {
     fontWeight: "700",
-    fontSize: "15px",
+    fontSize: "14px",
     color: "#1a1a2e",
   },
-  skillCardSub: {
+  calNavBtn: {
+    background: "none",
+    border: "1px solid #ececec",
+    borderRadius: "6px",
+    width: "24px",
+    height: "24px",
+    cursor: "pointer",
     fontSize: "12px",
+    color: "#888",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    padding: 0,
+  },
+  calNavRow: {
+    display: "flex",
+    gap: "4px",
+    alignItems: "center",
+  },
+  calGrid: {
+    display: "grid",
+    gridTemplateColumns: "repeat(7, 1fr)",
+    gap: "3px",
+  },
+  calDayLabel: {
+    textAlign: "center",
+    fontSize: "10px",
+    fontWeight: "700",
     color: "#bbb",
+    padding: "4px 0",
+    textTransform: "uppercase",
   },
-  skillRow: {
-    display: "flex",
-    alignItems: "center",
-    gap: "12px",
-    marginBottom: "13px",
-  },
-  skillName: {
-    width: "130px",
-    flexShrink: 0,
-    fontSize: "13px",
-    color: "#1a1a2e",
-    fontWeight: "500",
-  },
-  barTrack: {
-    flex: 1,
-    height: "8px",
-    background: "#ececec",
-    borderRadius: "99px",
-    overflow: "hidden",
-  },
-  skillPct: {
-    width: "36px",
-    textAlign: "right",
-    fontSize: "12px",
-    fontWeight: "700",
-    color: "#888",
-    flexShrink: 0,
-  },
-  skillFooter: {
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    marginTop: "6px",
-    paddingTop: "12px",
-    borderTop: "1px solid #f3f3f3",
-  },
-  legendRow: {
-    display: "flex",
-    gap: "14px",
-  },
-  legendItem: {
-    display: "flex",
-    alignItems: "center",
-    gap: "5px",
+  calCell: {
+    minHeight: "42px",
+    borderRadius: "8px",
+    border: "1px solid #f3f3f3",
+    padding: "4px 5px",
     fontSize: "11px",
-    color: "#888",
+    color: "#1a1a2e",
+    position: "relative",
+    background: "#fff",
   },
-  legendDot: {
-    width: "8px",
-    height: "8px",
-    borderRadius: "50%",
+  calCellToday: {
+    minHeight: "42px",
+    borderRadius: "8px",
+    border: "1px solid #c4b5f4",
+    padding: "4px 5px",
+    fontSize: "11px",
+    color: "#1a1a2e",
+    position: "relative",
+    background: "#ede9fb",
   },
-  overallScore: {
-    fontSize: "13px",
-    color: "#888",
+  calCellEmpty: {
+    minHeight: "42px",
+    borderRadius: "8px",
+    border: "1px solid transparent",
+    padding: "4px 5px",
   },
-  overallNum: {
-    color: "#3b82f6",
-    fontWeight: "800",
+  eventDot: {
+    width: "100%",
+    height: "5px",
+    borderRadius: "3px",
+    marginTop: "3px",
   },
-  bottomCards: {
+
+  // Bottom row
+  bottomRow: {
     display: "grid",
     gridTemplateColumns: "1fr 1fr",
     gap: "14px",
   },
-  gapCard: {
-    background: "#fff9ee",
-    border: "1px solid #fde68a",
-    borderRadius: "12px",
-    padding: "14px 16px",
+  upcomingItem: {
+    display: "flex",
+    alignItems: "flex-start",
+    gap: "10px",
+    padding: "8px 0",
+    borderBottom: "1px solid #f5f5f5",
   },
-  strengthCard: {
-    background: "#edfaf3",
-    border: "1px solid #6ee7b7",
-    borderRadius: "12px",
-    padding: "14px 16px",
+  upcomingItemLast: {
+    display: "flex",
+    alignItems: "flex-start",
+    gap: "10px",
+    padding: "8px 0",
   },
-  bottomCardTop: {
+  upcomingDot: {
+    width: "8px",
+    height: "8px",
+    borderRadius: "50%",
+    marginTop: "4px",
+    flexShrink: 0,
+  },
+  upcomingTitle: {
+    fontSize: "12px",
+    fontWeight: "600",
+    color: "#1a1a2e",
+  },
+  upcomingDate: {
+    fontSize: "11px",
+    color: "#aaa",
+  },
+
+  // Distribution
+  distRow: {
     display: "flex",
     alignItems: "center",
-    gap: "7px",
-    fontWeight: "700",
-    fontSize: "13px",
-    marginBottom: "5px",
+    gap: "10px",
+    marginBottom: "10px",
   },
-  bottomCardText: {
-    fontSize: "12px",
+  distLabel: {
+    fontSize: "11px",
     color: "#888",
-    lineHeight: 1.5,
-    margin: 0,
+    width: "72px",
+    flexShrink: 0,
+  },
+  distTrack: {
+    flex: 1,
+    height: "7px",
+    background: "#f0f0f0",
+    borderRadius: "99px",
+    overflow: "hidden",
+  },
+  distFill: {
+    height: "100%",
+    borderRadius: "99px",
   },
 };
 
-const skills = [
-  { name: "React / TypeScript", pct: 88, color: "#7c5cbf" },
-  { name: "Node.js / Express",  pct: 74, color: "#3b82f6" },
-  { name: "System Design",      pct: 65, color: "#f59e42" },
-  { name: "PostgreSQL / SQL",   pct: 80, color: "#34c48b" },
-  { name: "Communication",      pct: 90, color: "#8b5cf6" },
-  { name: "LeetCode (DSA)",     pct: 58, color: "#ef4444" },
+const DAY_LABELS = ["SU", "MO", "TU", "WE", "TH", "FR", "SA"];
+
+// July 2026 — starts on Wednesday (index 3)
+const JULY_EVENTS = {
+  2:  { color: "#7c5cbf", label: "Interview" },
+  8:  { color: "#3b82f6", label: "General" },
+  10: { color: "#ef4444", label: "Interview" },
+  15: { color: "#f59e42", label: "Follow up" },
+  18: { color: "#06b6d4", label: "Assessment" },
+  22: { color: "#3b82f6", label: "General" },
+  25: { color: "#ef4444", label: "Interview" },
+};
+
+const UPCOMING = [
+  { title: "Stripe Interview", date: "Jul 10", color: "#ef4444" },
+  { title: "Notion Follow-up", date: "Jul 15", color: "#f59e42" },
+  { title: "Vercel Assessment", date: "Jul 18", color: "#06b6d4" },
+];
+
+const DISTRIBUTION = [
+  { label: "General",    color: "#3b82f6", pct: 70 },
+  { label: "Interview",  color: "#ef4444", pct: 85 },
+  { label: "Follow up",  color: "#f59e42", pct: 35 },
+  { label: "Assessment", color: "#06b6d4", pct: 50 },
+  { label: "Offer",      color: "#34c48b", pct: 15 },
 ];
 
 const features = [
   {
-    icon: "🎯",
-    title: "Skill gap analysis",
-    desc: "See exactly what skills are most requested for jobs you applied to.",
+    icon: "📅",
+    title: "Interview & deadline tracking",
+    desc: "Pin interviews, follow-ups, and deadlines directly on calendar dates.",
   },
   {
-    icon: "📚",
-    title: "Learning paths",
-    desc: "Get curated resources to level up your weakest skills fast.",
+    icon: "🗂️",
+    title: "Category-wise event types",
+    desc: "Color-coded events — Interview, Follow up, Assessment, Offer, and General.",
+  },
+  {
+    icon: "🔔",
+    title: "Upcoming events panel",
+    desc: "See what's coming up next so you never miss a critical step.",
   },
   {
     icon: "📊",
-    title: "Progress tracking",
-    desc: "Mark milestones as you learn and watch your profile score rise.",
+    title: "Event distribution view",
+    desc: "Visual breakdown of how your time is split across event categories.",
   },
 ];
 
-export default function SkillIntelligenceSection() {
-    const navigate = useNavigate();
+function MiniCalendar() {
+  // July 2026 starts on Wednesday = offset 3
+  const startOffset = 3;
+  const totalDays = 31;
+  const cells = [];
+
+  // Empty cells before day 1
+  for (let i = 0; i < startOffset; i++) {
+    cells.push(<div key={`e-${i}`} style={styles.calCellEmpty} />);
+  }
+
+  // Day cells
+  for (let d = 1; d <= totalDays; d++) {
+    const event = JULY_EVENTS[d];
+    const isToday = d === 2;
+    cells.push(
+      <div key={d} style={isToday ? styles.calCellToday : styles.calCell}>
+        <span style={{ fontWeight: isToday ? "800" : "500", fontSize: "11px" }}>{d}</span>
+        {event && (
+          <div style={{ ...styles.eventDot, background: event.color }} />
+        )}
+      </div>
+    );
+  }
+
   return (
-    <main >
-        <section style={styles.section} >
+    <div>
+      <div style={styles.calHeader}>
+        <span style={styles.calMonthLabel}>July 2026</span>
+        <div style={styles.calNavRow}>
+          <button style={styles.calNavBtn}>‹</button>
+          <button style={styles.calNavBtn}>›</button>
+        </div>
+      </div>
+      <div style={styles.calGrid}>
+        {DAY_LABELS.map((d) => (
+          <div key={d} style={styles.calDayLabel}>{d}</div>
+        ))}
+        {cells}
+      </div>
+    </div>
+  );
+}
+
+export default function CalendarSection() {
+  const navigate = useNavigate();
+
+  return (
+    <section style={styles.section}>
       {/* LEFT */}
       <div style={styles.left}>
-        <span style={styles.eyebrow}>Skill Intelligence</span>
-        <h2 style={styles.heading}>Focus on the right skills</h2>
+        <span style={styles.eyebrow}>Calendar</span>
+        <h2 style={styles.heading}>Never miss an important date</h2>
         <p style={styles.subheading}>
-          Trackly analyzes the job descriptions you applied to and surfaces the exact skills you need to invest in to dramatically improve your interview rate.
+          Trackly's built-in calendar keeps your interviews, follow-ups, and deadlines organized in one place — so you always know what's next.
         </p>
 
         <div style={styles.featureList}>
           {features.map((f) => (
             <div key={f.title} style={styles.featureItem}>
-              <span style={styles.featureIcon}>{f.icon}</span>
-              <div style={styles.featureText}>
+              <div style={styles.featureIconBox}>{f.icon}</div>
+              <div>
                 <div style={styles.featureTitle}>{f.title}</div>
                 <p style={styles.featureDesc}>{f.desc}</p>
               </div>
@@ -257,75 +368,48 @@ export default function SkillIntelligenceSection() {
           ))}
         </div>
 
-        <button style={styles.btn} onClick={()=>navigate('/signUp')}>Analyze My Skills</button>
+        <button style={styles.btn} onClick={() => navigate("/signUp")}>
+          Open My Calendar
+        </button>
       </div>
 
       {/* RIGHT */}
       <div style={styles.right}>
-        {/* Skill Profile Card */}
-        <div style={styles.skillCard}>
-          <div style={styles.skillCardHeader}>
-            <span style={styles.skillCardTitle}>Your Skill Profile</span>
-            <span style={styles.skillCardSub}>vs. job market demand</span>
-          </div>
-
-          {skills.map((s) => (
-            <div key={s.name} style={styles.skillRow}>
-              <span style={styles.skillName}>{s.name}</span>
-              <div style={styles.barTrack}>
-                <div style={{
-                  height: "100%",
-                  width: `${s.pct}%`,
-                  background: s.color,
-                  borderRadius: "99px",
-                  transition: "width 0.6s ease",
-                }} />
-              </div>
-              <span style={styles.skillPct}>{s.pct}%</span>
-            </div>
-          ))}
-
-          <div style={styles.skillFooter}>
-            <div style={styles.legendRow}>
-              <div style={styles.legendItem}>
-                <span style={{ ...styles.legendDot, background: "#7c5cbf" }} />
-                Your level
-              </div>
-              <div style={styles.legendItem}>
-                <span style={{ ...styles.legendDot, background: "#ececec", border: "1.5px solid #ccc" }} />
-                Market avg
-              </div>
-            </div>
-            <span style={styles.overallScore}>
-              Overall: <span style={styles.overallNum}>76/100</span>
-            </span>
-          </div>
+        {/* Main calendar card */}
+        <div style={styles.card}>
+          <MiniCalendar />
         </div>
 
-        {/* Bottom Cards */}
-        <div style={styles.bottomCards}>
-          <div style={styles.gapCard}>
-            <div style={styles.bottomCardTop}>
-              <span>⚠️</span>
-              <span style={{ color: "#d97706" }}>Gap detected</span>
-            </div>
-            <p style={styles.bottomCardText}>
-              System Design is requested in 64% of your target roles
-            </p>
+        {/* Bottom: upcoming + distribution */}
+        <div style={styles.bottomRow}>
+          {/* Upcoming events */}
+          <div style={styles.card}>
+            <div style={styles.cardTitle}>📌 Upcoming Events</div>
+            {UPCOMING.map((ev, i) => (
+              <div key={ev.title} style={i === UPCOMING.length - 1 ? styles.upcomingItemLast : styles.upcomingItem}>
+                <div style={{ ...styles.upcomingDot, background: ev.color }} />
+                <div>
+                  <div style={styles.upcomingTitle}>{ev.title}</div>
+                  <div style={styles.upcomingDate}>{ev.date}</div>
+                </div>
+              </div>
+            ))}
           </div>
-          <div style={styles.strengthCard}>
-            <div style={styles.bottomCardTop}>
-              <span>🚀</span>
-              <span style={{ color: "#059669" }}>Top strength</span>
-            </div>
-            <p style={styles.bottomCardText}>
-              React skills match 94% of Frontend Engineer postings
-            </p>
+
+          {/* Event distribution */}
+          <div style={styles.card}>
+            <div style={styles.cardTitle}>📊 Event Types</div>
+            {DISTRIBUTION.map((d) => (
+              <div key={d.label} style={styles.distRow}>
+                <span style={styles.distLabel}>{d.label}</span>
+                <div style={styles.distTrack}>
+                  <div style={{ ...styles.distFill, width: `${d.pct}%`, background: d.color }} />
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>
     </section>
-    </main>
-    
   );
 }
