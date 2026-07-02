@@ -37,7 +37,7 @@
     width: 100%;
 }
 
-.bar-chart-conatiner{
+.bar-chart-container{
     width:50%;
     border:1px solid #c1c1c1;
     height:350px;
@@ -237,7 +237,7 @@
     .chart-container-analytics-page{
         width:100%;
     }
-    .bar-chart-conatiner{
+    .bar-chart-container{
         width:100%;
     }
     .line-chart-and-insights{
@@ -271,4 +271,150 @@
     }
     
 
+}
+
+
+.weekly-goal-card{
+
+    /* background-color:#fff; */
+
+
+    /* border-radius:18px; */
+
+    /* padding:28px; */
+
+    display:flex;
+    flex-direction:column;
+
+    justify-content:space-between;
+
+
+    /* box-shadow:0 6px 18px rgba(0,0,0,.04); */
+
+    width:100%;
+    
+    height:100%;
+    
+    
+    
+    
+
+}
+
+.weekly-goal-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:flex-start;
+
+}
+
+.goal-label{
+
+    font-size:15px;
+
+    color:#6b7280;
+
+    margin-bottom:8px;
+
+}
+
+.weekly-goal-header h2{
+
+    font-size:42px;
+
+    font-weight:700;
+
+}
+
+.weekly-goal-header span{
+
+    color:#9ca3af;
+
+    font-size:25px;
+
+    font-weight:500;
+
+}
+
+.goal-badge{
+
+    background:#ede9fe;
+
+    color:#6d4aff;
+
+    font-weight:700;
+
+    padding:10px 16px;
+
+    border-radius:999px;
+
+}
+
+.progress-bar{
+
+    margin-top:20px;
+
+    height:14px;
+
+    background:#edeef2;
+
+    border-radius:999px;
+
+    overflow:hidden;
+
+}
+
+.progress-fill{
+
+    height:100%;
+
+    border-radius:999px;
+
+    background:linear-gradient(
+        90deg,
+        #6D4AFF,
+        #8b5cf6
+    );
+
+    transition:width .7s ease;
+
+}
+
+.goal-footer{
+
+    margin-top:25px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+}
+
+.goal-footer p{
+
+    color:#6b7280;
+
+    font-size:15px;
+
+    font-weight:500;
+
+}
+
+.goal-success{
+
+    color:#10b981;
+
+    font-weight:700;
+
+}
+
+.quotes{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
 }

@@ -33,6 +33,7 @@ export default function AddNewJob() {
     const [nextStep, setNextStep] = useState("");
     const [portalName, setPortalName] = useState("");
     const [location, setLocation] = useState("");
+    
 
 
     const fields = [companyName, jobRole, dateApplied, currentStatus, nextStep, portalName];
@@ -49,7 +50,7 @@ export default function AddNewJob() {
 
         if (!value) return;
 
-        if (!tags.includes(value)) {
+        if (!tags.includes(value) && tags.length < 5) {
             setTags(prev => [...prev, value]);
         }
 
@@ -63,7 +64,7 @@ export default function AddNewJob() {
     }
 
     const addTag = (e) => {
-        if (e.key === "Enter" || e.key === ",") {
+        if (e.key === "Enter" || e.key === "," && tags.length) {
             e.preventDefault();
             handleAddTag();
         }
@@ -89,6 +90,10 @@ export default function AddNewJob() {
         window.dispatchEvent(new Event("applicationsUpdated"));
 
     }, [applicationArr])
+
+    
+
+   
     return (
         <>
 
@@ -318,7 +323,7 @@ export default function AddNewJob() {
 
                                         <input type="text" value={input} placeholder="React.js, Python, HTML..." onChange={tagInputHandeler} onKeyDown={addTag} />
                                         <button
-                                        className="add-tag-btn"
+                                            className="add-tag-btn"
                                             type="button"
                                             onClick={handleAddTag}
                                         >
@@ -357,11 +362,12 @@ export default function AddNewJob() {
                                                         employmentType: employmentType,
                                                         portal: portalName,
                                                         note: note,
+
                                                     }
                                                 ]
 
                                                 )
-
+                                            
                                             setCompanyName("");
                                             setJobRole("");
                                             setDateApplied("");
@@ -373,6 +379,7 @@ export default function AddNewJob() {
                                             setPortalName("");
                                             setCompanyWebsite("");
                                             setLocation("")
+                                            setTags([]);
 
                                         }
 
